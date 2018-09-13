@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fts_map.c                                          :+:      :+:    :+:   */
+/*   fts_app.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thbernar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 18:43:12 by thbernar          #+#    #+#             */
-/*   Updated: 2018/09/13 16:58:57 by thbernar         ###   ########.fr       */
+/*   Updated: 2018/09/13 19:27:00 by thbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_app_allocmap(t_app *app)
 	int i;
 
 	i = 0;
-	app->map = (int**)malloc(sizeof(int) * app->map_size.y);
+	app->map = (int**)malloc(sizeof(int*) * app->map_size.y);
 	if (app->map == NULL)
 		exit(-1);
 	while (i < app->map_size.y)
@@ -87,8 +87,10 @@ void	ft_app_writemap(t_app *app)
 				app->map[i][j] = ft_atoi(array[j]);
 			else
 				app->map[i][j] = 0;
+			printf("%d ", app->map[i][j]);
 			j++;
 		}
+		printf("\n");
 		ft_free_strsplit(array);
 		i++;
 	}
