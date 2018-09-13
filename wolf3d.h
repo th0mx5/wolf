@@ -6,7 +6,7 @@
 /*   By: thbernar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/03/28 22:44:25 by thbernar         ###   ########.fr       */
+/*   Updated: 2018/09/13 22:17:15 by thbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ typedef struct	s_app
 	char		*fname;
 	t_coord		winsize;
 	char		*img_data;
-	double		vector;
 	t_coord		pos;
 	t_coord		mouse;
 	t_coord		map_size;
@@ -52,7 +51,7 @@ int				ft_mousehooked(int button, int x, int y, t_app *app);
 int				ft_hook(int x, int y, t_app *app);
 
 void			ft_win_draw(t_app *app);
-void			ft_img_putpixel(t_app *app, t_coord p, int *color);
+void			ft_img_putpixel(t_app *app, t_coord p, int color);
 void			ft_calc_color(t_app *app, t_coord p);
 
 void			ft_app_init(t_app *app);

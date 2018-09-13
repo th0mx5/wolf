@@ -6,7 +6,7 @@
 /*   By: thbernar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 18:43:12 by thbernar          #+#    #+#             */
-/*   Updated: 2018/09/13 19:27:00 by thbernar         ###   ########.fr       */
+/*   Updated: 2018/09/13 21:49:54 by thbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_app_init(t_app *app)
 {
-	app->winsize.x = 720;
-	app->winsize.y = 480;
+	app->winsize.x = 320;
+	app->winsize.y = 200;
 	ft_app_countmap(app);
 	ft_app_allocmap(app);
 	ft_app_writemap(app);
