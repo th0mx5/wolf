@@ -84,7 +84,7 @@ void	ft_app_writemap(t_app *app)
 		while (j < app->map_size.x)
 		{
 			if (array[j])
-				app->map[i][j] = ft_atoi(array[j]);
+				(app->map[i][j] = ft_atoi(array[j]) == 1) ? 64 : 0;
 			else
 				app->map[i][j] = 0;
 			printf("%d ", app->map[i][j]);
