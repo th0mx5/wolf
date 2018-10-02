@@ -82,6 +82,7 @@ void	ft_writemap(t_var *v)
 		while (j < v->map_size.x)
 		{
 			if (array[j])
+<<<<<<< HEAD:parsing.c
 			{
 				if (ft_strcmp(array[j], "X") == 0)
 					v->map[i][j] = 2;
@@ -92,6 +93,12 @@ void	ft_writemap(t_var *v)
 				v->map[i][j] = 0;*/
 			//printf("%c", array[i][j]);
 			printf("%d ", v->map[i][j]);
+=======
+				(app->map[i][j] = ft_atoi(array[j]) == 1) ? 64 : 0;
+			else
+				app->map[i][j] = 0;
+			printf("%d ", app->map[i][j]);
+>>>>>>> 253b7909840405ef38ddb8066f2e111e73db4470:fts_app.c
 			j++;
 		}
 		printf("\n");
