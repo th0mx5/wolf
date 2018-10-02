@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fts_map.c                                          :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thbernar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/11 18:43:12 by thbernar          #+#    #+#             */
-/*   Updated: 2018/09/17 10:44:32 by maxisimo         ###   ########.fr       */
+/*   Created: 2018/10/02 13:43:25 by maxisimo          #+#    #+#             */
+/*   Updated: 2018/10/02 14:07:36 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void	ft_app_init(t_app *app)
+void	ft_init(t_var *v)
 {
-	app->winsize.x = 320;
-	app->winsize.y = 200;
-	ft_app_countmap(app);
-	ft_app_allocmap(app);
-	ft_app_writemap(app);
+	ft_countmap(v);
+	ft_allocmap(v);
+	ft_writemap(v);
 }
 
-void	ft_app_countmap(t_app *app)
+void	ft_countmap(t_var *v)
 {
 	int		fd;
 	int		count[3];
@@ -30,7 +28,7 @@ void	ft_app_countmap(t_app *app)
 
 	count[2] = 0;
 	count[0] = 0;
-	if (((fd = open(app->fname, O_RDONLY)) < 0))
+	if (((fd = open(v->fname, O_RDONLY)) < 0))
 		ft_error("Fatal error : invalid file.");
 	while ((get_next_line(fd, &s)) > 0)
 	{
@@ -44,28 +42,28 @@ void	ft_app_countmap(t_app *app)
 		ft_free_strsplit(array);
 		count[0]++;
 	}
-	app->map_size.x = count[2];
-	app->map_size.y = count[0];
+	v->map_size.x = count[2];
+	v->map_size.y = count[0];
 }
 
-void	ft_app_allocmap(t_app *app)
+void	ft_allocmap(t_var *v)
 {
 	int i;
 
 	i = 0;
-	app->map = (int**)malloc(sizeof(int) * app->map_size.y);
-	if (app->map == NULL)
+	v->map = (int**)malloc(sizeof(int*) * v->map_size.y);
+	if (v->map == NULL)
 		exit(-1);
-	while (i < app->map_size.y)
+	while (i < v->map_size.y)
 	{
-		app->map[i] = (int*)malloc(sizeof(int) * app->map_size.x);
-		if (app->map[i] == NULL)
+		v->map[i] = (int*)malloc(sizeof(int) * v->map_size.x);
+		if (v->map[i] == NULL)
 			exit(-1);
 		i++;
 	}
 }
 
-void	ft_app_writemap(t_app *app)
+void	ft_writemap(t_var *v)
 {
 	int		fd;
 	int		i;
@@ -74,21 +72,29 @@ void	ft_app_writemap(t_app *app)
 	char	*s;
 
 	i = 0;
-	if (((fd = open(app->fname, O_RDONLY)) < 0))
+	if (((fd = open(v->fname, O_RDONLY)) < 0))
 		ft_error("Fatal error : invalid file.");
-	while ((get_next_line(fd, &s)) > 0 && i < app->map_size.y)
+	while ((get_next_line(fd, &s)) > 0 && i < v->map_size.y)
 	{
 		j = 0;
 		array = ft_strsplit(s, ' ');
 		free(s);
-		while (j < app->map_size.x)
+		while (j < v->map_size.x)
 		{
 			if (array[j])
-				app->map[i][j] = ft_atoi(array[j]);
-			else
-				app->map[i][j] = 0;
+			{
+				if (ft_strcmp(array[j], "X") == 0)
+					v->map[i][j] = 2;
+				else
+					v->map[i][j] = ft_atoi(array[j]);
+			}
+			/*else
+				v->map[i][j] = 0;*/
+			//printf("%c", array[i][j]);
+			printf("%d ", v->map[i][j]);
 			j++;
 		}
+		printf("\n");
 		ft_free_strsplit(array);
 		i++;
 	}

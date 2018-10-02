@@ -6,7 +6,7 @@
 /*   By: thbernar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/03/28 22:44:25 by thbernar         ###   ########.fr       */
+/*   Updated: 2018/10/02 12:50:42 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@
 # include <math.h>
 # include "minilibx/mlx.h"
 # include "libft/libft.h"
+
+# define WIN_W 1280
+# define WIN_H 720
+# define FOV 60
+# define PI 3.14159265359
 
 typedef struct	s_coord
 {
@@ -31,38 +36,48 @@ typedef struct	s_coord_d
 	double		y;
 }				t_coord_d;
 
-typedef struct	s_app
+typedef struct	s_var
 {
+	int			x;
+	int			y;
+	int			Xa;
+	int			Ya;
+	int			Ax;
+	int			Ay;
+	double		posx;
+	double		posy;
+	double		angle_ray;
+	double		alpha;
+	double		dist;
 	void		*mlx;
 	void		*win;
 	void		*img;
 	char		*fname;
 	t_coord		winsize;
 	char		*img_data;
-	double		vector;
 	t_coord		pos;
 	t_coord		mouse;
 	t_coord		map_size;
 	int			**map;
-}				t_app;
+}				t_var;
 
-int				ft_keyhooked(int keycode, t_app *app);
-int				ft_zoom(int keycode, t_app *app, int x, int y);
-int				ft_mousehooked(int button, int x, int y, t_app *app);
-int				ft_hook(int x, int y, t_app *app);
+int				ft_keyhooked(int keycode, t_var *v);
+int				ft_zoom(int keycode, t_var *v, int x, int y);
+int				ft_mousehooked(int button, int x, int y, t_var *v);
+int				ft_hook(int x, int y, t_var *v);
 
-void			ft_win_draw(t_app *app);
-void			ft_img_putpixel(t_app *app, t_coord p, int *color);
-void			ft_calc_color(t_app *app, t_coord p);
+void			ft_win_draw(t_var *v);
+void			ft_img_putpixel(t_var *v, t_coord p, int color);
+void			ft_calc_color(t_var *v, t_coord p);
 
-void			ft_app_init(t_app *app);
-void			ft_app_countmap(t_app *app);
-void			ft_app_allocmap(t_app *app);
-void			ft_app_writemap(t_app *app);
+void			ft_init(t_var *v);
+void			ft_countmap(t_var *v);
+void			ft_allocmap(t_var *v);
+void			ft_writemap(t_var *v);
 
 void			ft_printcontrols(void);
 void			ft_error(char *s);
-void			ft_pickcolors(t_app *app, int *color, int i);
+void			ft_pickcolors(t_var *v, int *color, int i);
 
 double			ft_abs_d(double nb);
 int				ft_abs(int nb);

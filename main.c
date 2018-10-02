@@ -6,58 +6,63 @@
 /*   By: thbernar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 11:54:23 by thbernar          #+#    #+#             */
-/*   Updated: 2018/09/13 17:00:48 by thbernar         ###   ########.fr       */
+/*   Updated: 2018/10/02 14:23:22 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-int	ft_keyhooked(int keycode, t_app *app)
+int		ft_keyhooked(int keycode, t_var *v)
 {
 	if (keycode == 53)
 		exit(0);
 	if (keycode == 123)
-		app->pos.x = app->pos.x - 30;
+		v->pos.x = v->pos.x - 8;
 	if (keycode == 124)
-		app->pos.x = app->pos.x + 30;
+		v->pos.x = v->pos.x + 8;
 	if (keycode == 125)
-		app->pos.y = app->pos.y + 30;
+		v->pos.y = v->pos.y + 8;
 	if (keycode == 126)
-		app->pos.y = app->pos.y - 30;
-	ft_win_draw(app);
+		v->pos.y = v->pos.y - 8;
+	printf("pos : x = %d, y = %d\n", v->pos.x, v->pos.y);
+	ft_win_draw(v);
 	return (0);
 }
 
-int	ft_mousehooked(int button, int x, int y, t_app *app)
+int		ft_mousehooked(int button, int x, int y, t_var *v)
 {
 	(void)button;
 	(void)x;
 	(void)y;
-	ft_win_draw(app);
+	ft_win_draw(v);
 	return (0);
 }
 
-int	ft_hook(int x, int y, t_app *app)
+int		ft_hook(int x, int y, t_var *v)
 {
 	(void)x;
 	(void)y;
-	ft_win_draw(app);
+	ft_win_draw(v);
 	return (0);
 }
 
-int	main(int ac, char **av)
+int		main(int ac, char **av)
 {
-	t_app	app;
+	t_var	*v;
 
-	(void)ac;
-	app.fname = av[1];
-	ft_app_init(&app);
-	app.mlx = mlx_init();
-	app.win = mlx_new_window(app.mlx, app.winsize.x, app.winsize.y, "Wolf3D");
-	ft_win_draw(&app);
-	mlx_key_hook(app.win, ft_keyhooked, &app);
-	mlx_mouse_hook(app.win, ft_mousehooked, &app);
-	mlx_hook(app.win, 6, (1L << 6), ft_hook, &app);
-	mlx_loop(app.mlx);
+	if (!(v = (t_var *)malloc(sizeof(t_var))))
+		return (-1);
+	if (ac == 2)
+	{
+		v->fname = av[1];
+		v->mlx = mlx_init();
+		v->win = mlx_new_window(v->mlx, WIN_W, WIN_H, "Wolf3D");
+		v->img = mlx_new_image(v->win, WIN_W, WIN_H);
+		ft_init(v);
+		mlx_key_hook(v->win, ft_keyhooked, &v);
+		mlx_mouse_hook(v->win, ft_mousehooked, &v);
+		mlx_hook(v->win, 6, (1L << 6), ft_hook, &v);
+		mlx_loop(v->mlx);
+	}
 	return (0);
 }
