@@ -6,7 +6,7 @@
 /*   By: thbernar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 11:54:23 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/02 14:23:22 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/05 13:11:42 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		main(int ac, char **av)
 		v->mlx = mlx_init();
 		v->win = mlx_new_window(v->mlx, WIN_W, WIN_H, "Wolf3D");
 		v->img = mlx_new_image(v->win, WIN_W, WIN_H);
-		ft_init(v);
+		start(v);
 		mlx_key_hook(v->win, ft_keyhooked, &v);
 		mlx_mouse_hook(v->win, ft_mousehooked, &v);
 		mlx_hook(v->win, 6, (1L << 6), ft_hook, &v);

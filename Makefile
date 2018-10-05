@@ -6,7 +6,7 @@
 #    By: thbernar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/01 00:25:16 by thbernar          #+#    #+#              #
-#    Updated: 2018/03/26 18:25:17 by thbernar         ###   ########.fr        #
+#    Updated: 2018/10/05 13:14:02 by maxisimo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ NAME = wolf3d
 SRC = main.c \
 	  fts_utils.c \
 	  fts_draw.c \
-	  fts_app.c
+	  parsing.c \
+	  raycasting.c
 
 OBJ = $(SRC:.c=.o)
 

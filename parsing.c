@@ -6,20 +6,86 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 13:43:25 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/02 14:07:36 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/05 13:24:47 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void	ft_init(t_var *v)
+static int	ft_sizeline(char *str, int pos)
 {
-	ft_countmap(v);
-	ft_allocmap(v);
-	ft_writemap(v);
+	int		i;
+
+	i = 0;
+	while (str[pos] != 0 && str[pos] != '\n')
+	{
+		pos++;
+		i++;
+	}
+	return (i);
 }
 
-void	ft_countmap(t_var *v)
+static int	convert(t_var *v, int lines)
+{
+	int		i;
+
+	i = 0;
+	v->y = -1;
+	v->wth = ft_sizeline(v->buf, 0);
+	v->pix = (int **)malloc(sizeof(int *) * 4);
+	while (++i < 4)
+		v->pix[i] = (int *)malloc(sizeof(int) * 2);
+	i = 0;
+	if (!(v->map = (int ***)malloc(sizeof(int **) * lines)))
+	{
+		free(v->buf);
+		ft_error("error : Dynamic memory allocation failed.");
+	}
+	while (++v->y < lines && (v->x = 0) == 0)
+	{
+		if (!(v->map[v->y] = (int **)malloc(sizeof(int *) * v->wth)))
+		{
+			free(v->buf);
+			free(v->map);
+			ft_error("error : Dynamic memory allocation failed.");
+		}
+		/*
+		 * Reste plus qu'a reecrire la map sous forme :
+		 * map[coordx][coordy][01X];
+		*/
+	}
+	free(v->buf);
+	return (0);
+}
+
+int			start(t_var *v)
+{
+	int		fd;
+	int		lines;
+	char	*s;
+
+	fd = 0;
+	lines = 0;
+	if (!(v->buf = (char *)malloc(sizeof(char))))
+		return (0);
+	v->buf[0] = 0;
+	if (((fd = open(v->fname, O_RDONLY)) < 0))
+		ft_error("error : invalid file.");
+	while (get_next_line(fd, &s) > 0 && ++lines > 0)
+		v->buf = ft_strjoin(v->buf, ft_strjoin(s, "\n"));
+	if (lines < 3)
+	{
+		free(v->buf);
+		ft_error("error : invalid file.");
+	}
+	if (convert(v, lines) != 0)
+		return (-1);
+	if (close(fd) == -1)
+		free(v->map);
+	return (0);
+}
+
+/*void	ft_countmap(t_var *v)
 {
 	int		fd;
 	int		count[3];
@@ -82,27 +148,17 @@ void	ft_writemap(t_var *v)
 		while (j < v->map_size.x)
 		{
 			if (array[j])
-<<<<<<< HEAD:parsing.c
 			{
 				if (ft_strcmp(array[j], "X") == 0)
 					v->map[i][j] = 2;
 				else
 					v->map[i][j] = ft_atoi(array[j]);
 			}
-			/*else
-				v->map[i][j] = 0;*/
-			//printf("%c", array[i][j]);
 			printf("%d ", v->map[i][j]);
-=======
-				(app->map[i][j] = ft_atoi(array[j]) == 1) ? 64 : 0;
-			else
-				app->map[i][j] = 0;
-			printf("%d ", app->map[i][j]);
->>>>>>> 253b7909840405ef38ddb8066f2e111e73db4470:fts_app.c
 			j++;
 		}
 		printf("\n");
 		ft_free_strsplit(array);
 		i++;
 	}
-}
+}*/

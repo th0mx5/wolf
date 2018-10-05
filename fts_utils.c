@@ -6,7 +6,7 @@
 /*   By: thbernar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 15:04:48 by thbernar          #+#    #+#             */
-/*   Updated: 2018/03/28 22:44:05 by thbernar         ###   ########.fr       */
+/*   Updated: 2018/10/05 13:12:11 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_error(char *s)
 	exit(-1);
 }
 
-void	ft_pickcolors(t_app *map, int *color, int i)
+void	ft_pickcolors(t_var *map, int *color, int i)
 {
 	(void)map;
 	(void)color;

@@ -6,7 +6,7 @@
 /*   By: thbernar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/02 12:50:42 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/05 13:11:40 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ typedef struct	s_var
 {
 	int			x;
 	int			y;
+	int			**pix;
+	char		*buf;
+	int			wth;
 	int			Xa;
 	int			Ya;
 	int			Ax;
@@ -58,7 +61,7 @@ typedef struct	s_var
 	t_coord		pos;
 	t_coord		mouse;
 	t_coord		map_size;
-	int			**map;
+	int			***map;
 }				t_var;
 
 int				ft_keyhooked(int keycode, t_var *v);
@@ -70,10 +73,7 @@ void			ft_win_draw(t_var *v);
 void			ft_img_putpixel(t_var *v, t_coord p, int color);
 void			ft_calc_color(t_var *v, t_coord p);
 
-void			ft_init(t_var *v);
-void			ft_countmap(t_var *v);
-void			ft_allocmap(t_var *v);
-void			ft_writemap(t_var *v);
+int				start(t_var *v);
 
 void			ft_printcontrols(void);
 void			ft_error(char *s);

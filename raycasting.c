@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/26 16:39:39 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/02 13:59:50 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/05 13:16:11 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	draw_wall(t_var *v, int dpp)
 	*/
 }
 
-static void	calc_dist(t_var *v, int x, double tx, double ty)
+static void	calc_dist(t_var *v, double tx, double ty)
 {
 	int		dist_pp;
 
@@ -53,5 +53,5 @@ void		raycasting(t_var *v)
 {
 	v->x = 279;
 	while (++v->x < WIN_W)
-		calc_dist(v, v->x, v->posx, v->posy);
+		calc_dist(v, v->posx, v->posy);
 }
