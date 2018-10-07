@@ -6,11 +6,12 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 13:43:25 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/05 13:24:47 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/07 16:25:48 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
+#include <stdio.h>
 
 static int	ft_sizeline(char *str, int pos)
 {
@@ -49,13 +50,33 @@ static int	convert(t_var *v, int lines)
 			free(v->map);
 			ft_error("error : Dynamic memory allocation failed.");
 		}
-		/*
-		 * Reste plus qu'a reecrire la map sous forme :
-		 * map[coordx][coordy][01X];
-		*/
+		v->map[v->y][v->x] = (int *)malloc(sizeof(int));
+		v->map[v->y][v->x][0] = v->buf[i++];
 	}
 	free(v->buf);
 	return (0);
+}
+
+static int	find_player(t_var *v, char c, int x, int y)
+{
+	int		i;
+	int		count;
+
+	i = -1;
+	count = 0;
+	while (v->buf[++i] != 0)
+	{
+		if (v->buf[i] == '\n' && ++y != 0)
+			x = 0;
+		else if (v->buf[i] == c && ++count != 0)
+		{
+			v->p_x = ((double)x - 0.5);
+			v->p_y = ((double)y + 0.5);
+			v->angle_ray = 0.;
+		}
+		x++;
+	}
+	return (count);
 }
 
 int			start(t_var *v)
@@ -73,13 +94,11 @@ int			start(t_var *v)
 		ft_error("error : invalid file.");
 	while (get_next_line(fd, &s) > 0 && ++lines > 0)
 		v->buf = ft_strjoin(v->buf, ft_strjoin(s, "\n"));
-	if (lines < 3)
+	if (find_player(v, 'X', 0, 0) != 1 || convert(v, lines) != 0 || lines < 3)
 	{
 		free(v->buf);
 		ft_error("error : invalid file.");
 	}
-	if (convert(v, lines) != 0)
-		return (-1);
 	if (close(fd) == -1)
 		free(v->map);
 	return (0);

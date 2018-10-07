@@ -6,7 +6,7 @@
 /*   By: thbernar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:30:54 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/05 13:15:09 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/07 14:39:16 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_win_draw(t_var *v)
 	mlx_do_sync(v->mlx);
 }
 
-void	ft_img_putpixel(t_var *v, t_coord p, int color)
+/*void	ft_img_putpixel(t_var *v, t_coord p, int color)
 {
 	int i;
 
@@ -61,7 +61,7 @@ void	ft_img_putpixel(t_var *v, t_coord p, int color)
 	{
 		v->img_data[i] = color;
 	}
-}
+}*/
 
 void	ft_calc_color(t_var *v, t_coord p)
 {

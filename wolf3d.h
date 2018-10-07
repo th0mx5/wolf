@@ -6,7 +6,7 @@
 /*   By: thbernar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/05 13:11:40 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/07 15:13:57 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ typedef struct	s_var
 	int			y;
 	int			**pix;
 	char		*buf;
+	double		p_x;
+	double		p_y;
 	int			wth;
 	int			Xa;
 	int			Ya;
@@ -52,6 +54,9 @@ typedef struct	s_var
 	double		angle_ray;
 	double		alpha;
 	double		dist;
+	int			min;
+	double		s_dist;
+	int			max;
 	void		*mlx;
 	void		*win;
 	void		*img;
@@ -70,8 +75,10 @@ int				ft_mousehooked(int button, int x, int y, t_var *v);
 int				ft_hook(int x, int y, t_var *v);
 
 void			ft_win_draw(t_var *v);
-void			ft_img_putpixel(t_var *v, t_coord p, int color);
+void			ft_img_putpixel(t_var *v, int color);
 void			ft_calc_color(t_var *v, t_coord p);
+
+void			raycasting(t_var *v);
 
 int				start(t_var *v);
 

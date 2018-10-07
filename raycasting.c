@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/26 16:39:39 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/05 13:16:11 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/07 16:05:05 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,34 @@
 static void	draw_wall(t_var *v, int dpp)
 {
 	int		proj_slice_height;
+	int		clr;
+	int		mp;
 
+	v->y = 0;
 	proj_slice_height = 64 / v->dist * dpp;
-	/*
-	 * proj_slice_height : taille percue du mur, t'as juste a afficher le mur
-	 * et mettre le reste en noir pour voir si ca marche, regarde le lien que
-	 * je t'ai envoye sur messenger.
-	*/
+	mp = WIN_H / 2 - (proj_slice_height / 2);
+	clr = 0x804d17;
+	while (++v->y < WIN_H)
+	{
+		if (v->y >= mp && v->y <= mp + proj_slice_height)
+			ft_img_putpixel(v, 0x804d17);
+		else
+			ft_img_putpixel(v, 0x000000);
+	}
+	mlx_put_image_to_window(v->mlx, v->win, v->img, 0, 0);
+	mlx_destroy_image(v->mlx, v->img);
+	mlx_do_sync(v->mlx);
+}
+
+void		ft_img_putpixel(t_var *v, int color)
+{
+	int		i;
+
+	i = (v->x + (v->y * WIN_W)) * 4;
+	if (v->x > -1 && v->y > -1 && v->x < WIN_W && v->y < WIN_H)
+	{
+		v->img_data[i] = color;
+	}
 }
 
 static void	calc_dist(t_var *v, double tx, double ty)
@@ -51,7 +72,11 @@ static void	calc_dist(t_var *v, double tx, double ty)
 
 void		raycasting(t_var *v)
 {
+	v->posx = v->p_x;
+	v->posy = v->p_y;
 	v->x = 279;
+	printf("posx %lf\n", v->posx);
+	printf("posy %lf\n", v->posy);
 	while (++v->x < WIN_W)
 		calc_dist(v, v->posx, v->posy);
 }

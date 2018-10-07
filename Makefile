@@ -6,7 +6,7 @@
 #    By: thbernar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/01 00:25:16 by thbernar          #+#    #+#              #
-#    Updated: 2018/10/05 13:14:02 by maxisimo         ###   ########.fr        #
+#    Updated: 2018/10/07 09:46:27 by maxisimo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = wolf3d
 
 SRC = main.c \
 	  fts_utils.c \
+	  hook.c \
 	  fts_draw.c \
 	  parsing.c \
 	  raycasting.c
