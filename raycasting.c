@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/26 16:39:39 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/07 16:05:05 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/07 16:41:59 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,11 @@ static void	calc_dist(t_var *v, double tx, double ty)
 	else
 		v->Ya = 0;
 	v->Ax = tx + (ty - v->Ay) / atan(v->alpha); //pas sur si on met atan ou tan
+
+	/*
+	 * a partir de la c'est la merde
+	*/
+
 	while (v->map[(int)(ty)][(int)(tx)][0] != 1)
 	{
 		tx += v->Xa;
