@@ -6,11 +6,16 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/26 16:39:39 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/07 16:41:59 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/08 13:40:24 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
+
+/*
+ * fonction cense dessiner les murs mais je pense que j'ai fait totalement de
+ * la merde et qu'on peux tout reprendre parce que ca segfault
+*/
 
 static void	draw_wall(t_var *v, int dpp)
 {
@@ -45,11 +50,17 @@ void		ft_img_putpixel(t_var *v, int color)
 	}
 }
 
+/*
+ * gros segfault en pleins milieu (j'ai mis des printf pour voir jusau'ou
+ * ca allait, comme pour les deux fonctions d'avant je pense qu'on peux
+ * reprendre tout le raycasting car je sais pas du tout ou ca foire.
+*/
+
 static void	calc_dist(t_var *v, double tx, double ty)
 {
 	int		dist_pp;
 
-	dist_pp = (WIN_W / 2) / atan(30); //pas sur si on met atan ou tan;
+	dist_pp = (WIN_W / 2) / tan(30); //pas sur si on met atan ou tan;
 	v->angle_ray = FOV / (WIN_W - 280);
 	v->Xa = 64 / tan(FOV);
 	if (v->alpha != 0. && v->alpha != PI)
@@ -59,13 +70,13 @@ static void	calc_dist(t_var *v, double tx, double ty)
 	}
 	else
 		v->Ya = 0;
-	v->Ax = tx + (ty - v->Ay) / atan(v->alpha); //pas sur si on met atan ou tan
+	v->Ax = tx + (ty - v->Ay) / tan(v->alpha); //pas sur si on met atan ou tan
 
 	/*
 	 * a partir de la c'est la merde
 	*/
 
-	while (v->map[(int)(ty)][(int)(tx)][0] != 1)
+	while (v->map[(int)(ty)][(int)(tx)][0] != '1')
 	{
 		tx += v->Xa;
 		ty += v->Ya;
@@ -74,6 +85,11 @@ static void	calc_dist(t_var *v, double tx, double ty)
 			cos(v->angle_ray * (PI / 180.)));
 	draw_wall(v, dist_pp);
 }
+
+/*
+ * j'ai mis des printf pour verifier si on avait les bonne valeurs pour posx et
+ * posy et c'est bon, c'est donc bien apres que ca merde.
+*/
 
 void		raycasting(t_var *v)
 {

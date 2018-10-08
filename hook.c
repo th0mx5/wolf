@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/07 09:44:58 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/07 16:36:38 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/08 13:04:59 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ int		ft_keyhooked(int keycode, t_var *v)
 	if (keycode == 125)
 		v->pos.y = v->pos.y + 8;
 	if (keycode == 126)
-		v->pos.y = v->pos.y - 8;
-	printf("pos : x = %d, y = %d\n", v->pos.x, v->pos.y);*/
-	printf("keyhook%lf\n", v->p_x);
+		v->pos.y = v->pos.y - 8;*/
 	raycasting(v);
 	return (0);
 }

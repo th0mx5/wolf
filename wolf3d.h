@@ -6,7 +6,7 @@
 /*   By: thbernar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/07 15:13:57 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/08 13:40:26 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,13 @@
 # include "libft/libft.h"
 
 # define WIN_W 1280
-# define WIN_H 720
-# define FOV 60
+# define WIN_H 720 //fenetre de 1280/720;
+# define FOV 60 //angle de vue;
 # define PI 3.14159265359
+
+/*
+ * j'ai pas du tout utiliser ces deux structures.
+*/
 
 typedef struct	s_coord
 {
@@ -35,6 +39,11 @@ typedef struct	s_coord_d
 	double		x;
 	double		y;
 }				t_coord_d;
+
+/*
+ * Je pense qu'on peux utiliser qu'une seule structure, mais si tu prefere en
+ * utiliser plusieurs je te laisse faire le menage mdr
+*/
 
 typedef struct	s_var
 {
@@ -68,6 +77,10 @@ typedef struct	s_var
 	t_coord		map_size;
 	int			***map;
 }				t_var;
+
+/*
+ * y'a surement des fonctions a virees.
+*/
 
 int				ft_keyhooked(int keycode, t_var *v);
 int				ft_zoom(int keycode, t_var *v, int x, int y);

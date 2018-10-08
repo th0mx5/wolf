@@ -6,12 +6,16 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 13:43:25 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/07 16:25:48 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/08 13:27:41 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 #include <stdio.h>
+
+/*
+ * compte la longeur des lignes (x);
+*/
 
 static int	ft_sizeline(char *str, int pos)
 {
@@ -25,6 +29,12 @@ static int	ft_sizeline(char *str, int pos)
 	}
 	return (i);
 }
+
+/*
+ * Utilise sizeline, fait toous les mallocs necessaires, et remplit la map
+ * sous la forme map[coord_y][coord_x][01X], apres a toi de voir si c'est bien
+ * fait mais je pense que oui.
+*/
 
 static int	convert(t_var *v, int lines)
 {
@@ -57,6 +67,11 @@ static int	convert(t_var *v, int lines)
 	return (0);
 }
 
+/*
+ * renvoi 1 s'il a trouve un x, et inscrit ses coordonnees sur les variables
+ * p_x et p_y.
+*/
+
 static int	find_player(t_var *v, char c, int x, int y)
 {
 	int		i;
@@ -78,6 +93,14 @@ static int	find_player(t_var *v, char c, int x, int y)
 	}
 	return (count);
 }
+
+/*
+ * On malloc, on lis et on join, fait un printf du buffer si tu veux voir ce
+ * que fait le strjoin. Ensuite on regarde ou ce trouve le x avec find player,
+ * et on appel convert. je verifie en meme temps si on a bien plus de 3 lignes,
+ * mais il va peut etre falloir faire une fonction check pour verifier d'autres
+ * trucs.
+*/
 
 int			start(t_var *v)
 {
@@ -103,6 +126,12 @@ int			start(t_var *v)
 		free(v->map);
 	return (0);
 }
+
+/*
+ * Du coup j'ai mis tout le reste en commentaires parce que je pense que mon
+ * parsing est mieux mais si tu veux le reprendre ou quoi je l'ai laisse au
+ * cas ou
+*/
 
 /*void	ft_countmap(t_var *v)
 {
