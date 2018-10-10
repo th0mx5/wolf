@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/26 16:39:39 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/10 14:34:45 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/10 16:28:03 by thbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ static void	calc_dist(t_var *v, double tx, double ty)
 	}
 	v->dist = (sqrt(pow((tx - v->posx), 2.) + pow((ty - v->posy), 2.)) *
 			cos(v->angle_ray * (PI / 180.)));
-	draw_wall(v, dist_pp);
 }
 
 /*
@@ -99,5 +98,8 @@ void		raycasting(t_var *v)
 	printf("posx %lf\n", v->posx);
 	printf("posy %lf\n", v->posy);
 	while (++v->x < WIN_W)
+	{
 		calc_dist(v, v->posx, v->posy);
+		draw_wall(v, dist_pp);
+	}
 }
