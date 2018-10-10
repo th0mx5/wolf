@@ -6,7 +6,7 @@
 /*   By: thbernar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/08 13:40:26 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/10 15:45:04 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef struct	s_var
 	t_coord		pos;
 	t_coord		mouse;
 	t_coord		map_size;
-	int			***map;
+	char		**map;
 }				t_var;
 
 /*
@@ -93,7 +93,7 @@ void			ft_calc_color(t_var *v, t_coord p);
 
 void			raycasting(t_var *v);
 
-int				start(t_var *v);
+void			start(t_var *v);
 
 void			ft_printcontrols(void);
 void			ft_error(char *s);

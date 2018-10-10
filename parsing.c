@@ -6,134 +6,42 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 13:43:25 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/08 13:27:41 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/10 16:13:50 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 #include <stdio.h>
 
-/*
- * compte la longeur des lignes (x);
-*/
-
-static int	ft_sizeline(char *str, int pos)
+static void	ft_find_player(t_var *v)
 {
-	int		i;
-
-	i = 0;
-	while (str[pos] != 0 && str[pos] != '\n')
-	{
-		pos++;
-		i++;
-	}
-	return (i);
-}
-
-/*
- * Utilise sizeline, fait toous les mallocs necessaires, et remplit la map
- * sous la forme map[coord_y][coord_x][01X], apres a toi de voir si c'est bien
- * fait mais je pense que oui.
-*/
-
-static int	convert(t_var *v, int lines)
-{
-	int		i;
-
-	i = 0;
-	v->y = -1;
-	v->wth = ft_sizeline(v->buf, 0);
-	v->pix = (int **)malloc(sizeof(int *) * 4);
-	while (++i < 4)
-		v->pix[i] = (int *)malloc(sizeof(int) * 2);
-	i = 0;
-	if (!(v->map = (int ***)malloc(sizeof(int **) * lines)))
-	{
-		free(v->buf);
-		ft_error("error : Dynamic memory allocation failed.");
-	}
-	while (++v->y < lines && (v->x = 0) == 0)
-	{
-		if (!(v->map[v->y] = (int **)malloc(sizeof(int *) * v->wth)))
-		{
-			free(v->buf);
-			free(v->map);
-			ft_error("error : Dynamic memory allocation failed.");
-		}
-		v->map[v->y][v->x] = (int *)malloc(sizeof(int));
-		v->map[v->y][v->x][0] = v->buf[i++];
-	}
-	free(v->buf);
-	return (0);
-}
-
-/*
- * renvoi 1 s'il a trouve un x, et inscrit ses coordonnees sur les variables
- * p_x et p_y.
-*/
-
-static int	find_player(t_var *v, char c, int x, int y)
-{
-	int		i;
+	int		x;
+	int		y;
 	int		count;
 
-	i = -1;
+	x = 0;
 	count = 0;
-	while (v->buf[++i] != 0)
+	while (x < v->map_size.x)
 	{
-		if (v->buf[i] == '\n' && ++y != 0)
-			x = 0;
-		else if (v->buf[i] == c && ++count != 0)
+		y = 0;
+		while (y < v->map_size.y)
 		{
-			v->p_x = ((double)x - 0.5);
-			v->p_y = ((double)y + 0.5);
-			v->angle_ray = 0.;
+			if (v->map[x][y] == 'X')
+			{
+				v->p_x = ((double)x + 0.5);
+				v->p_y = ((double)y + 0.5);
+				v->angle_ray = 0.0;
+				count++;
+			}
+			y++;
 		}
 		x++;
 	}
-	return (count);
+	if (count != 1)
+		ft_error("Fatal error : invalid file.");
 }
 
-/*
- * On malloc, on lis et on join, fait un printf du buffer si tu veux voir ce
- * que fait le strjoin. Ensuite on regarde ou ce trouve le x avec find player,
- * et on appel convert. je verifie en meme temps si on a bien plus de 3 lignes,
- * mais il va peut etre falloir faire une fonction check pour verifier d'autres
- * trucs.
-*/
-
-int			start(t_var *v)
-{
-	int		fd;
-	int		lines;
-	char	*s;
-
-	fd = 0;
-	lines = 0;
-	if (!(v->buf = (char *)malloc(sizeof(char))))
-		return (0);
-	v->buf[0] = 0;
-	if (((fd = open(v->fname, O_RDONLY)) < 0))
-		ft_error("error : invalid file.");
-	while (get_next_line(fd, &s) > 0 && ++lines > 0)
-		v->buf = ft_strjoin(v->buf, ft_strjoin(s, "\n"));
-	if (find_player(v, 'X', 0, 0) != 1 || convert(v, lines) != 0 || lines < 3)
-	{
-		free(v->buf);
-		ft_error("error : invalid file.");
-	}
-	if (close(fd) == -1)
-		free(v->map);
-	return (0);
-}
-
-/*
- * Du coup j'ai mis tout le reste en commentaires parce que je pense que mon
- * parsing est mieux mais si tu veux le reprendre ou quoi je l'ai laisse au
- * cas ou
-*/
-
-/*void	ft_countmap(t_var *v)
+static void	ft_countmap(t_var *v)
 {
 	int		fd;
 	int		count[3];
@@ -160,24 +68,24 @@ int			start(t_var *v)
 	v->map_size.y = count[0];
 }
 
-void	ft_allocmap(t_var *v)
+static void	ft_allocmap(t_var *v)
 {
 	int i;
 
 	i = 0;
-	v->map = (int**)malloc(sizeof(int*) * v->map_size.y);
+	v->map = (char**)malloc(sizeof(char*) * v->map_size.y);
 	if (v->map == NULL)
 		exit(-1);
 	while (i < v->map_size.y)
 	{
-		v->map[i] = (int*)malloc(sizeof(int) * v->map_size.x);
+		v->map[i] = (char*)malloc(sizeof(char) * v->map_size.x);
 		if (v->map[i] == NULL)
 			exit(-1);
 		i++;
 	}
 }
 
-void	ft_writemap(t_var *v)
+static void	ft_writemap(t_var *v)
 {
 	int		fd;
 	int		i;
@@ -196,17 +104,27 @@ void	ft_writemap(t_var *v)
 		while (j < v->map_size.x)
 		{
 			if (array[j])
-			{
-				if (ft_strcmp(array[j], "X") == 0)
-					v->map[i][j] = 2;
-				else
-					v->map[i][j] = ft_atoi(array[j]);
-			}
-			printf("%d ", v->map[i][j]);
+				v->map[i][j] = array[j][0];
+			printf("%c ", v->map[i][j]);
 			j++;
 		}
 		printf("\n");
 		ft_free_strsplit(array);
 		i++;
 	}
-}*/
+}
+
+void	start(t_var *v)
+{
+	ft_countmap(v);
+	ft_allocmap(v);
+	ft_writemap(v);
+	ft_find_player(v);
+}
+
+/*
+ * Du coup j'ai mis tout le reste en commentaires parce que je pense que mon
+ * parsing est mieux mais si tu veux le reprendre ou quoi je l'ai laisse au
+ * cas ou
+*/
+

@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/26 16:39:39 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/08 13:40:24 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/10 14:34:45 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void	calc_dist(t_var *v, double tx, double ty)
 	 * a partir de la c'est la merde
 	*/
 
-	while (v->map[(int)(ty)][(int)(tx)][0] != '1')
+	while (v->map[(int)(ty)][(int)(tx)] != '1')
 	{
 		tx += v->Xa;
 		ty += v->Ya;
