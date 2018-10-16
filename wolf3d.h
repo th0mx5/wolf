@@ -6,7 +6,11 @@
 /*   By: thbernar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/10/16 14:35:20 by maxisimo         ###   ########.fr       */
+=======
+/*   Updated: 2018/10/16 14:13:04 by thbernar         ###   ########.fr       */
+>>>>>>> 91e2cdf7c84f07ad93073cf0afe4880687212cb4
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +105,7 @@ void			ft_pickcolors(t_app *app, int *color, int i);
 double			ft_abs_d(double nb);
 int				ft_abs(int nb);
 void			ft_free_strsplit(char **array);
+
+int				ft_is_againstwall(t_app *app);
 
 #endif
