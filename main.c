@@ -6,7 +6,7 @@
 /*   By: thbernar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 11:54:23 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/12 21:24:56 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/16 13:43:29 by thbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ int	ft_keyhooked(int keycode, t_app *app)
 {
 	if (keycode == 53)
 		exit(0);
-	/*if (keycode == 123)
-		app->pos.x = app->pos.x - 30;
-	if (keycode == 124)
-		app->pos.x = app->pos.x + 30;*/
-	if (keycode == 125)
-		app->pos.y = app->pos.y + 0.1;
-	if (keycode == 126)
+	if (keycode == 123)
 		app->pos.y = app->pos.y - 0.1;
+	if (keycode == 124)
+		app->pos.y = app->pos.y + 0.1;
+	if (keycode == 125)
+		app->pos.x = app->pos.x + 0.1;
+	if (keycode == 126)
+		app->pos.x = app->pos.x - 0.1;
 	printf("(%lf, %lf)\n", app->pos.x, app->pos.y);
 	raycasting(app);
 	return (0);
