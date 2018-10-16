@@ -6,7 +6,7 @@
 /*   By: thbernar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/12 21:24:12 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/16 14:35:20 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,12 @@ typedef struct	s_app
 	int			mapY;
 	int			side;
 	int			hit;
+	int			mv_up;
+	int			mv_down;
+	int			rt_right;
+	int			rt_left;
+	double		ms;
+	double		oldDirX;
 	double		deltaDistX;
 	double		deltaDistY;
 	double		rayDirX;
@@ -70,6 +76,8 @@ typedef struct	s_app
 	double		planeX;
 	double		planeY;
 	double		dist_wall;
+	double		oldPlaneX;
+
 }				t_app;
 
 int				ft_keyhooked(int keycode, t_app *app);
