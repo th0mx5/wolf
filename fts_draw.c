@@ -6,65 +6,72 @@
 /*   By: thbernar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:30:54 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/10 14:34:03 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/12 19:31:46 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void	ft_win_draw(t_var *v)
+void	ft_win_draw(t_app *app)
 {
+	t_coord	p;
 	int		n[3];
-	/*int		de;
-	int		hm;
-	int		hp;
-	int		i_min;
-	int		i_max;
-	p.x = 0;
+
+	p.x = 280;
 	p.y = 0;
-	de = 277;
-	hm = 64;
-	hp = de * hm / 288;*/
-
-	v->img = mlx_new_image(v->win, v->winsize.x, v->winsize.y);
-	v->img_data = mlx_get_data_addr(v->img, &n[0], &n[1], &n[2]);;
-
-	
-
-	/*while (p.y < app->winsize.y)
+	app->img = mlx_new_image(app->win, app->winsize.x, app->winsize.y);
+	app->img_data = mlx_get_data_addr(app->img, &n[0], &n[1], &n[2]);
+	while (p.x < app->winsize.x)
 	{
-		i_min = 100 - hp / 2;
-		i_max = 100 + hp / 2;
-		p.x = 0;
-		while (p.x < app->winsize.x)
-		{
-			if (p.y < i_min || p.y > i_max)
-				ft_img_putpixel(app, p, 0xFFFFFF);
-			else
-				ft_img_putpixel(app, p, 0x000000);
-			p.x++;
-		}
-		p.y++;
-	}*/
-
-	mlx_put_image_to_window(v->mlx, v->win, v->img, 0, 0);
-	mlx_destroy_image(v->mlx, v->img);
-	mlx_do_sync(v->mlx);
+		ft_calc_color(app, p);
+		p.x++;
+	}
+	mlx_put_image_to_window(app->mlx, app->win, app->img, 0, 0);
+	mlx_destroy_image(app->mlx, app->img);
+	mlx_do_sync(app->mlx);
 }
 
-/*void	ft_img_putpixel(t_var *v, t_coord p, int color)
+void	ft_img_putpixel(t_app *app, t_coord p, int *color)
 {
 	int i;
 
-	i = (p.x + (p.y * v->winsize.x)) * 4;
-	if (p.x > -1 && p.y > -1 && p.x < v->winsize.x && p.y < v->winsize.y)
+	i = (p.x + (p.y * app->winsize.x)) * 4;
+	if (p.x > -1 && p.y > -1 && p.x < app->winsize.x && p.y < app->winsize.y)
 	{
-		v->img_data[i] = color;
+		app->img_data[i] = (char)color[0];
+		app->img_data[i + 1] = (char)color[1];
+		app->img_data[i + 2] = (char)color[2];
 	}
-}*/
+}
 
-void	ft_calc_color(t_var *v, t_coord p)
+void	ft_calc_color(t_app *app, t_coord p) // CALL RAYCASTING
 {
-	(void)v;
-	(void)p;
+	int color[3];
+	int distance_player_projscreen = (app->winsize.x / 2 / tan(app->fov / 2));
+	//int angle_between_rays = app->fov / app->winsize.x;
+	t_coord A;
+	t_coord C;
+	int Ya = -64;
+	int Xa = 64 / tan(app->fov);
+	int PA;
+	A.y = (int)(app->pos.y / 64) * 64 - 1;
+	A.x = app->pos.x + (app->pos.y - A.y) / tan(app->fov);
+	C.x = A.x;
+	C.y = A.y;
+	while (app->map[C.x / 64][C.y / 64] == 0)
+	{
+		C.x = C.x + Xa;
+		C.y = C.y + Ya;
+	}
+	PA = ft_abs(app->pos.x - C.x) / cos(app->fov);
+	int wall_height = 64 / PA * distance_player_projscreen;
+	color[0] = 0;
+	color[1] = 255;
+	color[2] = 0;
+	p.y = (app->winsize.y / 2) - (wall_height / 2);
+	while (p.y < (app->winsize.y / 2) + (wall_height / 2))
+	{
+		ft_img_putpixel(app, p, color);
+		p.y++;;
+	}
 }

@@ -6,35 +6,58 @@
 /*   By: thbernar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 11:54:23 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/10 14:33:55 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/12 21:24:56 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-/*
- * J'ai pense a faire une fonction init ou mlx pour tout les trucs
- * d'initialisations de la fenetre etc.. Mais on peux peut etre laisser comme
- * ca c'est comme tu veux.
-*/
-
-int		main(int ac, char **av)
+int	ft_keyhooked(int keycode, t_app *app)
 {
-	t_var	*v;
-	int		n[3];
+	if (keycode == 53)
+		exit(0);
+	/*if (keycode == 123)
+		app->pos.x = app->pos.x - 30;
+	if (keycode == 124)
+		app->pos.x = app->pos.x + 30;*/
+	if (keycode == 125)
+		app->pos.y = app->pos.y + 0.1;
+	if (keycode == 126)
+		app->pos.y = app->pos.y - 0.1;
+	printf("(%lf, %lf)\n", app->pos.x, app->pos.y);
+	raycasting(app);
+	return (0);
+}
 
-	if (!(v = (t_var *)malloc(sizeof(t_var))))
-		return (-1);
-	if (ac == 2)
-	{
-		v->fname = av[1];
-		v->mlx = mlx_init(); //parsing
-		v->win = mlx_new_window(v->mlx, WIN_W, WIN_H, "Wolf3D");
-		v->img = mlx_new_image(v->win, WIN_W, WIN_H);
-		v->img_data = mlx_get_data_addr(v->img, &n[0], &n[1], &n[2]);
-		start(v);
-		mlx_hook(v->win, 2, (1L << 0), ft_keyhooked, v);
-		mlx_loop(v->mlx);
-	}
+int	ft_mousehooked(int button, int x, int y, t_app *app)
+{
+	(void)button;
+	(void)x;
+	(void)y;
+	raycasting(app);
+	return (0);
+}
+
+int	ft_hook(int x, int y, t_app *app)
+{
+	(void)x;
+	(void)y;
+	raycasting(app);
+	return (0);
+}
+
+int	main(int ac, char **av)
+{
+	t_app	app;
+
+	(void)ac;
+	app.fname = av[1];
+	ft_app_init(&app);
+	app.mlx = mlx_init();
+	app.win = mlx_new_window(app.mlx, app.winsize.x, app.winsize.y, "Wolf3D");
+	raycasting(&app);
+	mlx_key_hook(app.win, ft_keyhooked, &app);
+	//mlx_hook(app.win, 6, (1L << 6), ft_hook, &app);
+	mlx_loop(app.mlx);
 	return (0);
 }
