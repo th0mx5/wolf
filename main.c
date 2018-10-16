@@ -6,7 +6,7 @@
 /*   By: thbernar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 11:54:23 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/16 14:50:48 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/16 15:15:49 by thbernar         ###   ########.fr       */
 /*   Updated: 2018/10/16 14:34:52 by thbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -22,31 +22,25 @@ static int	ft_close(t_app *app)
 	return (0);
 }
 
-/*static int	ft_keyhooked(int keycode, t_app *app)
-{
-	t_coord_d old_pos;
-	if (keycode == 53)
-		exit(0);
-	if (keycode == 123)
-		app->pos.x = app->pos.x - 30;
-	if (keycode == 124)
-		app->pos.x = app->pos.x + 30;
-	if (keycode == 125)
-	old_pos = app->pos;
-	if (keycode == 123)
-		app->pos.y = app->pos.y - 0.1;
-	if (keycode == 124)
-		app->pos.y = app->pos.y + 0.1;
-	if (keycode == 125)
-		app->pos.x = app->pos.x + 0.1;
-	if (keycode == 126)
-		app->pos.x = app->pos.x - 0.1;
-	printf("(%lf, %lf) %d\n", app->pos.x, app->pos.y, ft_is_againstwall(app));
-	if (ft_is_againstwall(app))
-		app->pos = old_pos;
-	raycasting(app);
-	return (0);
-}*/
+/*int	ft_keyhooked(int keycode, t_app *app)
+  {
+  t_coord_d old_pos;
+  old_pos = app->pos;
+  if (keycode == 53)
+  exit(0);
+  if (keycode == 123)
+  app->pos.y = app->pos.y - 0.1;
+  if (keycode == 124)
+  app->pos.y = app->pos.y + 0.1;
+  if (keycode == 125)
+  app->pos.x = app->pos.x + 0.1;
+  if (keycode == 126)
+  app->pos.x = app->pos.x - 0.1;
+  if (ft_is_againstwall(app))
+  app->pos = old_pos;
+  raycasting(app);
+  return (0);
+  }*/
 
 static int	ft_key_press(int key, t_app *app)
 {
@@ -102,6 +96,7 @@ static int	ft_move(t_app *a)
 {
 	if (a->mv_up == 1)
 	{
+		printf("(%lf, %lf)\n", a->pos.x, a->pos.y);
 		if (a->map[(int)(a->pos.x + a->dirX * a->ms)][(int)(a->pos.y)] == 0)
 			a->pos.x += a->dirX * a->ms;
 		if (a->map[(int)(a->pos.x)][(int)(a->pos.y + a->dirY * a->ms)] == 0)
@@ -109,6 +104,7 @@ static int	ft_move(t_app *a)
 	}
 	if (a->mv_down == 1)
 	{
+		printf("(%lf, %lf)\n", a->pos.x, a->pos.y);
 		if (a->map[(int)(a->pos.x - a->dirX * a->ms)][(int)(a->pos.y)] == 0)
 			a->pos.x -= a->dirX * a->ms;
 		if (a->map[(int)(a->pos.x)][(int)(a->pos.y - a->dirY * a->ms)] == 0)
