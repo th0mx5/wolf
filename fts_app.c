@@ -6,11 +6,12 @@
 /*   By: thbernar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 18:43:12 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/16 15:19:43 by thbernar         ###   ########.fr       */
+/*   Updated: 2018/10/18 12:31:00 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
+#include <stdio.h>
 
 void	ft_app_init(t_app *app)
 {
@@ -31,7 +32,7 @@ void	ft_app_init(t_app *app)
 	ft_app_allocmap(app);
 	ft_app_writemap(app);
 	ft_app_calcplayerpos(app);
-	ft_app_printmap(app);
+	//ft_app_printmap(app);
 }
 
 void	ft_app_countmap(t_app *app)
@@ -120,10 +121,11 @@ void	ft_app_calcplayerpos(t_app *app)
 			{
 				app->pos.x = (double)p.y + 0.5;
 				app->pos.y = (double)p.x + 0.5;
-				return;
 			}
+			printf("%d ", app->map[p.x][p.y]);
 			p.x++;
 		}
+		printf("\n");
 		p.y++;
 	}
 }

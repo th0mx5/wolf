@@ -6,7 +6,7 @@
 /*   By: thbernar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 11:54:23 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/16 15:15:49 by thbernar         ###   ########.fr       */
+/*   Updated: 2018/10/18 15:59:21 by maxisimo         ###   ########.fr       */
 /*   Updated: 2018/10/16 14:34:52 by thbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -112,6 +112,7 @@ static int	ft_move(t_app *a)
 	}
 	ft_move_side(a);
 	raycasting(a);
+	draw_mm(a, 0, 0);
 	return (0);
 }
 
