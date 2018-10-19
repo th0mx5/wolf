@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thbernar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/18 15:59:06 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/19 16:23:25 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ typedef struct	s_app
 	int			mv_down;
 	int			rt_right;
 	int			rt_left;
+	int			px;
+	int			blocs;
 	double		ms;
 	double		oldDirX;
 	double		deltaDistX;
@@ -77,7 +79,6 @@ typedef struct	s_app
 	double		planeY;
 	double		dist_wall;
 	double		oldPlaneX;
-
 }				t_app;
 
 int				ft_keyhooked(int keycode, t_app *app);
