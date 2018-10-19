@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 18:41:09 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/19 16:23:16 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/19 17:34:24 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	put_pxl_to_img(t_app *a, int x, int y, int color)
 	}
 }
 
-static void	draw_minimap_square(t_app *app, x, y)
+static void	draw_minimap_square(t_app *app, int x, int y)
 {
 	int		i;
 	int		i2;
@@ -32,6 +32,7 @@ static void	draw_minimap_square(t_app *app, x, y)
 	i = 0;
 	app->px = 37;
 	app->blocs = 7;
+	clr = 0x116661;
 	while (i != app->blocs)
 	{
 		i2 = 0;

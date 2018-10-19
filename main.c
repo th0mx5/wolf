@@ -3,13 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thbernar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 11:54:23 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/18 15:59:21 by maxisimo         ###   ########.fr       */
-/*   Updated: 2018/10/16 14:34:52 by thbernar         ###   ########.fr       */
+/*   Updated: 2018/10/19 17:40:05 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "wolf3d.h"
 
@@ -112,7 +112,7 @@ static int	ft_move(t_app *a)
 	}
 	ft_move_side(a);
 	raycasting(a);
-	draw_mm(a, 0, 0);
+	//draw_minimap(a, 10, 10);
 	return (0);
 }
 

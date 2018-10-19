@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/19 16:23:25 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/19 17:34:21 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int				ft_zoom(int keycode, t_app *app, int x, int y);
 int				ft_mousehooked(int button, int x, int y, t_app *app);
 int				ft_hook(int x, int y, t_app *app);
 
-void			draw_mm(t_app *a, int x, int y);
+void			draw_minimap(t_app *a, int x, int y);
 
 void			raycasting(t_app *app);
 
