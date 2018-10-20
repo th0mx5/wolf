@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:20:06 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/19 17:36:46 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/20 16:25:04 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	dda(t_app *app)
 			app->mapY += app->stepY;
 			app->side = 1;
 		}
-		if (app->map[app->mapX][app->mapY] == 1)
+		if (app->map[app->mapY][app->mapX] > 0)
 			app->hit = 1;
 	}
 }
@@ -73,8 +73,8 @@ static void	dda(t_app *app)
 static void	raycasting_init(t_app *app, int x)
 {
 	app->camX = 2 * x / (double)app->winsize.x - 1;
-	app->rayPosX = app->pos.x;
-	app->rayPosY = app->pos.y;
+	app->rayPosX = app->pos.y;
+	app->rayPosY = app->pos.x;
 	app->rayDirX = app->dirX + app->planeX * app->camX;
 	app->rayDirY = app->dirY + app->planeY * app->camX;
 	app->mapX = (int)app->rayPosX;

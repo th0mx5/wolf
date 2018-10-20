@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fts_map.c                                          :+:      :+:    :+:   */
+/*   fts_app.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thbernar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 18:43:12 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/19 16:53:24 by thbernar         ###   ########.fr       */
+/*   Updated: 2018/10/20 16:20:56 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,10 +117,10 @@ void	ft_app_calcplayerpos(t_app *app)
 		p.x = 0;
 		while (p.x < app->map_size.x)
 		{
-			if (app->map[p.x][p.y] == 9)
+			if (app->map[p.x][p.y] == -1)
 			{
-				app->pos.x = (double)p.y + 0.5;
-				app->pos.y = (double)p.x + 0.5;
+				app->pos.y = (double)p.y + 0.5;
+				app->pos.x = (double)p.x + 0.5;
 			}
 			printf("%d ", app->map[p.x][p.y]);
 			p.x++;
