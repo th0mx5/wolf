@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 11:54:23 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/20 16:32:28 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/20 19:49:44 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,18 +97,18 @@ static int	ft_move(t_app *a)
 	if (a->mv_up == 1)
 	{
 		printf("(%lf, %lf)\n", a->pos.x, a->pos.y);
-		if (a->map[(int)(a->pos.x + a->dirX * a->ms)][(int)(a->pos.y)] <= 0)
-			a->pos.x += a->dirX * a->ms;
-		if (a->map[(int)(a->pos.x)][(int)(a->pos.y + a->dirY * a->ms)] <= 0)
-			a->pos.y += a->dirY * a->ms;
+		if (a->map[(int)(a->pos.x + a->dirX * a->ms)][(int)(a->pos.y)] == 0)
+			a->pos.y += a->dirX * a->ms;
+		if (a->map[(int)(a->pos.x)][(int)(a->pos.y + a->dirY * a->ms)] == 0)
+			a->pos.x += a->dirY * a->ms;
 	}
 	if (a->mv_down == 1)
 	{
 		printf("(%lf, %lf)\n", a->pos.x, a->pos.y);
-		if (a->map[(int)(a->pos.x - a->dirX * a->ms)][(int)(a->pos.y)] <= 0)
-			a->pos.x -= a->dirX * a->ms;
-		if (a->map[(int)(a->pos.x)][(int)(a->pos.y - a->dirY * a->ms)] <= 0)
-			a->pos.y -= a->dirY * a->ms;
+		if (a->map[(int)(a->pos.x - a->dirX * a->ms)][(int)(a->pos.y)] == 0)
+			a->pos.y -= a->dirX * a->ms;
+		if (a->map[(int)(a->pos.x)][(int)(a->pos.y - a->dirY * a->ms)] == 0)
+			a->pos.x -= a->dirY * a->ms;
 	}
 	ft_move_side(a);
 	raycasting(a);
