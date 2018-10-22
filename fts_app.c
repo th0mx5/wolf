@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 18:43:12 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/22 14:04:34 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/22 14:41:18 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	ft_app_init(t_app *app)
 	app->winsize.y = 720;
 	app->fov = 60;
 	app->player_size = 32;
-	app->dirY = -1;
-	app->dirX = 0;
+	app->dirX = -1;
+	app->dirY = 0;
 	app->planeX = 0;
 	app->planeY = 0.66;
 	app->ms = 0.1;
@@ -34,7 +34,6 @@ void	ft_app_init(t_app *app)
 	ft_app_allocmap(app);
 	ft_app_writemap(app);
 	ft_app_calcplayerpos(app);
-	//ft_app_printmap(app);
 }
 
 void	ft_app_countmap(t_app *app)

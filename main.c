@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 11:54:23 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/22 14:03:01 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/22 18:28:06 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,24 +84,24 @@ static int	ft_move(t_app *a)
 {
 	if (a->mv_up == 1)
 	{
-		if (a->map[(int)(a->pos.x + a->dirX * a->ms)][(int)(a->pos.y)] == 0)
-			a->pos.y += a->dirX * a->ms;
-		if (a->map[(int)(a->pos.x)][(int)(a->pos.y + a->dirY * a->ms)] == 0)
+		if (a->map[(int)(a->pos.x + a->dirY * a->ms)][(int)(a->pos.y)] == 0)
 			a->pos.x += a->dirY * a->ms;
+		if (a->map[(int)(a->pos.x)][(int)(a->pos.y + a->dirX * a->ms)] == 0)
+			a->pos.y += a->dirX * a->ms;
 	}
 	if (a->mv_down == 1)
 	{
-		if (a->map[(int)(a->pos.x - a->dirX * a->ms)][(int)(a->pos.y)] == 0)
-			a->pos.y -= a->dirX * a->ms;
-		if (a->map[(int)(a->pos.x)][(int)(a->pos.y - a->dirY * a->ms)] == 0)
+		if (a->map[(int)(a->pos.x - a->dirY * a->ms)][(int)(a->pos.y)] == 0)
 			a->pos.x -= a->dirY * a->ms;
+		if (a->map[(int)(a->pos.x)][(int)(a->pos.y - a->dirX * a->ms)] == 0)
+			a->pos.y -= a->dirX * a->ms;
 	}
 	if (a->mv_left == 1)
 	{
-		if (a->map[(int)(a->pos.x + a->dirX * a->ms)][(int)(a->pos.y)] == 0)
-			a->pos.x += a->dirX * a->ms;
-		if (a->map[(int)(a->pos.x)][(int)(a->pos.y + a->dirY * a->ms)] == 0)
-			a->pos.y += a->dirY * a->ms;
+		if (a->map[(int)(a->pos.y + a->dirX * a->ms)][(int)(a->pos.x)] == 0)
+			a->pos.y += a->dirX * a->ms;
+		if (a->map[(int)(a->pos.y)][(int)(a->pos.x + a->dirY * a->ms)] == 0)
+			a->pos.x += a->dirY * a->ms;
 	}
 	if (a->mv_right == 1)
 	{
@@ -112,7 +112,7 @@ static int	ft_move(t_app *a)
 	}
 	ft_rotate(a);
 	raycasting(a);
-	//draw_minimap(a, 0, 0);
+	draw_minimap(a);
 	return (0);
 }
 

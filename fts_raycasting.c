@@ -6,20 +6,39 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:20:06 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/22 14:11:02 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/22 18:07:58 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
+#include <stdio.h>
 
 static void	draw_wall(int x, int start, int end, t_app *app)
 {
+	//int		i;
+	//int		clr = 255 * 256;
+
+	//i = -1;
 	while (++start <= end)
 	{
 		if (x < app->winsize.x && start < app->winsize.y)
 			ft_memcpy(app->img_data + 4 * app->winsize.x * start + x * 4,
 					&app->color, sizeof(int));
 	}
+	/*while (++i < app->winsize.y / 2)
+	{
+		clr -= 256;
+		if (x < app->winsize.x && i < app->winsize.y)
+			ft_memcpy(app->img_data + 4 * app->winsize.x * i + x * 4,
+					&clr, sizeof(int));
+	}
+	while (++i < app->winsize.y)
+	{
+		clr += 256;
+		if (x < app->winsize.x && i < app->winsize.y)
+			ft_memcpy(app->img_data + 4 * app->winsize.x * i + x * 4,
+					&clr, sizeof(int));
+	}*/
 }
 
 static void	dda_init(t_app *app)
@@ -89,6 +108,21 @@ static void	raycasting_init(t_app *app, int x)
 			app->rayDirY;
 }
 
+/*static void		draw_background(t_app *app, double val, int clr)
+{
+	int		x;
+	int		y;
+
+	while (y < app->winsize.y)
+	{
+		x = 280;
+		while (x < app->winsize.x)
+		{
+
+		}
+	}
+}*/
+
 void	raycasting(t_app *app)
 {
 	t_coord	p;
@@ -108,9 +142,9 @@ void	raycasting(t_app *app)
 		if (app->end >= app->winsize.y)
 			app->end = app->winsize.y - 1;
 		if (app->side == 1)
-			app->color = 0xdd8800;
+			app->color = 0xdd8100;
 		else
-			app->color = 0x00FF00;
+			app->color = 0x7b4801;
 		draw_wall(p.x, app->start - 1, app->end, app);
 	}
 	mlx_put_image_to_window(app->mlx, app->win, app->img, 0, 0);
