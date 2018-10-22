@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/19 17:34:21 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/22 11:50:15 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ typedef struct	s_app
 	int			hit;
 	int			mv_up;
 	int			mv_down;
+	int			mv_left;
+	int			mv_right;
 	int			rt_right;
 	int			rt_left;
 	int			px;

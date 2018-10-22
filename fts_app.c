@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 18:43:12 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/20 19:40:48 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/22 14:04:34 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,15 @@ void	ft_app_init(t_app *app)
 	app->winsize.y = 720;
 	app->fov = 60;
 	app->player_size = 32;
-	app->dirX = -1;
-	app->dirY = 0;
+	app->dirY = -1;
+	app->dirX = 0;
 	app->planeX = 0;
 	app->planeY = 0.66;
 	app->ms = 0.1;
 	app->mv_up = 0;
 	app->mv_down = 0;
+	app->mv_right = 0;
+	app->mv_left = 0;
 	app->rt_right = 0;
 	app->rt_left = 0;
 	ft_app_countmap(app);
@@ -121,6 +123,7 @@ void	ft_app_calcplayerpos(t_app *app)
 			{
 				app->pos.y = (double)p.y + 0.5;
 				app->pos.x = (double)p.x + 0.5;
+				app->map[p.x][p.y] = 0;
 			}
 			printf("%d ", app->map[p.x][p.y]);
 			p.x++;
