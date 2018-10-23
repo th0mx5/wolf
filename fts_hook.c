@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 11:15:41 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/23 11:17:58 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/23 13:30:58 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,15 @@ int	ft_key_press(int key, t_app *app)
 		app->rt_left = 1;
 	else if (key == 124)
 		app->rt_right = 1;
+	else if (key == 35)
+	{
+		if (app->psy == 1)
+			app->psy = 0;
+		else
+			app->psy = 1;
+	}
+	else if (key == 257)
+		app->speed = 1;
 	else if (key == 53)
 		exit(0);
 	return (0);
@@ -54,11 +63,14 @@ int	ft_key_release(int key, t_app *app)
 		app->rt_left = 0;
 	else if (key == 124)
 		app->rt_right = 0;
+	else if (key == 257)
+		app->speed = 0;
 	return (0);
 }
 
 static void	ft_rotate(t_app *a)
 {
+	a->ms = (a->speed == 1) ? 0.1 : 0.07;
 	if (a->rt_right == 1)
 	{
 		a->oldDirX = a->dirX;
@@ -111,6 +123,6 @@ int	ft_move(t_app *a)
 	}
 	ft_rotate(a);
 	raycasting(a);
-	draw_minimap(a);
+	//draw_minimap(a);
 	return (0);
 }

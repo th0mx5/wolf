@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:20:06 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/23 11:25:12 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/23 13:40:33 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,30 @@
 
 static void	draw_wall(int x, int start, int end, t_app *app)
 {
-	//int		i;
-	//int		clr = 255 * 256;
+	int		i;
+	int		clr = 0;
 
-	//i = -1;
+	i = -1;
+	while (++i < WIN_H / 2)
+	{
+		clr = 0x049dba;
+		if (x < WIN_W && i < WIN_H)
+			ft_memcpy(app->img_data + 4 * WIN_W * i + x * 4,
+					&clr, sizeof(int));
+	}
+	while (i++ < WIN_H)
+	{
+		clr = 0x088808;
+		if (x < WIN_W && i < WIN_H)
+			ft_memcpy(app->img_data + 4 * WIN_W * i + x * 4,
+					&clr, sizeof(int));
+	}
 	while (++start <= end)
 	{
 		if (x < WIN_W && start < WIN_H)
 			ft_memcpy(app->img_data + 4 * WIN_W * start + x * 4,
 					&app->color, sizeof(int));
 	}
-	/*while (++i < WIN_H / 2)
-	{
-		clr -= 256;
-		if (x < WIN_W && i < WIN_H)
-			ft_memcpy(app->img_data + 4 * WIN_W * i + x * 4,
-					&clr, sizeof(int));
-	}
-	while (++i < WIN_H)
-	{
-		clr += 256;
-		if (x < WIN_W && i < WIN_H)
-			ft_memcpy(app->img_data + 4 * WIN_W * i + x * 4,
-					&clr, sizeof(int));
-	}*/
 }
 
 static void	dda_init(t_app *app)
@@ -108,46 +108,31 @@ static void	raycasting_init(t_app *app, int x)
 			app->rayDirY;
 }
 
-/*static void		draw_background(t_app *app, double val, int clr)
-{
-	int		x;
-	int		y;
-
-	while (y < WIN_H)
-	{
-		x = 280;
-		while (x < WIN_W)
-		{
-
-		}
-	}
-}*/
-
-void	raycasting(t_app *app)
+void	raycasting(t_app *a)
 {
 	t_coord	p;
 	int		n[3];
 
 	p.x = 279;
-	app->img = mlx_new_image(app->win, WIN_W, WIN_H);
-	app->img_data = mlx_get_data_addr(app->img, &n[0], &n[1], &n[2]);
+	a->img = mlx_new_image(a->win, WIN_W, WIN_H);
+	a->img_data = mlx_get_data_addr(a->img, &n[0], &n[1], &n[2]);
 	while (++p.x < WIN_W)
 	{
-		raycasting_init(app, p.x);
-		app->lineheight = (int)(WIN_H / app->dist_wall);
-		app->start = -app->lineheight / 2 + WIN_H / 2;
-		if (app->start < 0)
-			app->start = 0;
-		app->end = app->lineheight / 2 + WIN_H / 2;
-		if (app->end >= WIN_H)
-			app->end = WIN_H - 1;
-		if (app->side == 1)
-			app->color = 0xdd8100;
+		raycasting_init(a, p.x);
+		a->lineheight = (int)(WIN_H / a->dist_wall);
+		a->start = -a->lineheight / 2 + WIN_H / 2;
+		if (a->start < 0)
+			a->start = 0;
+		a->end = a->lineheight / 2 + WIN_H / 2;
+		if (a->end >= WIN_H)
+			a->end = WIN_H - 1;
+		if (a->side == 1)
+			a->color = (a->psy == 1) ? 0xdd8100 * a->dist_wall : 0xdd8100;
 		else
-			app->color = 0x7b4801;
-		draw_wall(p.x, app->start - 1, app->end, app);
+			a->color = (a->psy == 1) ? 0x7b4801 * a->dist_wall : 0x7b4801;
+		draw_wall(p.x, a->start - 1, a->end, a);
 	}
-	mlx_put_image_to_window(app->mlx, app->win, app->img, 0, 0);
-	mlx_destroy_image(app->mlx, app->img);
-	mlx_do_sync(app->mlx);
+	mlx_put_image_to_window(a->mlx, a->win, a->img, 0, 0);
+	mlx_destroy_image(a->mlx, a->img);
+	mlx_do_sync(a->mlx);
 }

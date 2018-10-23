@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 18:41:09 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/23 11:26:51 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/23 13:30:41 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,20 @@ void		draw_minimap(t_app *app)
 {
 	int		x;
 	int		y;
+	double		labx;
+	double		laby;
+	int		clr;
 
-	y = 0;
-	while (y < WIN_H)
+	x = -1;
+	while (++x <  150)
 	{
-		x = 0;
-		while (x < 281)
+		y = -1;
+		while (++y < 150)
 		{
-			if ((x < 10 || x >= 271) && (y <= 10 || y >= 271))
-				put_pxl_to_img(app, x, y, 0x7b4801);
-			x++;
+			labx = (x * app->map_size.x) / 150.;
+			laby = ((150 - y) * app->map_size.y) / 150.;
+			clr = (app->map[(int)labx][(int)laby] != 0 ? 0 : 0xFFFFFF);
+			put_pxl_to_img(app, x, 150 - y, clr);
 		}
-		y++;
 	}
 }
