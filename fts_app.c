@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 18:43:12 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/22 14:41:18 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/23 11:24:05 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 void	ft_app_init(t_app *app)
 {
-	app->winsize.x = 1280;
-	app->winsize.y = 720;
 	app->fov = 60;
 	app->player_size = 32;
 	app->dirX = -1;

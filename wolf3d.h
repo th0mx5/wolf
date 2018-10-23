@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/23 11:14:44 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/23 11:28:04 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <math.h>
 # include "minilibx/mlx.h"
 # include "libft/libft.h"
+
+# define WIN_W 1280
+# define WIN_H 720
 
 typedef struct	s_coord
 {
@@ -37,7 +40,6 @@ typedef struct	s_app
 	void		*win;
 	void		*img;
 	char		*fname;
-	t_coord		winsize;
 	char		*img_data;
 	t_coord_d	pos;
 	int			fov;

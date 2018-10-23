@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:20:06 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/22 18:07:58 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/23 11:25:12 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,22 @@ static void	draw_wall(int x, int start, int end, t_app *app)
 	//i = -1;
 	while (++start <= end)
 	{
-		if (x < app->winsize.x && start < app->winsize.y)
-			ft_memcpy(app->img_data + 4 * app->winsize.x * start + x * 4,
+		if (x < WIN_W && start < WIN_H)
+			ft_memcpy(app->img_data + 4 * WIN_W * start + x * 4,
 					&app->color, sizeof(int));
 	}
-	/*while (++i < app->winsize.y / 2)
+	/*while (++i < WIN_H / 2)
 	{
 		clr -= 256;
-		if (x < app->winsize.x && i < app->winsize.y)
-			ft_memcpy(app->img_data + 4 * app->winsize.x * i + x * 4,
+		if (x < WIN_W && i < WIN_H)
+			ft_memcpy(app->img_data + 4 * WIN_W * i + x * 4,
 					&clr, sizeof(int));
 	}
-	while (++i < app->winsize.y)
+	while (++i < WIN_H)
 	{
 		clr += 256;
-		if (x < app->winsize.x && i < app->winsize.y)
-			ft_memcpy(app->img_data + 4 * app->winsize.x * i + x * 4,
+		if (x < WIN_W && i < WIN_H)
+			ft_memcpy(app->img_data + 4 * WIN_W * i + x * 4,
 					&clr, sizeof(int));
 	}*/
 }
@@ -91,7 +91,7 @@ static void	dda(t_app *app)
 
 static void	raycasting_init(t_app *app, int x)
 {
-	app->camX = 2 * x / (double)app->winsize.x - 1;
+	app->camX = 2 * x / (double)WIN_W - 1;
 	app->rayPosX = app->pos.y;
 	app->rayPosY = app->pos.x;
 	app->rayDirX = app->dirX + app->planeX * app->camX;
@@ -113,10 +113,10 @@ static void	raycasting_init(t_app *app, int x)
 	int		x;
 	int		y;
 
-	while (y < app->winsize.y)
+	while (y < WIN_H)
 	{
 		x = 280;
-		while (x < app->winsize.x)
+		while (x < WIN_W)
 		{
 
 		}
@@ -129,18 +129,18 @@ void	raycasting(t_app *app)
 	int		n[3];
 
 	p.x = 279;
-	app->img = mlx_new_image(app->win, app->winsize.x, app->winsize.y);
+	app->img = mlx_new_image(app->win, WIN_W, WIN_H);
 	app->img_data = mlx_get_data_addr(app->img, &n[0], &n[1], &n[2]);
-	while (++p.x < app->winsize.x)
+	while (++p.x < WIN_W)
 	{
 		raycasting_init(app, p.x);
-		app->lineheight = (int)(app->winsize.y / app->dist_wall);
-		app->start = -app->lineheight / 2 + app->winsize.y / 2;
+		app->lineheight = (int)(WIN_H / app->dist_wall);
+		app->start = -app->lineheight / 2 + WIN_H / 2;
 		if (app->start < 0)
 			app->start = 0;
-		app->end = app->lineheight / 2 + app->winsize.y / 2;
-		if (app->end >= app->winsize.y)
-			app->end = app->winsize.y - 1;
+		app->end = app->lineheight / 2 + WIN_H / 2;
+		if (app->end >= WIN_H)
+			app->end = WIN_H - 1;
 		if (app->side == 1)
 			app->color = 0xdd8100;
 		else
