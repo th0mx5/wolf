@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 18:43:12 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/23 16:54:52 by thbernar         ###   ########.fr       */
+/*   Updated: 2018/10/23 17:27:19 by thbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	ft_app_countmap(t_app *app)
 		ft_free_strsplit(array);
 		count[0]++;
 	}
+	free(s);
 	app->map_size.x = count[2];
 	app->map_size.y = count[0];
 }
@@ -127,10 +128,8 @@ void	ft_app_calcplayerpos(t_app *app)
 				app->map[p.x][p.y] = 0;
 				app->p_count++;
 			}
-			printf("%d ", app->map[p.x][p.y]);
 			p.x++;
 		}
-		printf("\n");
 		p.y++;
 	}
 }
