@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 18:43:12 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/23 12:17:26 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/23 16:54:52 by thbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,13 @@ void	ft_app_init(t_app *app)
 	app->mv_left = 0;
 	app->rt_right = 0;
 	app->rt_left = 0;
+	app->p_count = 0;
 	ft_app_countmap(app);
 	ft_app_allocmap(app);
 	ft_app_writemap(app);
 	ft_app_calcplayerpos(app);
+	if (app->p_count != 1)
+		ft_error("Fatal error : invalid map.");
 }
 
 void	ft_app_countmap(t_app *app)
@@ -122,6 +125,7 @@ void	ft_app_calcplayerpos(t_app *app)
 				app->pos.y = (double)p.y + 0.5;
 				app->pos.x = (double)p.x + 0.5;
 				app->map[p.x][p.y] = 0;
+				app->p_count++;
 			}
 			printf("%d ", app->map[p.x][p.y]);
 			p.x++;
