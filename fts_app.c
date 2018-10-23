@@ -6,7 +6,11 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 18:43:12 by thbernar          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/10/23 16:58:26 by maxisimo         ###   ########.fr       */
+=======
+/*   Updated: 2018/10/23 17:31:31 by thbernar         ###   ########.fr       */
+>>>>>>> d0153e3b18f2be1a945a53b50abb8c90299e9d97
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +65,7 @@ void	ft_app_countmap(t_app *app)
 		ft_free_strsplit(array);
 		count[0]++;
 	}
+	free(s);
 	app->map_size.x = count[2];
 	app->map_size.y = count[0];
 }
@@ -108,6 +113,7 @@ void	ft_app_writemap(t_app *app)
 		ft_free_strsplit(array);
 		p.y++;
 	}
+	free(s);
 }
 
 void	ft_app_calcplayerpos(t_app *app)
