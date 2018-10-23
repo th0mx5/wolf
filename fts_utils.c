@@ -6,11 +6,24 @@
 /*   By: thbernar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 15:04:48 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/23 16:10:55 by thbernar         ###   ########.fr       */
+/*   Updated: 2018/03/28 22:44:05 by thbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
+
+void	ft_printcontrols(void)
+{
+	ft_putstr("--- Controls ---\n");
+	ft_putstr("+ : zoom in\n");
+	ft_putstr("- : zoom out\n");
+	ft_putstr("ARROWS : move\n");
+	ft_putstr("MOUSE (julia only) : toggle C\n");
+	ft_putstr("LEFT OPTION : increase I\n");
+	ft_putstr("LEFT CMD : decrease I\n");
+	ft_putstr("LEFT CTRL : toggle colors\n");
+	ft_putstr("--- End Controls ---\n");
+}
 
 void	ft_error(char *s)
 {
@@ -52,21 +65,3 @@ void	ft_free_strsplit(char **array)
 	}
 	free(array);
 }
-
-/*void	ft_app_printmap(t_app *app) // DEBUG
-{
-	t_coord p;
-
-	p.y = 0;
-	while (p.y < app->map_size.y)
-	{
-		p.x = 0;
-		while (p.x < app->map_size.x)
-		{
-			ft_putnbr(app->map[p.x][p.y]);
-			p.x++;
-		}
-		ft_putchar('\n');
-		p.y++;
-	}
-}*/

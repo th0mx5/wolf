@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/23 15:53:56 by thbernar         ###   ########.fr       */
+/*   Updated: 2018/10/23 12:20:25 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ typedef struct	s_app
 	t_coord		mouse;
 	t_coord		map_size;
 	int			**map;
-	int			p_count;
 	//-------------------------
 	int			color;
 	int			start;
