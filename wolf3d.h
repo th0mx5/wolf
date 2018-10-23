@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/22 17:01:19 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/23 11:14:44 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,10 @@ typedef struct	s_app
 	double		oldPlaneX;
 }				t_app;
 
-int				ft_keyhooked(int keycode, t_app *app);
-int				ft_zoom(int keycode, t_app *app, int x, int y);
-int				ft_mousehooked(int button, int x, int y, t_app *app);
-int				ft_hook(int x, int y, t_app *app);
+int				ft_close(t_app *app);
+int				ft_key_press(int key, t_app *app);
+int				ft_key_release(int key, t_app *app);
+int				ft_move(t_app *a);
 
 void			draw_minimap(t_app *a);
 void			put_pxl_to_img(t_app *a, int x, int y, int color);
