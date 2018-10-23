@@ -6,22 +6,20 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 11:15:41 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/23 13:30:58 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/23 16:44:49 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-int	ft_close(t_app *app)
+int			ft_close(t_app *app)
 {
-	free(app->fname);
 	free(app->map);
-	free(app);
 	exit(0);
 	return (0);
 }
 
-int	ft_key_press(int key, t_app *app)
+int			ft_key_press(int key, t_app *app)
 {
 	if (key == 13)
 		app->mv_up = 1;
@@ -49,7 +47,7 @@ int	ft_key_press(int key, t_app *app)
 	return (0);
 }
 
-int	ft_key_release(int key, t_app *app)
+int			ft_key_release(int key, t_app *app)
 {
 	if (key == 13)
 		app->mv_up = 0;
@@ -91,7 +89,7 @@ static void	ft_rotate(t_app *a)
 	}
 }
 
-int	ft_move(t_app *a)
+int			ft_move(t_app *a)
 {
 	if (a->mv_up == 1)
 	{

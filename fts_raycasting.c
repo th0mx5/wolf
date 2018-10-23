@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:20:06 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/23 13:40:33 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/23 13:54:33 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ static void	draw_wall(int x, int start, int end, t_app *app)
 	i = -1;
 	while (++i < WIN_H / 2)
 	{
-		clr = 0x049dba;
+		clr = 0;
 		if (x < WIN_W && i < WIN_H)
 			ft_memcpy(app->img_data + 4 * WIN_W * i + x * 4,
 					&clr, sizeof(int));
 	}
 	while (i++ < WIN_H)
 	{
-		clr = 0x088808;
+		clr = 0;
 		if (x < WIN_W && i < WIN_H)
 			ft_memcpy(app->img_data + 4 * WIN_W * i + x * 4,
 					&clr, sizeof(int));
