@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:20:06 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/29 21:15:55 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/29 21:25:15 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,14 +161,14 @@ void	raycasting(t_app *a)
 			if (a->h == 0)
 				a->color = 0xdd8100;
 			else
-				a->color = ((c1.r & 0xff) << 16) + ((c1.g & 0xff) << 8) + (0 & 0xff);
+				a->color = ft_rgb_to_hex(c1);
 		}
 		else
 		{
 			if (a->h == 0)
 				a->color = 0x7b4801;
 			else
-				a->color = ((c2.r & 0xff) << 16) + ((c2.g & 0xff) << 8) + (0 & 0xff);
+				a->color = ft_rgb_to_hex(c2);
 		}
 		draw_wall(p.x, a->start - 1, a->end, a);
 	}
