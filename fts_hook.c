@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 11:15:41 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/29 11:14:00 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/29 15:52:48 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ int			ft_key_press(int key, t_app *app)
 		app->rt_dw = 1;
 	else if (key == 126)
 		app->rt_up = 1;
-	else if (key == 35)
+	else if (key == 4)
 	{
-		if (app->psy == 1)
-			app->psy = 0;
+		if (app->h == 1)
+			app->h = 0;
 		else
-			app->psy = 1;
+			app->h = 1;
 	}
 	else if (key == 257)
 		app->speed = 1;

@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:20:06 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/29 11:06:13 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/29 15:52:03 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,9 @@ void	raycasting(t_app *a)
 {
 	t_coord	p;
 	int		n[3];
-
+	int		c1[2];
+	int		c2[2];
+	double		intensity;
 	p.x = 279;
 	a->img = mlx_new_image(a->win, WIN_W, WIN_H);
 	a->img_data = mlx_get_data_addr(a->img, &n[0], &n[1], &n[2]);
@@ -126,12 +128,28 @@ void	raycasting(t_app *a)
 		a->end = a->lineheight / 2 + a->lookud;
 		if (a->end >= WIN_H)
 			a->end = WIN_H - 1;
+		intensity = (a->dist_wall < 1) ? 1 : 1 / a->dist_wall;
+		c1[0] = 221 * intensity;
+		c1[1] = 129 * intensity;
+		c2[0] = 123 * intensity;
+		c2[1] = 72 * intensity;
 		if (a->side == 1)
-			a->color = (a->psy == 1) ? 0xdd8100 * a->dist_wall : 0xdd8100;
+		{
+			if (a->h == 0)
+				a->color = 0xdd8100;
+			else
+				a->color = ((c1[0] & 0xff) << 16) + ((c1[1] & 0xff) << 8) + (0 & 0xff);
+		}
 		else
-			a->color = (a->psy == 1) ? 0x7b4801 * a->dist_wall : 0x7b4801;
+		{
+			if (a->h == 0)
+				a->color = 0x7b4801;
+			else
+				a->color = ((c2[0] & 0xff) << 16) + ((c2[1] & 0xff) << 8) + (0 & 0xff);
+		}
 		draw_wall(p.x, a->start - 1, a->end, a);
 	}
+	printf("%lf\n", a->dist_wall);
 	mlx_put_image_to_window(a->mlx, a->win, a->img, 0, 0);
 	mlx_destroy_image(a->mlx, a->img);
 	mlx_do_sync(a->mlx);

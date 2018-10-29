@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 18:43:12 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/29 11:07:14 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/29 15:53:09 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	ft_app_init(t_app *app)
 	app->planeX = 0;
 	app->planeY = 0.66;
 	app->ms = 0.07;
-	app->psy = 0;
 	app->mv_up = 0;
 	app->mv_down = 0;
 	app->mv_right = 0;
@@ -34,6 +33,7 @@ void	ft_app_init(t_app *app)
 	app->rt_dw = 0;
 	app->lookud = WIN_H / 2;
 	app->p_count = 0;
+	app->h = 0;
 	ft_app_countmap(app);
 	ft_app_allocmap(app);
 	ft_app_writemap(app);
