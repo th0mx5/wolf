@@ -6,38 +6,76 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:20:06 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/29 17:06:48 by thbernar         ###   ########.fr       */
+/*   Updated: 2018/10/29 19:31:23 by thbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 #include <stdio.h>
 
-static void	draw_wall(int x, int start, int end, t_app *app)
+static void	draw_wall(int x, int start, int end, t_app *a)
 {
 	int		i;
 	int		clr;
+	t_color	c1;
+	t_color c2;;
+	double		intensity;
 
 	i = -1;
-	while (++i < WIN_H / 2)
+	intensity = (a->dist_wall < 1) ? 1 : 1 / a->dist_wall;
+	//printf("%d\n", a->textures[0].cursor.x);
+	c1.r = c1.r * intensity;
+	c1.g = c1.g * intensity;
+	c1.b = c1.b * intensity;
+	c2.r = c2.r * intensity;
+	c2.g = c2.g * intensity;
+	c2.b = c2.b * intensity;
+	if (a->side == 1)
+	{
+		if (a->h == 0)
+			a->color = 0xdd8100;
+		//else
+			//a->color = ((c1.r & 0xff) << 16) + ((c1.g & 0xff) << 8) + (c1.b & 0xff);
+	}
+	else
+	{
+		if (a->h == 0)
+			a->color = 0x7b4801;
+		//else
+			//a->color = ((c2.r & 0xff) << 16) + ((c2.g & 0xff) << 8) + (c2.b & 0xff);
+	}
+	while (++i < a->start)
 	{
 		clr = 0;
-			if (x < WIN_W && i < WIN_H)
-				ft_memcpy(app->img_data + 4 * WIN_W * i + x * 4,
-						&clr, sizeof(int));
+		if (x < WIN_W && i < WIN_H)
+			ft_memcpy(a->img_data + 4 * WIN_W * i + x * 4,
+					&clr, sizeof(int));
 	}
 	while (i++ < WIN_H)
 	{
 		clr = 0;
 		if (x < WIN_W && i < WIN_H)
-			ft_memcpy(app->img_data + 4 * WIN_W * i + x * 4,
+			ft_memcpy(a->img_data + 4 * WIN_W * i + x * 4,
 					&clr, sizeof(int));
 	}
 	while (++start <= end)
 	{
-		if (x < WIN_W && start < WIN_H)
-			ft_memcpy(app->img_data + 4 * WIN_W * start + x * 4,
-					&app->color, sizeof(int));
+		if (x < WIN_W && start < WIN_H && a->h == 0)
+			ft_memcpy(a->img_data + 4 * WIN_W * start + x * 4,
+					&a->color, sizeof(int));
+		else if (x < WIN_W && start < WIN_H && a->h == 1)
+		{
+			//printf("%d, %d, %d\n", c1.r, c1.g, c1.b);
+			c1 = get_pixel_color(&a->textures[0], a->textures[0].cursor.x, a->textures[0].cursor.y  % 128);
+			c2 = get_pixel_color(&a->textures[0], a->textures[0].cursor.x, a->textures[0].cursor.y  % 128);
+			//a->textures[0].cursor.y++;
+			if (a->side == 1)
+				a->color = ft_rgb_to_hex(c1);
+			else
+				a->color = ft_rgb_to_hex(c2);
+			ft_memcpy(a->img_data + 4 * WIN_W * start + x * 4,
+					&a->color, sizeof(int));
+		}
 	}
 }
 
@@ -112,9 +150,6 @@ void	raycasting(t_app *a)
 {
 	t_coord	p;
 	int		n[3];
-	t_color	c1;
-	t_color c2;;
-	double		intensity;
 	p.x = 279;
 	a->img = mlx_new_image(a->win, WIN_W, WIN_H);
 	a->img_data = mlx_get_data_addr(a->img, &n[0], &n[1], &n[2]);
@@ -128,25 +163,6 @@ void	raycasting(t_app *a)
 		a->end = a->lineheight / 2 + a->lookud;
 		if (a->end >= WIN_H)
 			a->end = WIN_H - 1;
-		intensity = (a->dist_wall < 1) ? 1 : 1 / a->dist_wall;
-		c1.r = 221 * intensity;
-		c1.g = 129 * intensity;
-		c2.r = 123 * intensity;
-		c2.g = 72 * intensity;
-		if (a->side == 1)
-		{
-			if (a->h == 0)
-				a->color = 0xdd8100;
-			else
-				a->color = ((c1.r & 0xff) << 16) + ((c1.g & 0xff) << 8) + (0 & 0xff);
-		}
-		else
-		{
-			if (a->h == 0)
-				a->color = 0x7b4801;
-			else
-				a->color = ((c2.r & 0xff) << 16) + ((c2.g & 0xff) << 8) + (0 & 0xff);
-		}
 		draw_wall(p.x, a->start - 1, a->end, a);
 	}
 	//printf("%lf\n", a->dist_wall);

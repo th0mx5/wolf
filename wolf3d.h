@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/29 17:00:24 by thbernar         ###   ########.fr       */
+/*   Updated: 2018/10/29 19:30:59 by thbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct	s_bmp
 	int			height;
 	int			data_offset;
 	int			*data;
+	t_coord		cursor;
 }				t_bmp;
 
 typedef struct	s_app
@@ -137,5 +138,7 @@ int				ft_is_againstwall(t_app *app);
 
 void			load_bmp(t_bmp *img, char *filename);
 t_color			get_pixel_color(t_bmp *img, int x, int y);
+
+int				ft_rgb_to_hex(t_color c);
 
 #endif
