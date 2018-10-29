@@ -6,38 +6,60 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:20:06 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/29 17:06:48 by thbernar         ###   ########.fr       */
+/*   Updated: 2018/10/29 21:04:45 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 #include <stdio.h>
 
-static void	draw_wall(int x, int start, int end, t_app *app)
+static void	draw_wall(int x, int start, int end, t_app *a)
 {
 	int		i;
 	int		clr;
 
 	i = -1;
-	while (++i < WIN_H / 2)
+	while (++i < start)
 	{
 		clr = 0;
 			if (x < WIN_W && i < WIN_H)
-				ft_memcpy(app->img_data + 4 * WIN_W * i + x * 4,
+				ft_memcpy(a->img_data + 4 * WIN_W * i + x * 4,
 						&clr, sizeof(int));
 	}
 	while (i++ < WIN_H)
 	{
 		clr = 0;
 		if (x < WIN_W && i < WIN_H)
-			ft_memcpy(app->img_data + 4 * WIN_W * i + x * 4,
+			ft_memcpy(a->img_data + 4 * WIN_W * i + x * 4,
 					&clr, sizeof(int));
 	}
+	if (a->t == 1)
+	{
+		if (a->side == 0)
+			a->wallX = a->rayPosY + a->dist_wall * a->rayDirY;
+		else
+			a->wallX = a->rayPosX + a->dist_wall * a->rayDirX;
+		a->texX = (int)(a->wallX * 64);
+		if (a->side == 0 && a->rayDirX > 0)
+			a->texX = 64 - a->texX - 1;
+		if (a->side == 1 && a->rayDirY < 0)
+			a->texX = 64 - a->texX - 1;
+		a->texX = abs(a->texX);
+	}
+	t_color	color;
 	while (++start <= end)
 	{
-		if (x < WIN_W && start < WIN_H)
-			ft_memcpy(app->img_data + 4 * WIN_W * start + x * 4,
-					&app->color, sizeof(int));
+		if (a->t == 1 && x < WIN_W && start < WIN_H)
+		{
+			a->texY = abs((((start * 256 - WIN_H * 128 + a->lineheight * 128) *
+					64)	/ a->lineheight) / 256);
+			color = get_pixel_color(&a->textures[0], a->texX, a->texY);
+			ft_memcpy(a->img_data + 4 * WIN_W * start + x * 4,
+					&clr, sizeof(int));
+		}
+		else if (x < WIN_W && start < WIN_H)
+			ft_memcpy(a->img_data + 4 * WIN_W * start + x * 4,
+					&a->color, sizeof(int));
 	}
 }
 

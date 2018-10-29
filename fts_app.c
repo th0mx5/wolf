@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 18:43:12 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/29 17:01:48 by thbernar         ###   ########.fr       */
+/*   Updated: 2018/10/29 20:26:59 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	ft_app_init(t_app *app)
 	app->lookud = WIN_H / 2;
 	app->p_count = 0;
 	app->h = 0;
+	app->t = 0;
 	ft_app_countmap(app);
 	ft_app_allocmap(app);
 	ft_app_writemap(app);

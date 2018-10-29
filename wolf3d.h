@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/29 17:00:24 by thbernar         ###   ########.fr       */
+/*   Updated: 2018/10/29 20:54:18 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,12 @@ typedef struct	s_bmp
 	int			height;
 	int			data_offset;
 	int			*data;
+
+	void		*img;
+	char		*d;
+	int			bpp;
+	int			sizeline;
+	int			endian;
 }				t_bmp;
 
 typedef struct	s_app
@@ -88,6 +94,10 @@ typedef struct	s_app
 	int			speed;
 	int			lookud;
 	int			h;
+	int			t;
+	int			texX;
+	int			texY;
+	int			wallX;
 	double		ms;
 	double		oldDirX;
 	double		deltaDistX;
@@ -105,7 +115,7 @@ typedef struct	s_app
 	double		planeY;
 	double		dist_wall;
 	double		oldPlaneX;
-	t_bmp		textures[10];
+	t_bmp		textures[9];
 }				t_app;
 
 int				ft_close(t_app *app);
