@@ -6,13 +6,10 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 18:43:12 by thbernar          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2018/10/23 16:58:26 by maxisimo         ###   ########.fr       */
-=======
-/*   Updated: 2018/10/23 17:31:31 by thbernar         ###   ########.fr       */
->>>>>>> d0153e3b18f2be1a945a53b50abb8c90299e9d97
+/*   Updated: 2018/10/29 11:07:14 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "wolf3d.h"
 #include <stdio.h>
@@ -33,6 +30,9 @@ void	ft_app_init(t_app *app)
 	app->mv_left = 0;
 	app->rt_right = 0;
 	app->rt_left = 0;
+	app->rt_up = 0;
+	app->rt_dw = 0;
+	app->lookud = WIN_H / 2;
 	app->p_count = 0;
 	ft_app_countmap(app);
 	ft_app_allocmap(app);

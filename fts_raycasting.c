@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:20:06 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/23 13:54:33 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/29 11:06:13 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@
 static void	draw_wall(int x, int start, int end, t_app *app)
 {
 	int		i;
-	int		clr = 0;
+	int		clr;
 
 	i = -1;
 	while (++i < WIN_H / 2)
 	{
 		clr = 0;
-		if (x < WIN_W && i < WIN_H)
-			ft_memcpy(app->img_data + 4 * WIN_W * i + x * 4,
-					&clr, sizeof(int));
+			if (x < WIN_W && i < WIN_H)
+				ft_memcpy(app->img_data + 4 * WIN_W * i + x * 4,
+						&clr, sizeof(int));
 	}
 	while (i++ < WIN_H)
 	{
@@ -120,10 +120,10 @@ void	raycasting(t_app *a)
 	{
 		raycasting_init(a, p.x);
 		a->lineheight = (int)(WIN_H / a->dist_wall);
-		a->start = -a->lineheight / 2 + WIN_H / 2;
+		a->start = -a->lineheight / 2 + a->lookud;
 		if (a->start < 0)
 			a->start = 0;
-		a->end = a->lineheight / 2 + WIN_H / 2;
+		a->end = a->lineheight / 2 + a->lookud;
 		if (a->end >= WIN_H)
 			a->end = WIN_H - 1;
 		if (a->side == 1)

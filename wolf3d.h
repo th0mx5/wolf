@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/23 16:53:50 by thbernar         ###   ########.fr       */
+/*   Updated: 2018/10/29 11:06:09 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,13 @@ typedef struct	s_app
 	int			mv_right;
 	int			rt_right;
 	int			rt_left;
+	int			rt_up;
+	int			rt_dw;
 	int			px;
 	int			blocs;
 	int			psy;
 	int			speed;
+	int			lookud;
 	double		ms;
 	double		oldDirX;
 	double		deltaDistX;

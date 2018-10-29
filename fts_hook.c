@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 11:15:41 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/23 16:44:49 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/29 11:14:00 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ int			ft_key_press(int key, t_app *app)
 		app->rt_left = 1;
 	else if (key == 124)
 		app->rt_right = 1;
+	else if (key == 125)
+		app->rt_dw = 1;
+	else if (key == 126)
+		app->rt_up = 1;
 	else if (key == 35)
 	{
 		if (app->psy == 1)
@@ -61,6 +65,10 @@ int			ft_key_release(int key, t_app *app)
 		app->rt_left = 0;
 	else if (key == 124)
 		app->rt_right = 0;
+	else if (key == 125)
+		app->rt_dw = 0;
+	else if (key == 126)
+		app->rt_up = 0;
 	else if (key == 257)
 		app->speed = 0;
 	return (0);
@@ -87,6 +95,10 @@ static void	ft_rotate(t_app *a)
 		a->planeX = a->planeX * cos(0.05) - a->planeY * sin(0.05);
 		a->planeY = a->oldPlaneX * sin(0.05) + a->planeY * cos(0.05);
 	}
+	if (a->rt_up == 1)
+		a->lookud = ((a->lookud += 10) >= WIN_H) ? WIN_H : a->lookud + 10;
+	if (a->rt_dw == 1)
+		a->lookud = ((a->lookud -= 10) <= 0) ? 0 : a->lookud - 10;
 }
 
 int			ft_move(t_app *a)
