@@ -6,7 +6,7 @@
 /*   By: thbernar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 15:04:48 by thbernar          #+#    #+#             */
-/*   Updated: 2018/03/28 22:44:05 by thbernar         ###   ########.fr       */
+/*   Updated: 2018/10/29 19:29:53 by thbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,9 @@ void	ft_error(char *s)
 	exit(-1);
 }
 
-void	ft_pickcolors(t_app *map, int *color, int i)
+int		ft_rgb_to_hex(t_color c)
 {
-	(void)map;
-	(void)color;
-	(void)i;
+	return (((c.r & 0xff) << 16) + ((c.g & 0xff) << 8) + (c.b & 0xff));
 }
 
 double	ft_abs_d(double nb)

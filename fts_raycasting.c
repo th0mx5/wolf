@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:20:06 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/29 21:04:45 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/29 21:15:55 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	draw_wall(int x, int start, int end, t_app *a)
 {
 	int		i;
 	int		clr;
+	t_color	color;
 
 	i = -1;
 	while (++i < start)
@@ -46,7 +47,6 @@ static void	draw_wall(int x, int start, int end, t_app *a)
 			a->texX = 64 - a->texX - 1;
 		a->texX = abs(a->texX);
 	}
-	t_color	color;
 	while (++start <= end)
 	{
 		if (a->t == 1 && x < WIN_W && start < WIN_H)
@@ -54,6 +54,7 @@ static void	draw_wall(int x, int start, int end, t_app *a)
 			a->texY = abs((((start * 256 - WIN_H * 128 + a->lineheight * 128) *
 					64)	/ a->lineheight) / 256);
 			color = get_pixel_color(&a->textures[0], a->texX, a->texY);
+			clr = ft_rgb_to_hex(color);
 			ft_memcpy(a->img_data + 4 * WIN_W * start + x * 4,
 					&clr, sizeof(int));
 		}

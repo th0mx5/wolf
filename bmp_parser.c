@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bmp_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thbernar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 15:11:51 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/29 17:02:36 by thbernar         ###   ########.fr       */
+/*   Updated: 2018/10/29 21:10:04 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void load_bmp(t_bmp *img, char *filename)
 	file = fopen(filename, "r");
 	if (file) {
 		get_data_from_file(img, file);
+		img->cursor.x = 0;
+		img->cursor.y = 0;
 		fclose(file);
 	}
 }
