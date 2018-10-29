@@ -6,28 +6,24 @@
 /*   By: thbernar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 15:11:51 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/26 16:49:24 by thbernar         ###   ########.fr       */
+/*   Updated: 2018/10/29 17:02:36 by thbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "wolf3d.h"
 
-typedef struct s_bmp
-{
-	int		width;
-	int		height;
-	int		data_offset;
-	int		*data;
-}		t_bmp;
-
-static void get_pixel_color(t_bmp *img, int x, int y)
+t_color get_pixel_color(t_bmp *img, int x, int y)
 {
 	int os;
+	t_color color;
 
 	os = x + y * img->width;
-	printf("(%d, %d, %d)", img->data[0 + os], img->data[1 + os], img->data[2 + os]);
+	color.r = img->data[0 + os];
+	color.g = img->data[1 + os];
+	color.b = img->data[2 + os];
+	return (color);
 }
+
 static void get_data_from_file(t_bmp *img, FILE *file)
 {
 	int c;
@@ -70,7 +66,7 @@ static void get_data_from_file(t_bmp *img, FILE *file)
 	}
 }
 
-static void load_bmp(t_bmp *img, char *filename)
+void load_bmp(t_bmp *img, char *filename)
 {
 	FILE 	*file;
 
@@ -79,16 +75,4 @@ static void load_bmp(t_bmp *img, char *filename)
 		get_data_from_file(img, file);
 		fclose(file);
 	}
-}
-
-int main(int ac, char **av)
-{
-	t_bmp texture;
-	load_bmp(&texture, av[1]);
-	get_pixel_color(&texture, 0, 0);
-	printf("-------------\n");
-	printf("width = %d\n", texture.width);
-	printf("height = %d\n", texture.height);
-	printf("data_offset = %d\n", texture.data_offset);
-	return (0);
 }

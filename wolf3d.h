@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/29 15:53:00 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/29 17:00:24 by thbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,22 @@ typedef struct	s_coord_d
 	double		x;
 	double		y;
 }				t_coord_d;
+
+
+typedef struct	s_color
+{
+	int			r;
+	int			g;
+	int			b;
+}				t_color;
+
+typedef struct	s_bmp
+{
+	int			width;
+	int			height;
+	int			data_offset;
+	int			*data;
+}				t_bmp;
 
 typedef struct	s_app
 {
@@ -89,6 +105,7 @@ typedef struct	s_app
 	double		planeY;
 	double		dist_wall;
 	double		oldPlaneX;
+	t_bmp		textures[10];
 }				t_app;
 
 int				ft_close(t_app *app);
@@ -117,5 +134,8 @@ int				ft_abs(int nb);
 void			ft_free_strsplit(char **array);
 
 int				ft_is_againstwall(t_app *app);
+
+void			load_bmp(t_bmp *img, char *filename);
+t_color			get_pixel_color(t_bmp *img, int x, int y);
 
 #endif

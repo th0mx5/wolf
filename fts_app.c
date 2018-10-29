@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 18:43:12 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/29 15:53:09 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/29 17:01:48 by thbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	ft_app_init(t_app *app)
 	ft_app_calcplayerpos(app);
 	if (app->p_count != 1)
 		ft_error("Fatal error : invalid map.");
+	load_bmp(&app->textures[0] ,"textures/texture_wall1.bmp");
 }
 
 void	ft_app_countmap(t_app *app)

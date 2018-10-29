@@ -6,7 +6,7 @@
 #    By: thbernar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/01 00:25:16 by thbernar          #+#    #+#              #
-#    Updated: 2018/10/23 11:17:17 by maxisimo         ###   ########.fr        #
+#    Updated: 2018/10/29 16:53:54 by thbernar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ SRC = main.c \
 	  fts_raycasting.c \
 	  fts_app.c \
 	  fts_minimap.c \
-	  fts_hook.c
+	  fts_hook.c \
+	  bmp_parser.c
 
 OBJ = $(SRC:.c=.o)
 
