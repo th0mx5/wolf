@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:20:06 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/29 21:25:15 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/29 21:53:52 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	draw_wall(int x, int start, int end, t_app *a)
 					64)	/ a->lineheight) / 256);
 			color = get_pixel_color(&a->textures[0], a->texX, a->texY);
 			clr = ft_rgb_to_hex(color);
-			ft_memcpy(a->img_data + 4 * WIN_W * start + x * 4,
+			ft_memcpy(a->img_data + 8 * WIN_W * start + x * 4,
 					&clr, sizeof(int));
 		}
 		else if (x < WIN_W && start < WIN_H)
