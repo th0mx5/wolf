@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/30 12:57:50 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/30 16:35:56 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ typedef struct	s_app
 	int			texX;
 	int			texY;
 	int			wallX;
+	double		kx;
+	double		ky;
 	double		ms;
 	double		oldDirX;
 	double		deltaDistX;

@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:20:06 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/30 12:57:32 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/30 18:11:24 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ void		raycasting(t_app *a)
 		wall_color_detection(a, intensity);
 		draw_wall(p.x, a->start - 1, a->end, a);
 	}
+	//draw_minimap(a);
 	mlx_put_image_to_window(a->mlx, a->win, a->img, 0, 0);
 	mlx_destroy_image(a->mlx, a->img);
 	mlx_do_sync(a->mlx);
