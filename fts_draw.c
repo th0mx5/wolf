@@ -6,26 +6,23 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:30:54 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/30 11:14:54 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/30 12:50:37 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
-#include <stdio.h>
 
-static void	ft_put_pixel(int x, int start, t_app *a)
+static void	ft_floor_and_ceilling(int x, int start, int clr, t_app *a)
 {
 	int		i;
-	int		clr;
-	t_color	color;
 
 	i = -1;
 	while (++i < start)
 	{
 		clr = 0;
-			if (x < WIN_W && i < WIN_H)
-				ft_memcpy(a->img_data + 4 * WIN_W * i + x * 4,
-						&clr, sizeof(int));
+		if (x < WIN_W && i < WIN_H)
+			ft_memcpy(a->img_data + 4 * WIN_W * i + x * 4,
+					&clr, sizeof(int));
 	}
 	while (i++ < WIN_H)
 	{
@@ -34,10 +31,17 @@ static void	ft_put_pixel(int x, int start, t_app *a)
 			ft_memcpy(a->img_data + 4 * WIN_W * i + x * 4,
 					&clr, sizeof(int));
 	}
+}
+
+static void	ft_put_pixel(int x, int start, t_app *a)
+{
+	int		clr;
+	t_color	color;
+
 	if (a->t == 1 && x < WIN_W && start < WIN_H)
 	{
-		a->texY = abs((((start * 256 - WIN_H * 128 + a->lineheight * 128) *
-				64)	/ a->lineheight) / 256);
+		a->texY = abs((((start * 256 - WIN_H * 128 + a->lineheight * 128)
+					* 64) / a->lineheight) / 256);
 		color = get_pixel_color(&a->textures[0], a->texX, a->texY);
 		clr = ft_rgb_to_hex(color);
 		ft_memcpy(a->img_data + 8 * WIN_W * start + x * 4,
@@ -50,6 +54,7 @@ static void	ft_put_pixel(int x, int start, t_app *a)
 
 void		draw_wall(int x, int start, int end, t_app *a)
 {
+	ft_floor_and_ceilling(x, start, 0, a);
 	if (a->t == 1)
 	{
 		if (a->side == 0)

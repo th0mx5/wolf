@@ -6,13 +6,13 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 15:04:48 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/30 11:23:02 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/30 12:25:58 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-int			ft_close(t_app *app)
+int		ft_close(t_app *app)
 {
 	free(app->map);
 	exit(0);

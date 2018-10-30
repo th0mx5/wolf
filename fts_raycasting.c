@@ -6,66 +6,12 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:20:06 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/30 11:13:23 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/30 12:57:32 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 #include <stdio.h>
-
-static void	ft_put_pixel(int x, int start, t_app *a)
-{
-	int		i;
-	int		clr;
-	t_color	color;
-
-	i = -1;
-	while (++i < start)
-	{
-		clr = 0;
-			if (x < WIN_W && i < WIN_H)
-				ft_memcpy(a->img_data + 4 * WIN_W * i + x * 4,
-						&clr, sizeof(int));
-	}
-	while (i++ < WIN_H)
-	{
-		clr = 0;
-		if (x < WIN_W && i < WIN_H)
-			ft_memcpy(a->img_data + 4 * WIN_W * i + x * 4,
-					&clr, sizeof(int));
-	}
-	if (a->t == 1 && x < WIN_W && start < WIN_H)
-	{
-		a->texY = abs((((start * 256 - WIN_H * 128 + a->lineheight * 128) *
-				64)	/ a->lineheight) / 256);
-		color = get_pixel_color(&a->textures[0], a->texX, a->texY);
-		clr = ft_rgb_to_hex(color);
-		ft_memcpy(a->img_data + 8 * WIN_W * start + x * 4,
-				&clr, sizeof(int));
-	}
-	else if (x < WIN_W && start < WIN_H)
-		ft_memcpy(a->img_data + 4 * WIN_W * start + x * 4,
-				&a->color, sizeof(int));
-}
-
-void		draw_wall(int x, int start, int end, t_app *a)
-{
-	if (a->t == 1)
-	{
-		if (a->side == 0)
-			a->wallX = a->rayPosY + a->dist_wall * a->rayDirY;
-		else
-			a->wallX = a->rayPosX + a->dist_wall * a->rayDirX;
-		a->texX = (int)(a->wallX * 64);
-		if (a->side == 0 && a->rayDirX > 0)
-			a->texX = 64 - a->texX - 1;
-		if (a->side == 1 && a->rayDirY < 0)
-			a->texX = 64 - a->texX - 1;
-		a->texX = abs(a->texX);
-	}
-	while (++start <= end)
-		ft_put_pixel(x, start, a);
-}
 
 static void	dda_init(t_app *app)
 {
@@ -134,13 +80,39 @@ static void	raycasting_init(t_app *app, int x)
 			app->rayDirY;
 }
 
-void	raycasting(t_app *a)
+static void	wall_color_detection(t_app *a, double intensity)
 {
-	t_coord	p;
-	int		n[3];
 	t_color	c1;
-	t_color c2;;
-	double		intensity;
+	t_color c2;
+
+	c1.r = 221 * intensity;
+	c1.g = 129 * intensity;
+	c1.b = 0;
+	c2.r = 123 * intensity;
+	c2.g = 72 * intensity;
+	c2.b = 0;
+	if (a->side == 1)
+	{
+		if (a->h == 0)
+			a->color = 0xdd8100;
+		else
+			a->color = ft_rgb_to_hex(c1);
+	}
+	else
+	{
+		if (a->h == 0)
+			a->color = 0x7b4801;
+		else
+			a->color = ft_rgb_to_hex(c2);
+	}
+}
+
+void		raycasting(t_app *a)
+{
+	int		n[3];
+	double	intensity;
+	t_coord	p;
+
 	p.x = 279;
 	a->img = mlx_new_image(a->win, WIN_W, WIN_H);
 	a->img_data = mlx_get_data_addr(a->img, &n[0], &n[1], &n[2]);
@@ -155,29 +127,9 @@ void	raycasting(t_app *a)
 		if (a->end >= WIN_H)
 			a->end = WIN_H - 1;
 		intensity = (a->dist_wall < 1) ? 1 : 1 / a->dist_wall;
-		c1.r = 221 * intensity;
-		c1.g = 129 * intensity;
-		c1.b = 0;
-		c2.r = 123 * intensity;
-		c2.g = 72 * intensity;
-		c2.b = 0;
-		if (a->side == 1)
-		{
-			if (a->h == 0)
-				a->color = 0xdd8100;
-			else
-				a->color = ft_rgb_to_hex(c1);
-		}
-		else
-		{
-			if (a->h == 0)
-				a->color = 0x7b4801;
-			else
-				a->color = ft_rgb_to_hex(c2);
-		}
+		wall_color_detection(a, intensity);
 		draw_wall(p.x, a->start - 1, a->end, a);
 	}
-	//printf("%lf\n", a->dist_wall);
 	mlx_put_image_to_window(a->mlx, a->win, a->img, 0, 0);
 	mlx_destroy_image(a->mlx, a->img);
 	mlx_do_sync(a->mlx);

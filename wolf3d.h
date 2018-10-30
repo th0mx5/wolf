@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/30 11:34:53 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/30 12:57:50 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,12 @@ typedef struct	s_app
 	t_bmp		textures[9];
 }				t_app;
 
+void			ft_app_allocmap(t_app *app);
+void			ft_app_writemap(t_app *app);
 void			ft_app_init(t_app *app);
 
 int				ft_key_press(int key, t_app *app);
+int				ft_key_press2(int key, t_app *app);
 int				ft_key_release(int key, t_app *app);
 
 int				ft_move(t_app *a);

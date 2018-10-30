@@ -6,12 +6,11 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 18:43:12 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/30 11:21:17 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/30 12:41:35 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
-#include <stdio.h>
 
 static void	ft_app_countmap(t_app *app)
 {
@@ -39,9 +38,10 @@ static void	ft_app_countmap(t_app *app)
 	free(s);
 	app->map_size.x = count[2];
 	app->map_size.y = count[0];
+	ft_app_allocmap(app);
 }
 
-static void	ft_app_allocmap(t_app *app)
+void		ft_app_allocmap(t_app *app)
 {
 	int i;
 
@@ -56,9 +56,10 @@ static void	ft_app_allocmap(t_app *app)
 			exit(-1);
 		i++;
 	}
+	ft_app_writemap(app);
 }
 
-static void	ft_app_writemap(t_app *app)
+void		ft_app_writemap(t_app *app)
 {
 	int		fd;
 	char	**array;
@@ -110,7 +111,7 @@ static void	ft_app_calcplayerpos(t_app *app)
 	}
 }
 
-void	ft_app_init(t_app *app)
+void		ft_app_init(t_app *app)
 {
 	app->fov = 60;
 	app->player_size = 32;
@@ -132,10 +133,8 @@ void	ft_app_init(t_app *app)
 	app->h = 0;
 	app->t = 0;
 	ft_app_countmap(app);
-	ft_app_allocmap(app);
-	ft_app_writemap(app);
 	ft_app_calcplayerpos(app);
 	if (app->p_count != 1)
 		ft_error("Fatal error : invalid map.");
-	load_bmp(&app->textures[0] ,"textures/texture_wall1.bmp");
+	load_bmp(&app->textures[0], "textures/texture_wall1.bmp");
 }

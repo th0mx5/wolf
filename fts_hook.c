@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 11:15:41 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/30 11:32:06 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/30 12:48:30 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,10 @@ int			ft_key_press(int key, t_app *app)
 			app->h = 1;
 	}
 	ft_key_press2(key, app);
+	return (0);
 }
 
-static int	ft_key_press2(int key, t_app *app)
+int			ft_key_press2(int key, t_app *app)
 {
 	if (key == 17)
 	{
