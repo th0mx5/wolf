@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   fts_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thbernar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 15:04:48 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/29 19:29:53 by thbernar         ###   ########.fr       */
+/*   Updated: 2018/10/30 11:23:02 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void	ft_printcontrols(void)
+int			ft_close(t_app *app)
 {
-	ft_putstr("--- Controls ---\n");
-	ft_putstr("+ : zoom in\n");
-	ft_putstr("- : zoom out\n");
-	ft_putstr("ARROWS : move\n");
-	ft_putstr("MOUSE (julia only) : toggle C\n");
-	ft_putstr("LEFT OPTION : increase I\n");
-	ft_putstr("LEFT CMD : decrease I\n");
-	ft_putstr("LEFT CTRL : toggle colors\n");
-	ft_putstr("--- End Controls ---\n");
+	free(app->map);
+	exit(0);
+	return (0);
 }
 
 void	ft_error(char *s)
@@ -36,21 +30,6 @@ int		ft_rgb_to_hex(t_color c)
 	return (((c.r & 0xff) << 16) + ((c.g & 0xff) << 8) + (c.b & 0xff));
 }
 
-double	ft_abs_d(double nb)
-{
-	if (nb < 0)
-		return (-nb);
-	else
-		return (nb);
-}
-
-int		ft_abs(int nb)
-{
-	if (nb < 0)
-		return (-nb);
-	else
-		return (nb);
-}
 void	ft_free_strsplit(char **array)
 {
 	int i;

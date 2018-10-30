@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/29 21:10:16 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/30 11:34:53 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,36 +113,27 @@ typedef struct	s_app
 	t_bmp		textures[9];
 }				t_app;
 
-int				ft_close(t_app *app);
+void			ft_app_init(t_app *app);
+
 int				ft_key_press(int key, t_app *app);
 int				ft_key_release(int key, t_app *app);
+
 int				ft_move(t_app *a);
+
+void			raycasting(t_app *app);
+
+void			draw_wall(int x, int start, int end, t_app *a);
 
 void			draw_minimap(t_app *a);
 void			put_pxl_to_img(t_app *a, int x, int y, int color);
 
-void			raycasting(t_app *app);
-
-void			ft_app_init(t_app *app);
-void			ft_app_countmap(t_app *app);
-void			ft_app_allocmap(t_app *app);
-void			ft_app_writemap(t_app *app);
-void			ft_app_calcplayerpos(t_app *app);
-void			ft_app_printmap(t_app *app);
-
-void			ft_printcontrols(void);
+int				ft_close(t_app *app);
 void			ft_error(char *s);
-void			ft_pickcolors(t_app *app, int *color, int i);
-
-double			ft_abs_d(double nb);
-int				ft_abs(int nb);
+int				ft_rgb_to_hex(t_color c);
 void			ft_free_strsplit(char **array);
-
-int				ft_is_againstwall(t_app *app);
 
 void			load_bmp(t_bmp *img, char *filename);
 t_color			get_pixel_color(t_bmp *img, int x, int y);
 
-int				ft_rgb_to_hex(t_color c);
 
 #endif

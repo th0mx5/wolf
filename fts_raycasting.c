@@ -6,14 +6,14 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:20:06 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/29 21:53:52 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/30 11:13:23 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 #include <stdio.h>
 
-static void	draw_wall(int x, int start, int end, t_app *a)
+static void	ft_put_pixel(int x, int start, t_app *a)
 {
 	int		i;
 	int		clr;
@@ -34,6 +34,22 @@ static void	draw_wall(int x, int start, int end, t_app *a)
 			ft_memcpy(a->img_data + 4 * WIN_W * i + x * 4,
 					&clr, sizeof(int));
 	}
+	if (a->t == 1 && x < WIN_W && start < WIN_H)
+	{
+		a->texY = abs((((start * 256 - WIN_H * 128 + a->lineheight * 128) *
+				64)	/ a->lineheight) / 256);
+		color = get_pixel_color(&a->textures[0], a->texX, a->texY);
+		clr = ft_rgb_to_hex(color);
+		ft_memcpy(a->img_data + 8 * WIN_W * start + x * 4,
+				&clr, sizeof(int));
+	}
+	else if (x < WIN_W && start < WIN_H)
+		ft_memcpy(a->img_data + 4 * WIN_W * start + x * 4,
+				&a->color, sizeof(int));
+}
+
+void		draw_wall(int x, int start, int end, t_app *a)
+{
 	if (a->t == 1)
 	{
 		if (a->side == 0)
@@ -48,20 +64,7 @@ static void	draw_wall(int x, int start, int end, t_app *a)
 		a->texX = abs(a->texX);
 	}
 	while (++start <= end)
-	{
-		if (a->t == 1 && x < WIN_W && start < WIN_H)
-		{
-			a->texY = abs((((start * 256 - WIN_H * 128 + a->lineheight * 128) *
-					64)	/ a->lineheight) / 256);
-			color = get_pixel_color(&a->textures[0], a->texX, a->texY);
-			clr = ft_rgb_to_hex(color);
-			ft_memcpy(a->img_data + 8 * WIN_W * start + x * 4,
-					&clr, sizeof(int));
-		}
-		else if (x < WIN_W && start < WIN_H)
-			ft_memcpy(a->img_data + 4 * WIN_W * start + x * 4,
-					&a->color, sizeof(int));
-	}
+		ft_put_pixel(x, start, a);
 }
 
 static void	dda_init(t_app *app)
@@ -154,8 +157,10 @@ void	raycasting(t_app *a)
 		intensity = (a->dist_wall < 1) ? 1 : 1 / a->dist_wall;
 		c1.r = 221 * intensity;
 		c1.g = 129 * intensity;
+		c1.b = 0;
 		c2.r = 123 * intensity;
 		c2.g = 72 * intensity;
+		c2.b = 0;
 		if (a->side == 1)
 		{
 			if (a->h == 0)

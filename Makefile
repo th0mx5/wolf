@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: thbernar <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/01 00:25:16 by thbernar          #+#    #+#              #
-#    Updated: 2018/10/29 16:53:54 by thbernar         ###   ########.fr        #
+#    Updated: 2018/10/30 11:35:34 by maxisimo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,8 @@ SRC = main.c \
 	  fts_app.c \
 	  fts_minimap.c \
 	  fts_hook.c \
+	  fts_draw.c \
+	  fts_move.c \
 	  bmp_parser.c
 
 OBJ = $(SRC:.c=.o)
