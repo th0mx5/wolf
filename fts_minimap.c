@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 18:41:09 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/30 18:11:18 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/30 20:18:13 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,14 @@ void	put_pxl_to_img(t_app *a, int x, int y, int color)
 
 static int	check_map(t_app *a, int x, int y)
 {
+	t_color	c1;
+
+	c1.r = 37;
+	c1.g = 73;
+	c1.b = 35;
 	if (a->map[x][y] == 1)
-		return (0xdd8100);
+	//printf("%d %d\n", x, y);
+		return (ft_rgb_to_hex(c1));
 	return (0);
 }
 
@@ -44,7 +50,7 @@ void		draw_minimap(t_app *app)
 	while (++x < 271)
 	{
 		m_y = 0;
-		if ((x % (int)app->kx == 0) && (mx <= app->map_size.x - 1))
+		if ((x % (int)app->kx == 0) && (mx < app->map_size.x - 1))
 		{
 			color = check_map(app, mx, m_y);
 			mx++;
@@ -52,7 +58,7 @@ void		draw_minimap(t_app *app)
 		y = 9;
 		while (++y < 271)
 		{
-			if ((y % (int)app->ky == 0) && (m_y <= app->map_size.y))
+			if ((y % (int)app->ky == 0) && (m_y < app->map_size.y - 1))
 			{
 				color = check_map(app, mx, m_y);
 				m_y++;

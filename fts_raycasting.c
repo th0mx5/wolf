@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:20:06 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/30 18:11:24 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/10/30 19:42:37 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void		raycasting(t_app *a)
 	double	intensity;
 	t_coord	p;
 
-	p.x = 279;
+	p.x = 0;
 	a->img = mlx_new_image(a->win, WIN_W, WIN_H);
 	a->img_data = mlx_get_data_addr(a->img, &n[0], &n[1], &n[2]);
 	while (++p.x < WIN_W)
@@ -130,7 +130,7 @@ void		raycasting(t_app *a)
 		wall_color_detection(a, intensity);
 		draw_wall(p.x, a->start - 1, a->end, a);
 	}
-	//draw_minimap(a);
+	draw_minimap(a);
 	mlx_put_image_to_window(a->mlx, a->win, a->img, 0, 0);
 	mlx_destroy_image(a->mlx, a->img);
 	mlx_do_sync(a->mlx);
