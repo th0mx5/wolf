@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 11:15:41 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/11/02 17:14:26 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/02 17:26:19 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,17 @@
 
 static void	ft_start_screen(t_app *a)
 {
-	a->loop = (a->loop < 60) ? a->loop + 1 : 0;
-	if (a->loop < 40 && a->startscreen == 0)
-		mlx_string_put(a->mlx, a->win, 450, 300, 0xFFFFFF, START);
-	else if (a->loop >= 40 && a->startscreen == 0)
-		mlx_clear_window(a->mlx, a->win);
+	t_color	c1;
+	//int		color;
+
+	a->loop = a->loop + 0.02;
+	if (a->startscreen == 0)
+	{
+		c1.r = fabs(sin(a->loop)) * 255;
+		c1.g = fabs(sin(a->loop)) * 255;
+		c1.b = fabs(sin(a->loop)) * 255;
+		mlx_string_put(a->mlx, a->win, 450, 300, ft_rgb_to_hex(c1), START);
+	}
 }
 
 int			expose_hook(t_app *a)
