@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/02 16:09:18 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/02 17:24:02 by thbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 # define WIN_W 1280
 # define WIN_H 720
-# define START "PRESS ANY KEY FOR START"
+# define START "PRESS ANY KEY TO START"
 
 typedef struct	s_coord
 {
@@ -97,7 +97,7 @@ typedef struct	s_app
 	int			mx;
 	int			my;
 	int			startscreen;
-	int			loop;
+	double		loop;
 	double		kx;
 	double		ky;
 	double		ms;
