@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 18:41:09 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/11/02 17:23:46 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/02 18:55:12 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	put_pxl_to_img(t_app *a, int x, int y, int color)
 {
-	if (x < WIN_W && y < WIN_H) // && a->mx < a->map_size.x && a->my < a->map_size.y)
+	if (x < WIN_W && y < WIN_H)
 	{
 		ft_memcpy(a->img_data + 4 * WIN_W * y + x * 4,
 			&color, sizeof(int));
@@ -34,48 +34,42 @@ static int	check_map(t_app *a, int x, int y)
 	return (0);
 }
 
-/*void		draw_minimap(t_app *app)
-{
-	int			x;
-	int			y;
-	int			color;
-
-	app->mx = 0;
-	x = 8;
-	app->kx = 262.0 / app->map_size.x;
-	app->ky = 262.0 / app->map_size.y;
-	while (++x < 271)
-	{
-		app->my = 0;
-		if ((x % (int)app->kx == 0) && (app->mx < app->map_size.x - 1))
-		{
-			color = check_map(app, app->mx, app->my);
-			app->mx++;
-		}
-		y = 8;
-		while (++y < 271)
-		{
-			if ((y % (int)app->ky == 0) && (app->my < app->map_size.y - 1))
-			{
-				color = check_map(app, app->mx, app->my);
-				app->my++;
-			}
-			put_pxl_to_img(app, x, y, color);
-		}
-	}
-}*/
-
 void		draw_minimap(t_app *a)
 {
 	int		x;
 	int		y;
+	int		block;
+	int		color;
+	t_coord	tmp;
 
 	x = 8;
+	block = 37;
 	while (++x < 271)
 	{
-		color = 0xFFFFFF;
 		y = 8;
 		while (++y < 271)
+		{
+			color = 0xFFFFFF;
+			tmp.x = (x / block) + a->pos.x - 3;
+			tmp.y = (y / block) + a->pos.y - 3;
+			if (tmp.x >= 0 && tmp.y >= 0 && tmp.x < a->map_size.x
+					&& tmp.y < a->map_size.y)
+				color = check_map(a, tmp.x, tmp.y);
 			put_pxl_to_img(a, x, y, color);
+			tmp.x = 131 - block;
+			tmp.y = 131 - block;
+			/*while (tmp.x < 131 + block)
+			{
+				tmp.y = 131 - block;
+				while (tmp.y < 131 + block)
+				{
+					put_pxl_to_img(a, tmp.x, tmp.y, 0xF1F1F1);
+					tmp.y++;
+				}
+				tmp.x++;
+			}*/
+			put_pxl_to_img(a, 131, 131, 0xF1F1F1);
+			
+		}
 	}
 }
