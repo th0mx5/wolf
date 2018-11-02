@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/10/30 16:35:56 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/02 16:09:18 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 # define WIN_W 1280
 # define WIN_H 720
+# define START "PRESS ANY KEY FOR START"
 
 typedef struct	s_coord
 {
@@ -93,6 +94,10 @@ typedef struct	s_app
 	int			texX;
 	int			texY;
 	int			wallX;
+	int			mx;
+	int			my;
+	int			startscreen;
+	int			loop;
 	double		kx;
 	double		ky;
 	double		ms;
@@ -119,6 +124,7 @@ void			ft_app_allocmap(t_app *app);
 void			ft_app_writemap(t_app *app);
 void			ft_app_init(t_app *app);
 
+int				expose_hook(t_app *a);
 int				ft_key_press(int key, t_app *app);
 int				ft_key_press2(int key, t_app *app);
 int				ft_key_release(int key, t_app *app);

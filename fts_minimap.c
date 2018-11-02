@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 18:41:09 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/30 20:18:13 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/02 15:28:51 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	put_pxl_to_img(t_app *a, int x, int y, int color)
 {
-	if (x < WIN_W && y < WIN_H)
+	if (x < WIN_W && y < WIN_H && a->mx < a->map_size.x && a->my < a->map_size.y)
 	{
 		ft_memcpy(a->img_data + 4 * WIN_W * y + x * 4,
 			&color, sizeof(int));
@@ -26,11 +26,10 @@ static int	check_map(t_app *a, int x, int y)
 {
 	t_color	c1;
 
-	c1.r = 37;
-	c1.g = 73;
-	c1.b = 35;
+	c1.r = 225;
+	c1.g = 130;
+	c1.b = 0;
 	if (a->map[x][y] == 1)
-	//printf("%d %d\n", x, y);
 		return (ft_rgb_to_hex(c1));
 	return (0);
 }
@@ -39,29 +38,27 @@ void		draw_minimap(t_app *app)
 {
 	int			x;
 	int			y;
-	int			mx;
-	int			m_y;
 	int			color;
 
-	mx = 0;
+	app->mx = 0;
 	x = 8;
 	app->kx = 262.0 / app->map_size.x;
 	app->ky = 262.0 / app->map_size.y;
 	while (++x < 271)
 	{
-		m_y = 0;
-		if ((x % (int)app->kx == 0) && (mx < app->map_size.x - 1))
+		app->my = 0;
+		if ((x % (int)app->kx == 0) && (app->mx < app->map_size.x - 1))
 		{
-			color = check_map(app, mx, m_y);
-			mx++;
+			color = check_map(app, app->mx, app->my);
+			app->mx++;
 		}
-		y = 9;
+		y = 8;
 		while (++y < 271)
 		{
-			if ((y % (int)app->ky == 0) && (m_y < app->map_size.y - 1))
+			if ((y % (int)app->ky == 0) && (app->my < app->map_size.y - 1))
 			{
-				color = check_map(app, mx, m_y);
-				m_y++;
+				color = check_map(app, app->mx, app->my);
+				app->my++;
 			}
 			put_pxl_to_img(app, x, y, color);
 		}
