@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 11:15:41 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/11/02 16:27:50 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/02 17:14:26 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,9 @@
 
 static void	ft_start_screen(t_app *a)
 {
-	t_color	c1;
-	int		color;
-
-	c1.r = 255;
-	c1.g = 255;
-	c1.b = 255;
 	a->loop = (a->loop < 60) ? a->loop + 1 : 0;
 	if (a->loop < 40 && a->startscreen == 0)
-	{
-		while (a->loop < 40)
-			color = ft_rgb_to_hex(c1);
-			mlx_string_put(a->mlx, a->win, 450, 300, color, START);
-			c1.r -= 6;
-			c1.g -= 6;
-			c1.b -= 6;
-	}
+		mlx_string_put(a->mlx, a->win, 450, 300, 0xFFFFFF, START);
 	else if (a->loop >= 40 && a->startscreen == 0)
 		mlx_clear_window(a->mlx, a->win);
 }

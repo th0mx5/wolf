@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 18:41:09 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/11/02 15:28:51 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/02 17:23:46 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	put_pxl_to_img(t_app *a, int x, int y, int color)
 {
-	if (x < WIN_W && y < WIN_H && a->mx < a->map_size.x && a->my < a->map_size.y)
+	if (x < WIN_W && y < WIN_H) // && a->mx < a->map_size.x && a->my < a->map_size.y)
 	{
 		ft_memcpy(a->img_data + 4 * WIN_W * y + x * 4,
 			&color, sizeof(int));
@@ -34,7 +34,7 @@ static int	check_map(t_app *a, int x, int y)
 	return (0);
 }
 
-void		draw_minimap(t_app *app)
+/*void		draw_minimap(t_app *app)
 {
 	int			x;
 	int			y;
@@ -62,5 +62,20 @@ void		draw_minimap(t_app *app)
 			}
 			put_pxl_to_img(app, x, y, color);
 		}
+	}
+}*/
+
+void		draw_minimap(t_app *a)
+{
+	int		x;
+	int		y;
+
+	x = 8;
+	while (++x < 271)
+	{
+		color = 0xFFFFFF;
+		y = 8;
+		while (++y < 271)
+			put_pxl_to_img(a, x, y, color);
 	}
 }
