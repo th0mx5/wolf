@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 18:41:09 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/11/02 18:55:12 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/11 20:28:07 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,57 @@ static int	check_map(t_app *a, int x, int y)
 	return (0);
 }
 
+static void	draw_player(t_app *a)
+{
+	//int		countx;
+	//int		county;
+	/*county = 127;
+	while (++county < 134)
+	{
+		countx = 127;
+		while (++countx < 134)
+			put_pxl_to_img(a, countx, county, ft_rgb_to_hex(c1));
+	}*/
+	int		x;
+	int		y;
+	int		xc;
+	int		yc;
+	int		d;
+	int		i = 0;
+	t_color	c1;
+
+	a->loop = a->loop + 0.05;
+	c1.r = fabs(sin(a->loop)) * 255;
+	c1.g = 0;
+	c1.b = 0;
+	while (++i < 5)
+	{
+		x = 0;
+		y = i;
+		d = 5 - 4 * i;
+		xc = 131;
+		yc = 131;
+		while (x <= y)
+		{
+			put_pxl_to_img(a, xc + x, yc - y, ft_rgb_to_hex(c1));
+			put_pxl_to_img(a, xc - x, yc - y, ft_rgb_to_hex(c1));
+			put_pxl_to_img(a, xc + x, yc + y, ft_rgb_to_hex(c1));
+			put_pxl_to_img(a, xc - x, yc + y, ft_rgb_to_hex(c1));
+			put_pxl_to_img(a, xc + y, yc - x, ft_rgb_to_hex(c1));
+			put_pxl_to_img(a, xc - y, yc - x, ft_rgb_to_hex(c1));
+			put_pxl_to_img(a, xc + y, yc + x, ft_rgb_to_hex(c1));
+			put_pxl_to_img(a, xc - y, yc + x, ft_rgb_to_hex(c1));
+			if (d > 0)
+			{
+				y--;
+				d -= 8 * y;
+			}
+			x++;
+			d = d + 8 * x + 4;
+		}
+	}
+}
+
 void		draw_minimap(t_app *a)
 {
 	int		x;
@@ -49,27 +100,14 @@ void		draw_minimap(t_app *a)
 		y = 8;
 		while (++y < 271)
 		{
-			color = 0xFFFFFF;
+			color = 0;
 			tmp.x = (x / block) + a->pos.x - 3;
 			tmp.y = (y / block) + a->pos.y - 3;
 			if (tmp.x >= 0 && tmp.y >= 0 && tmp.x < a->map_size.x
 					&& tmp.y < a->map_size.y)
 				color = check_map(a, tmp.x, tmp.y);
 			put_pxl_to_img(a, x, y, color);
-			tmp.x = 131 - block;
-			tmp.y = 131 - block;
-			/*while (tmp.x < 131 + block)
-			{
-				tmp.y = 131 - block;
-				while (tmp.y < 131 + block)
-				{
-					put_pxl_to_img(a, tmp.x, tmp.y, 0xF1F1F1);
-					tmp.y++;
-				}
-				tmp.x++;
-			}*/
-			put_pxl_to_img(a, 131, 131, 0xF1F1F1);
-			
 		}
 	}
+	draw_player(a);
 }
