@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:20:06 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/11/11 21:07:32 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/11 21:21:21 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,7 @@ void		raycasting(t_app *a)
 		raycasting_init(a, p.x);
 		a->lineheight = (int)(WIN_H / a->dist_wall);
 		a->start = -a->lineheight / 2 + a->lookud;
-		if (a->start < 0)
-			a->start = 0;
+		a->start = (a->start < 0) ? 0 : a->start;
 		a->end = a->lineheight / 2 + a->lookud;
 		if (a->end >= WIN_H)
 			a->end = WIN_H - 1;
