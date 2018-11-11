@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 18:41:09 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/11/11 20:54:01 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/11 21:06:35 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,6 @@ static int	check_map(t_app *a, int x, int y)
 
 void		draw_player(t_app *a)
 {
-	//int		countx;
-	//int		county;
-	/*county = 127;
-	while (++county < 134)
-	{
-		countx = 127;
-		while (++countx < 134)
-			put_pxl_to_img(a, countx, county, ft_rgb_to_hex(c1));
-	}*/
 	int		x;
 	int		y;
 	int		xc;
@@ -66,14 +57,14 @@ void		draw_player(t_app *a)
 		yc = 131;
 		while (x <= y)
 		{
-			put_pxl_to_img(a, xc + x, yc - y, ft_rgb_to_hex(c1));
-			put_pxl_to_img(a, xc - x, yc - y, ft_rgb_to_hex(c1));
-			put_pxl_to_img(a, xc + x, yc + y, ft_rgb_to_hex(c1));
-			put_pxl_to_img(a, xc - x, yc + y, ft_rgb_to_hex(c1));
-			put_pxl_to_img(a, xc + y, yc - x, ft_rgb_to_hex(c1));
-			put_pxl_to_img(a, xc - y, yc - x, ft_rgb_to_hex(c1));
-			put_pxl_to_img(a, xc + y, yc + x, ft_rgb_to_hex(c1));
-			put_pxl_to_img(a, xc - y, yc + x, ft_rgb_to_hex(c1));
+			put_pxl_to_img(a, xc + x, yc - y, 0xFF0000);
+			put_pxl_to_img(a, xc - x, yc - y, 0xFF0000);
+			put_pxl_to_img(a, xc + x, yc + y, 0xFF0000);
+			put_pxl_to_img(a, xc - x, yc + y, 0xFF0000);
+			put_pxl_to_img(a, xc + y, yc - x, 0xFF0000);
+			put_pxl_to_img(a, xc - y, yc - x, 0xFF0000);
+			put_pxl_to_img(a, xc + y, yc + x, 0xFF0000);
+			put_pxl_to_img(a, xc - y, yc + x, 0xFF0000);
 			if (d > 0)
 			{
 				y--;
@@ -109,5 +100,4 @@ void		draw_minimap(t_app *a)
 			put_pxl_to_img(a, x, y, color);
 		}
 	}
-	//draw_player(a);
 }
