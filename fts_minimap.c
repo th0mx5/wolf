@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 18:41:09 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/11/11 20:28:07 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/11 20:54:01 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	check_map(t_app *a, int x, int y)
 	return (0);
 }
 
-static void	draw_player(t_app *a)
+void		draw_player(t_app *a)
 {
 	//int		countx;
 	//int		county;
@@ -109,5 +109,5 @@ void		draw_minimap(t_app *a)
 			put_pxl_to_img(a, x, y, color);
 		}
 	}
-	draw_player(a);
+	//draw_player(a);
 }

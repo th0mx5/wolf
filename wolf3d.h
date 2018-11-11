@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/02 17:57:54 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/11 20:53:40 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ void			draw_wall(int x, int start, int end, t_app *a);
 
 void			draw_minimap(t_app *a);
 void			put_pxl_to_img(t_app *a, int x, int y, int color);
+void			draw_player(t_app *a);
 
 int				ft_close(t_app *app);
 void			ft_error(char *s);
