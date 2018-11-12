@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:20:06 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/11/11 21:21:21 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/12 15:26:48 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ void		raycasting(t_app *a)
 		a->end = a->lineheight / 2 + a->lookud;
 		if (a->end >= WIN_H)
 			a->end = WIN_H - 1;
+		a->wall_size = a->start - a->end;
 		intensity = (a->dist_wall < 1) ? 1 : 1 / a->dist_wall;
 		wall_color_detection(a, intensity);
 		draw_wall(p.x, a->start - 1, a->end, a);

@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/11 20:53:40 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/12 15:24:59 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ typedef struct	s_app
 	int			color;
 	int			start;
 	int			end;
+	int			wall_size;
+	int			start2;
 	int			lineheight;
 	int			stepX;
 	int			stepY;

@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 18:41:09 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/11/11 21:06:35 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/12 14:38:59 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void		draw_player(t_app *a)
 	int		xc;
 	int		yc;
 	int		d;
-	int		i = 0;
+	int		i = -1;
 	t_color	c1;
 
 	a->loop = a->loop + 0.05;

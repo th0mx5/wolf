@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:30:54 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/11 20:47:15 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/12 15:26:52 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	ft_floor_and_ceilling(int x, int start, int clr, t_app *a)
 	int		i;
 
 	i = -1;
-	while (++i < start)
+	while (++i <= start)
 	{
 		clr = 0;
 		if (x < WIN_W && i < WIN_H)
@@ -35,7 +35,15 @@ static void	ft_floor_and_ceilling(int x, int start, int clr, t_app *a)
 
 static void	ft_put_pixel(int x, int start, t_app *a)
 {
-	if (x < WIN_W && start < WIN_H)
+	int		clr;
+	t_color	c1;
+
+	c1 = get_pixel_color(a->textures, x, a->start * 128 / a->wall_size);
+	clr = ft_rgb_to_hex(c1);
+	if (x % 64 < WIN_W && start % 64 < WIN_H && a->t == 1)
+		ft_memcpy(a->img_data + 4 * WIN_W * start + x * 4,
+				&clr, sizeof(int));
+	else if (x < WIN_W && start < WIN_H)
 		ft_memcpy(a->img_data + 4 * WIN_W * start + x * 4,
 				&a->color, sizeof(int));
 }
