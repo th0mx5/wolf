@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/12 15:24:59 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/13 11:15:21 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ typedef struct	s_app
 	int			mx;
 	int			my;
 	int			startscreen;
+	double		mm_intensitX;
+	double		mm_intensitY;
 	double		loop;
 	double		kx;
 	double		ky;
