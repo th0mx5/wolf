@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:30:54 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/12 15:26:52 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/13 10:43:01 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	ft_put_pixel(int x, int start, t_app *a)
 	int		clr;
 	t_color	c1;
 
-	c1 = get_pixel_color(a->textures, x, a->start * 128 / a->wall_size);
+	c1 = get_pixel_color(a->textures, x, -(start) * 128 / a->wall_size);
 	clr = ft_rgb_to_hex(c1);
 	if (x % 64 < WIN_W && start % 64 < WIN_H && a->t == 1)
 		ft_memcpy(a->img_data + 4 * WIN_W * start + x * 4,
