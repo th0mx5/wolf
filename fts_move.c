@@ -54,6 +54,7 @@ static void	ft_move2(t_app *a)
 			a->pos.x -= a->dirX * a->ms;
 		if (a->map[(int)(a->pos.x)][(int)(a->pos.y + a->dirY * a->ms)] == 0)
 			a->pos.y += a->dirY * a->ms;
+
 	}
 }
 
