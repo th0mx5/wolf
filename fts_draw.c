@@ -33,12 +33,12 @@ static void	ft_floor_and_ceilling(int x, int start, int clr, t_app *a)
 	}
 }
 
-static void	ft_put_pixel(int x, int start, t_app *a)
+static void	ft_put_pixel(int x, int y, int start, t_app *a)
 {
 	int		clr;
 	t_color	c1;
 
-	c1 = get_pixel_color(a->textures, (x % 128), -(start) * 128 / a->wall_size);
+	c1 = get_pixel_color(a->textures, (x % 64) * 2, (-start + y) * 128 / a->wall_size);
 	clr = ft_rgb_to_hex(c1);
 	if (x < WIN_W && start < WIN_H && a->t == 1)
 		ft_memcpy(a->img_data + 4 * WIN_W * start + x * 4,
@@ -50,7 +50,10 @@ static void	ft_put_pixel(int x, int start, t_app *a)
 
 void		draw_wall(int x, int start, int end, t_app *a)
 {
+	int y = start;
 	ft_floor_and_ceilling(x, start, 0, a);
 	while (++start <= end)
-		ft_put_pixel(x, start, a);
+	{
+		ft_put_pixel(x, y, start, a);
+	}
 }
