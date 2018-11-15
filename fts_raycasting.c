@@ -121,10 +121,7 @@ void		raycasting(t_app *a)
 		raycasting_init(a, p.x);
 		a->lineheight = (int)(WIN_H / a->dist_wall);
 		a->start = -a->lineheight / 2 + a->lookud;
-		a->start = (a->start < 0) ? 0 : a->start;
 		a->end = a->lineheight / 2 + a->lookud;
-		if (a->end >= WIN_H)
-			a->end = WIN_H - 1;
 		a->wall_size = a->start - a->end;
 		intensity = (a->dist_wall < 1) ? 1 : 1 / a->dist_wall;
 		wall_color_detection(a, intensity);

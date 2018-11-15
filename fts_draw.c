@@ -56,8 +56,8 @@ static void	ft_put_pixel(int x, int y, int start, int textX, t_app *a)
 void		draw_wall(int x, int start, int end, t_app *a)
 {
 	int		y;
-	int textX;
-	double wallX;
+	int 	textX;
+	double	wallX;
 
 	y = start;
 	if (a->t == 1)
@@ -76,6 +76,7 @@ void		draw_wall(int x, int start, int end, t_app *a)
 	ft_floor_and_ceilling(x, start, 0, a);
 	while (++start <= end)
 	{
-		ft_put_pixel(x, y, start, textX, a);
+		if (start > 0)
+			ft_put_pixel(x, y, start, textX, a);
 	}
 }
