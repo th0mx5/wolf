@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 11:15:41 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/11/02 17:26:19 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/15 17:46:43 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static void	ft_start_screen(t_app *a)
 {
 	t_color	c1;
-	//int		color;
 
 	a->loop = a->loop + 0.02;
 	if (a->startscreen == 0)
