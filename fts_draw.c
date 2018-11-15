@@ -33,17 +33,15 @@ static void	ft_floor_and_ceilling(int x, int start, int clr, t_app *a)
 	}
 }
 
-static void	ft_put_pixel(int x, int y, int start, int textX, t_app *a)
+static void	ft_put_pixel(int x, int start, int textX, int textY, t_app *a)
 {
 	int		clr;
 	t_color	c1;
 
 	if (a->side == 0)
-		c1 = get_pixel_color(&a->textures[a->texnum], (textX / 2),
-			(-start + y) * 128 / a->wall_size);
+		c1 = get_pixel_color(&a->textures[a->texnum], textX, textY);
 	else
-		c1 = get_pixel_color(&a->textures[a->texnum + 1], (textX / 2),
-			(-start + y) * 128 / a->wall_size);
+		c1 = get_pixel_color(&a->textures[a->texnum + 1], textX, textY);
 	clr = ft_rgb_to_hex(c1);
 	if (x < WIN_W && start < WIN_H && a->t == 1)
 		ft_memcpy(a->img_data + 4 * WIN_W * start + x * 4,
@@ -57,6 +55,7 @@ void		draw_wall(int x, int start, int end, t_app *a)
 {
 	int		y;
 	int 	textX;
+	int		textY;
 	double	wallX;
 
 	y = start;
@@ -77,6 +76,9 @@ void		draw_wall(int x, int start, int end, t_app *a)
 	while (++start <= end)
 	{
 		if (start > 0)
-			ft_put_pixel(x, y, start, textX, a);
+		{
+			textY = (-start + y) * 128 / a->wall_size;
+			ft_put_pixel(x, start, textX, textY, a);
+		}
 	}
 }
