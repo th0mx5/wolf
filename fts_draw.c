@@ -39,10 +39,10 @@ static void	ft_put_pixel(int x, int y, int start, int textX, t_app *a)
 	t_color	c1;
 
 	if (a->side == 0)
-		c1 = get_pixel_color(&a->textures[a->texnum], (textX / 2),
+		c1 = get_pixel_color(&a->textures[a->texnum], textX,
 			(-start + y) * 128 / a->wall_size);
 	else
-		c1 = get_pixel_color(&a->textures[a->texnum + 1], (textX / 2),
+		c1 = get_pixel_color(&a->textures[a->texnum + 1], textX,
 			(-start + y) * 128 / a->wall_size);
 	clr = ft_rgb_to_hex(c1);
 	if (x < WIN_W && start < WIN_H && a->t == 1)
