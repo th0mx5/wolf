@@ -15,9 +15,9 @@
 static void	ft_start_screen(t_app *a)
 {
 	t_color c;
-	int		clr;
 	t_color	c1;
 	t_coord p;
+	t_coord tmp;
 	int		n[3];
 	double	sin_factor;
 
@@ -36,14 +36,15 @@ static void	ft_start_screen(t_app *a)
 		while (p.x < a->startscreen_logo.width * 3)
 		{
 			c = get_pixel_color(&a->startscreen_logo, p.x / 3, p.y / 3);
-			clr = ft_rgb_to_hex(c);
-			ft_memcpy(a->img_data + 4 * WIN_W * (p.y + WIN_H / 2 - (a->startscreen_logo.height * 3)) + (p.x * 4 + (WIN_W + a->startscreen_logo.width * 3)), &clr, sizeof(int));
+			tmp.x = p.x + WIN_W / 2 - a->startscreen_logo.width / 2 * 3;
+			tmp.y = p.y + WIN_H / 2 - a->startscreen_logo.height / 2 * 3;
+			ft_put_pxl_to_img(a, c, tmp.x, tmp.y);
 			p.x++;
 		}
 		p.y++;
 	}
 	mlx_put_image_to_window(a->mlx, a->win, a->img, 0, 0);
-	mlx_string_put(a->mlx, a->win, WIN_W / 2 - 150, WIN_H / 2 + 100, ft_rgb_to_hex(c1), START);
+	mlx_string_put(a->mlx, a->win, WIN_W / 2 - 120, WIN_H / 2 + 250, ft_rgb_to_hex(c1), START);
 	mlx_destroy_image(a->mlx, a->img);
 	mlx_do_sync(a->mlx);
 }
