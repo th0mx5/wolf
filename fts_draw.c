@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:30:54 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/15 13:34:32 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/15 13:58:37 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ static void	ft_floor_and_ceilling(int x, int start, int clr, t_app *a)
 	i = -1;
 	while (++i <= start)
 	{
-		clr = 0;
+		clr = (a->t == 1) ? 0x0000FF : 0;
 		if (x < WIN_W && i < WIN_H)
 			ft_memcpy(a->img_data + 4 * WIN_W * i + x * 4,
 					&clr, sizeof(int));
 	}
 	while (i++ < WIN_H)
 	{
-		clr = 0;
+		clr = (a->t == 1) ? 0x555555 : 0;
 		if (x < WIN_W && i < WIN_H)
 			ft_memcpy(a->img_data + 4 * WIN_W * i + x * 4,
 					&clr, sizeof(int));
