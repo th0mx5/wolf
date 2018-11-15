@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:30:54 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/15 13:58:37 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/15 16:28:03 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,7 @@ static void	ft_put_pixel(int x, int start, int textX, int textY, t_app *a)
 	if (a->h)
 		ft_apply_shadow_to_color(&c1, a->clr_intensity);
 	clr = ft_rgb_to_hex(c1);
-	if (x < WIN_W && start < WIN_H)
-		ft_memcpy(a->img_data + 4 * WIN_W * start + x * 4,
-				&clr, sizeof(int));
+	ft_memcpy(a->img_data + 4 * WIN_W * start + x * 4, &clr, sizeof(int));
 }
 
 void		draw_wall(int x, int start, int end, t_app *a)
@@ -99,7 +97,7 @@ void		draw_wall(int x, int start, int end, t_app *a)
 	ft_floor_and_ceilling(x, start, 0, a);
 	while (++start <= end)
 	{
-		if (start > 0)
+		if (start >= 0 && start < WIN_H)
 		{
 			textY = (-start + y) * 128 / a->wall_size;
 			ft_put_pixel(x, start, textX, textY, a);
