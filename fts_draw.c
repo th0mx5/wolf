@@ -33,22 +33,46 @@ static void	ft_floor_and_ceilling(int x, int start, int clr, t_app *a)
 	}
 }
 
+static void ft_apply_shadow_to_color(t_color *c, double intensity)
+{
+	c->r = c->r * intensity;
+	c->g = c->g * intensity;
+	c->b = c->b * intensity;
+}
+
 static void	ft_put_pixel(int x, int start, int textX, int textY, t_app *a)
 {
 	int		clr;
 	t_color	c1;
 
-	if (a->side == 0)
-		c1 = get_pixel_color(&a->textures[a->texnum], textX, textY);
+	if (a->t == 1)
+	{
+		if (a->side == 0)
+			c1 = get_pixel_color(&a->textures[a->texnum], textX, textY);
+		else
+			c1 = get_pixel_color(&a->textures[a->texnum + 1], textX, textY);
+	}
 	else
-		c1 = get_pixel_color(&a->textures[a->texnum + 1], textX, textY);
+	{
+		if (a->side == 1)
+		{
+			c1.r = 221;
+			c1.g = 129;
+			c1.b = 0;
+		}
+		else
+		{
+			c1.r = 221;
+			c1.g = 129;
+			c1.b = 0;		
+		}
+	}
+	if (a->h)
+		ft_apply_shadow_to_color(&c1, a->clr_intensity);
 	clr = ft_rgb_to_hex(c1);
-	if (x < WIN_W && start < WIN_H && a->t == 1)
+	if (x < WIN_W && start < WIN_H)
 		ft_memcpy(a->img_data + 4 * WIN_W * start + x * 4,
 				&clr, sizeof(int));
-	else if (x < WIN_W && start < WIN_H)
-		ft_memcpy(a->img_data + 4 * WIN_W * start + x * 4,
-				&a->color, sizeof(int));
 }
 
 void		draw_wall(int x, int start, int end, t_app *a)

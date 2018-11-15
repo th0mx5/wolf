@@ -123,6 +123,7 @@ typedef struct	s_app
 	double		dist_wall;
 	double		oldPlaneX;
 	t_bmp		textures[9];
+	double		clr_intensity;
 }				t_app;
 
 void			ft_app_allocmap(t_app *app);
