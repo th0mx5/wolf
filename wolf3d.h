@@ -124,6 +124,7 @@ typedef struct	s_app
 	double		oldPlaneX;
 	t_bmp		textures[9];
 	double		clr_intensity;
+	t_bmp		startscreen_logo;
 }				t_app;
 
 void			ft_app_allocmap(t_app *app);

@@ -14,17 +14,35 @@
 
 static void	ft_start_screen(t_app *a)
 {
+	t_color c;
+	int		clr;
 	t_color	c1;
-	//int		color;
+	t_coord p;
+	int		n[3];
 
+	p.x = 0;
+	a->img = mlx_new_image(a->win, WIN_W, WIN_H);
+	a->img_data = mlx_get_data_addr(a->img, &n[0], &n[1], &n[2]);
 	a->loop = a->loop + 0.02;
-	if (a->startscreen == 0)
+	c1.r = fabs(sin(a->loop)) * 255;
+	c1.g = fabs(sin(a->loop)) * 255;
+	c1.b = fabs(sin(a->loop)) * 255;
+	p.y = 1;
+	while (p.y < a->startscreen_logo.height)
 	{
-		c1.r = fabs(sin(a->loop)) * 255;
-		c1.g = fabs(sin(a->loop)) * 255;
-		c1.b = fabs(sin(a->loop)) * 255;
-		mlx_string_put(a->mlx, a->win, 450, 300, ft_rgb_to_hex(c1), START);
+		p.x = 1;
+		while (p.x < a->startscreen_logo.width)
+		{
+			c = get_pixel_color(&a->startscreen_logo, p.x, p.y);
+			clr = ft_rgb_to_hex(c);
+			ft_memcpy(a->img_data + 4 * WIN_W * p.y + p.x * 4, &clr, sizeof(int));
+			p.x++;
+		}
+		p.y++;
 	}
+	mlx_put_image_to_window(a->mlx, a->win, a->img, 0, 0);
+	mlx_string_put(a->mlx, a->win, 450, 300, ft_rgb_to_hex(c1), START);
+	mlx_destroy_image(a->mlx, a->img);
 }
 
 int			expose_hook(t_app *a)
