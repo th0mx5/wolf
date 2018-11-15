@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 18:43:12 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/15 13:20:50 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/15 15:14:47 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,8 +140,8 @@ void		ft_app_init(t_app *app)
 		ft_error("Fatal error : invalid map.");
 	load_bmp(&app->textures[0], "textures/texture_wall1.bmp");
 	load_bmp(&app->textures[1], "textures/wall2.bmp");
-	load_bmp(&app->textures[2], "textures/wall3.bmp");
-	load_bmp(&app->textures[3], "textures/wall4.bmp");
+	load_bmp(&app->textures[2], "textures/earth.bmp");
+	load_bmp(&app->textures[3], "textures/red.bmp");
 	load_bmp(&app->textures[4], "textures/wall5.bmp");
 	load_bmp(&app->textures[5], "textures/wall6.bmp");
 	load_bmp(&app->textures[6], "textures/wall7.bmp");
