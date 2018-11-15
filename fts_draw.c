@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:30:54 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/14 13:39:08 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/15 13:26:57 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,12 @@ static void	ft_put_pixel(int x, int y, int start, t_app *a)
 	int		clr;
 	t_color	c1;
 
-	c1 = get_pixel_color(a->textures, (x % 64) * 2, (-start + y) * 128 / a->wall_size);
+	if (a->side == 0)
+		c1 = get_pixel_color(&a->textures[a->texnum], (x % 64) * 128 / 64,
+			(-start + y) * 128 / a->wall_size);
+	else
+		c1 = get_pixel_color(&a->textures[a->texnum + 1], (x % 64) * 128 / 64,
+			(-start + y) * 128 / a->wall_size);
 	clr = ft_rgb_to_hex(c1);
 	if (x < WIN_W && start < WIN_H && a->t == 1)
 		ft_memcpy(a->img_data + 4 * WIN_W * start + x * 4,
@@ -50,7 +55,11 @@ static void	ft_put_pixel(int x, int y, int start, t_app *a)
 
 void		draw_wall(int x, int start, int end, t_app *a)
 {
-	int y = start;
+	int		y;
+
+	y = start;
+	if (a->t == 1)
+		a->texnum = a->map[(int)a->mapY][(int)a->mapX] - 1;
 	ft_floor_and_ceilling(x, start, 0, a);
 	while (++start <= end)
 	{
