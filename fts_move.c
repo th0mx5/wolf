@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/30 11:31:02 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/10/30 14:02:22 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/15 13:36:11 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static void	ft_move2(t_app *a)
 			a->pos.x -= a->dirX * a->ms;
 		if (a->map[(int)(a->pos.x)][(int)(a->pos.y + a->dirY * a->ms)] == 0)
 			a->pos.y += a->dirY * a->ms;
+
 	}
 }
 
