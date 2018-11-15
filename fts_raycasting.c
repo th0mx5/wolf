@@ -125,7 +125,7 @@ void		raycasting(t_app *a)
 		a->wall_size = a->start - a->end;
 		intensity = (a->dist_wall < 1) ? 1 : 1 / a->dist_wall;
 		wall_color_detection(a, intensity);
-		draw_wall(p.x, a->start - 1, a->end, a);
+		draw_wall(p.x, a->start, a->end, a);
 	}
 	draw_minimap(a);
 	draw_player(a);
