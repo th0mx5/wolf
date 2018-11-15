@@ -62,8 +62,8 @@ static void	ft_put_pixel(int x, int start, int textX, int textY, t_app *a)
 		}
 		else
 		{
-			c1.r = 221;
-			c1.g = 129;
+			c1.r = 86;
+			c1.g = 65;
 			c1.b = 0;		
 		}
 	}
