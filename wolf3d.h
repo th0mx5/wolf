@@ -50,6 +50,7 @@ typedef struct	s_bmp
 	int			data_offset;
 	int			*data;
 	t_coord		cursor;
+	double		scale;
 }				t_bmp;
 
 typedef struct	s_app
@@ -151,6 +152,7 @@ void			ft_error(char *s);
 int				ft_rgb_to_hex(t_color c);
 void			ft_free_strsplit(char **array);
 void			ft_put_pxl_to_img(t_app *a, t_color c, int x, int y);
+void			ft_put_bmp_to_img(t_app *a, t_bmp bmp, int x, int y);
 
 void			load_bmp(t_bmp *img, char *filename);
 t_color			get_pixel_color(t_bmp *img, int x, int y);

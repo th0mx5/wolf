@@ -14,14 +14,11 @@
 
 static void	ft_start_screen(t_app *a)
 {
-	t_color c;
 	t_color	c1;
-	t_coord p;
 	t_coord tmp;
 	int		n[3];
 	double	sin_factor;
 
-	p.x = 0;
 	a->img = mlx_new_image(a->win, WIN_W, WIN_H);
 	a->img_data = mlx_get_data_addr(a->img, &n[0], &n[1], &n[2]);
 	a->loop = a->loop + 0.02;
@@ -29,20 +26,10 @@ static void	ft_start_screen(t_app *a)
 	c1.r = sin_factor * 255;
 	c1.g = sin_factor * 255;
 	c1.b = sin_factor * 255;
-	p.y = 1;
-	while (p.y < a->startscreen_logo.height * 3)
-	{
-		p.x = 1;
-		while (p.x < a->startscreen_logo.width * 3)
-		{
-			c = get_pixel_color(&a->startscreen_logo, p.x / 3, p.y / 3);
-			tmp.x = p.x + WIN_W / 2 - a->startscreen_logo.width / 2 * 3;
-			tmp.y = p.y + WIN_H / 2 - a->startscreen_logo.height / 2 * 3;
-			ft_put_pxl_to_img(a, c, tmp.x, tmp.y);
-			p.x++;
-		}
-		p.y++;
-	}
+	a->startscreen_logo.scale = 3;
+	tmp.x = WIN_W / 2 - a->startscreen_logo.width / 2 * 3;
+	tmp.y = WIN_H / 2 - a->startscreen_logo.height / 2 * 3;
+	ft_put_bmp_to_img(a, a->startscreen_logo, tmp.x, tmp.y);
 	mlx_put_image_to_window(a->mlx, a->win, a->img, 0, 0);
 	mlx_string_put(a->mlx, a->win, WIN_W / 2 - 120, WIN_H / 2 + 250, ft_rgb_to_hex(c1), START);
 	mlx_destroy_image(a->mlx, a->img);

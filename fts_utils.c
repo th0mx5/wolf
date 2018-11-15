@@ -50,3 +50,23 @@ void	ft_put_pxl_to_img(t_app *a, t_color c, int x, int y)
 	hex_clr = ft_rgb_to_hex(c);
 	ft_memcpy(a->img_data + 4 * WIN_W * y + x * 4, &hex_clr, sizeof(int));
 }
+
+void	ft_put_bmp_to_img(t_app *a, t_bmp bmp, int x, int y)
+{
+	t_coord p;
+	t_color	c;
+
+	p.x = 0;
+	p.y = 0;
+	while (p.y < bmp.height * bmp.scale)
+	{
+		p.x = 0;
+		while (p.x < bmp.width * bmp.scale)
+		{
+			c = get_pixel_color(&bmp, p.x / bmp.scale, p.y / bmp.scale);
+			ft_put_pxl_to_img(a, c, x + p.x, y + p.y);
+			p.x++;
+		}
+		p.y++;
+	}
+}
