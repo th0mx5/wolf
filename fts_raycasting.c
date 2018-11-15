@@ -80,37 +80,9 @@ static void	raycasting_init(t_app *app, int x)
 			app->rayDirY;
 }
 
-static void	wall_color_detection(t_app *a, double intensity)
-{
-	t_color	c1;
-	t_color c2;
-
-	c1.r = 221 * intensity;
-	c1.g = 129 * intensity;
-	c1.b = 0;
-	c2.r = 123 * intensity;
-	c2.g = 72 * intensity;
-	c2.b = 0;
-	if (a->side == 1)
-	{
-		if (a->h == 0)
-			a->color = 0xdd8100;
-		else
-			a->color = ft_rgb_to_hex(c1);
-	}
-	else
-	{
-		if (a->h == 0)
-			a->color = 0x7b4801;
-		else
-			a->color = ft_rgb_to_hex(c2);
-	}
-}
-
 void		raycasting(t_app *a)
 {
 	int		n[3];
-	double	intensity;
 	t_coord	p;
 
 	p.x = 0;
@@ -123,8 +95,7 @@ void		raycasting(t_app *a)
 		a->start = -a->lineheight / 2 + a->lookud;
 		a->end = a->lineheight / 2 + a->lookud;
 		a->wall_size = a->start - a->end;
-		intensity = (a->dist_wall < 1) ? 1 : 1 / a->dist_wall;
-		wall_color_detection(a, intensity);
+		a->clr_intensity = (a->dist_wall < 1) ? 1 : 1 / a->dist_wall;
 		draw_wall(p.x, a->start, a->end, a);
 	}
 	draw_minimap(a);
