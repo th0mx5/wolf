@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:30:54 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/15 16:31:05 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/15 19:14:45 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,23 @@ static void	ft_put_pixel(int x, int start, int textX, int textY, t_app *a)
 
 	if (a->t == 1)
 	{
-		if (a->side == 0)
+		/*if (a->dirX < 0)
 			c1 = get_pixel_color(&a->textures[a->texnum], textX, textY);
-		else
+		else if (a->dirX >= 0)
 			c1 = get_pixel_color(&a->textures[a->texnum + 1], textX, textY);
+		else if (a->dirY < 0)
+			c1 = get_pixel_color(&a->textures[a->texnum + 2], textX, textY);
+		else if (a->dirY >= 0)
+			c1 = get_pixel_color(&a->textures[a->texnum + 3], textX, textY);*/
+		if (a->side == 0 && a->rayDirX < 0)
+			a->texnum = 2;
+		if (a->side == 0 && a->rayDirX > 0)
+			a->texnum = 3;
+		if (a->side == 1 && a->rayDirY < 0)
+			a->texnum = 4;
+		if (a->side == 1 && a->rayDirY > 0)
+			a->texnum = 5;
+		c1 = get_pixel_color(&a->textures[a->texnum], textX, textY);
 	}
 	else
 	{
