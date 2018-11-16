@@ -124,7 +124,7 @@ void		draw_wall(int x, int start, int end, t_app *a)
 	{
 		if (start >= 0 && start < WIN_H)
 		{
-			a->texY = (-start + y) * 128 / a->wall_size;
+			a->texY = (y - start + 1) * 128 / a->wall_size;
 			ft_put_pixel(x, start, a);
 		}
 	}
