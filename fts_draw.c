@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:30:54 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/16 14:22:40 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/16 15:40:12 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	ft_floor_and_ceilling(int x, int start, int clr, t_app *a)
 	}
 }
 
-static void	ft_draw_sky(int x, int start, t_app *a)
+/*static void	ft_draw_sky(int x, int start, t_app *a)
 {
 	int		i;
 	int		clr;
@@ -53,7 +53,7 @@ static void	ft_draw_sky(int x, int start, t_app *a)
 				&clr, sizeof(int));
 		i++;
 	}
-}
+}*/
 
 static void ft_apply_shadow_to_color(t_color *c, double intensity)
 {
@@ -118,8 +118,8 @@ void		draw_wall(int x, int start, int end, t_app *a)
 		a->texX = 128 - a->texX - 1;
     if (a->side == 1 && a->rayDirY < 0) 
 		a->texX = 128 - a->texX - 1;
-	//ft_floor_and_ceilling(x, start, 0, a);
-	(a->t == 0) ? ft_floor_and_ceilling(x, start, 0, a) : ft_draw_sky(x, start, a);
+	ft_floor_and_ceilling(x, start, 0, a);
+	//(a->t == 0) ? ft_floor_and_ceilling(x, start, 0, a) : ft_draw_sky(x, start, a);
 	while (++start <= end)
 	{
 		if (start >= 0 && start < WIN_H)
