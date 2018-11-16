@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:30:54 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/15 19:14:45 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/16 14:22:40 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,28 @@ static void	ft_floor_and_ceilling(int x, int start, int clr, t_app *a)
 	}
 }
 
+static void	ft_draw_sky(int x, int start, t_app *a)
+{
+	int		i;
+	int		clr;
+	t_color	c1;
+
+	i = 0;
+	a->alpha = acos(a->dirX);
+	if (a->dirY < 0)
+		a->alpha *= -1;
+	a->skyX = a->alpha * 128 / (2 * M_PI);
+	while (i <= start)
+	{
+		a->skyY = i * 128 / (WIN_H / 2);
+		c1 = get_pixel_color(&a->textures[2], (int)a->skyX, (int)a->skyY);
+		clr = ft_rgb_to_hex(c1);
+		ft_memcpy(a->img_data + 4 * WIN_W * i + x * 4,
+				&clr, sizeof(int));
+		i++;
+	}
+}
+
 static void ft_apply_shadow_to_color(t_color *c, double intensity)
 {
 	c->r = c->r * intensity;
@@ -40,21 +62,13 @@ static void ft_apply_shadow_to_color(t_color *c, double intensity)
 	c->b = c->b * intensity;
 }
 
-static void	ft_put_pixel(int x, int start, int textX, int textY, t_app *a)
+static void	ft_put_pixel(int x, int start, t_app *a)
 {
 	int		clr;
 	t_color	c1;
 
 	if (a->t == 1)
 	{
-		/*if (a->dirX < 0)
-			c1 = get_pixel_color(&a->textures[a->texnum], textX, textY);
-		else if (a->dirX >= 0)
-			c1 = get_pixel_color(&a->textures[a->texnum + 1], textX, textY);
-		else if (a->dirY < 0)
-			c1 = get_pixel_color(&a->textures[a->texnum + 2], textX, textY);
-		else if (a->dirY >= 0)
-			c1 = get_pixel_color(&a->textures[a->texnum + 3], textX, textY);*/
 		if (a->side == 0 && a->rayDirX < 0)
 			a->texnum = 2;
 		if (a->side == 0 && a->rayDirX > 0)
@@ -63,7 +77,7 @@ static void	ft_put_pixel(int x, int start, int textX, int textY, t_app *a)
 			a->texnum = 4;
 		if (a->side == 1 && a->rayDirY > 0)
 			a->texnum = 5;
-		c1 = get_pixel_color(&a->textures[a->texnum], textX, textY);
+		c1 = get_pixel_color(&a->textures[a->texnum], a->texX, a->texY);
 	}
 	else
 	{
@@ -89,8 +103,6 @@ static void	ft_put_pixel(int x, int start, int textX, int textY, t_app *a)
 void		draw_wall(int x, int start, int end, t_app *a)
 {
 	int		y;
-	int 	textX;
-	int		textY;
 	double	wallX;
 
 	y = start;
@@ -101,19 +113,19 @@ void		draw_wall(int x, int start, int end, t_app *a)
 	else
 		wallX = a->pos.y + a->dist_wall * a->rayDirX;
 	wallX -= floor(wallX); 
-	textX = (int)(wallX * 128);
+	a->texX = (int)(wallX * 128);
 	if (a->side == 0 && a->rayDirX > 0) 
-		textX = 128 - textX - 1;
+		a->texX = 128 - a->texX - 1;
     if (a->side == 1 && a->rayDirY < 0) 
-		textX = 128 - textX - 1;
-
-	ft_floor_and_ceilling(x, start, 0, a);
+		a->texX = 128 - a->texX - 1;
+	//ft_floor_and_ceilling(x, start, 0, a);
+	(a->t == 0) ? ft_floor_and_ceilling(x, start, 0, a) : ft_draw_sky(x, start, a);
 	while (++start <= end)
 	{
 		if (start >= 0 && start < WIN_H)
 		{
-			textY = (-start + y) * 128 / a->wall_size;
-			ft_put_pixel(x, start, textX, textY, a);
+			a->texY = (-start + y) * 128 / a->wall_size;
+			ft_put_pixel(x, start, a);
 		}
 	}
 }

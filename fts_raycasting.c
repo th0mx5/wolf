@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:20:06 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/11/15 18:44:43 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/16 11:13:42 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,12 @@ static void	dda(t_app *app)
 			app->sideDistX += app->deltaDistX;
 			app->mapX += app->stepX;
 			app->side = 0;
-			if (app->rayDirX < 0)
-				app->NorthSouth = 1;
-			else if (app->rayDirX > 0)
-				app->NorthSouth = 0;
 		}
 		else
 		{
 			app->sideDistY += app->deltaDistY;
 			app->mapY += app->stepY;
 			app->side = 1;
-			if (app->rayDirY < 0)
-				app->EastWest = 1;
-			else if (app->rayDirY > 0)
-				app->EastWest = 0;
 		}
 		if (app->map[app->mapY][app->mapX] > 0)
 			app->hit = 1;
@@ -108,8 +100,6 @@ void		raycasting(t_app *a)
 	}
 	draw_minimap(a);
 	draw_player(a);
-	/*printf("dirX = %lf\n", a->rayDirX);
-	printf("dirY = %lf\n", a->rayDirY);*/
 	mlx_put_image_to_window(a->mlx, a->win, a->img, 0, 0);
 	mlx_destroy_image(a->mlx, a->img);
 	mlx_do_sync(a->mlx);

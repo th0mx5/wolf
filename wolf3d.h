@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/15 18:26:47 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/16 15:05:19 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,11 @@ typedef struct	s_app
 	char		*fname;
 	char		*img_data;
 	t_coord_d	pos;
-	int			fov;
 	int			player_size;
 	t_coord		mouse;
 	t_coord		map_size;
 	int			**map;
 	int			p_count;
-	//-------------------------
 	int			color;
 	int			start;
 	int			end;
@@ -103,8 +101,9 @@ typedef struct	s_app
 	int			texnum;
 	int			NorthSouth;
 	int			EastWest;
-	double		mm_intensitX;
-	double		mm_intensitY;
+	double		skyX;
+	double		skyY;
+	double		alpha;
 	double		loop;
 	double		kx;
 	double		ky;

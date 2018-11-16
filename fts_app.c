@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 18:43:12 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/15 16:05:53 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/16 15:09:40 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ static void	ft_app_calcplayerpos(t_app *app)
 
 void		ft_app_init(t_app *app)
 {
-	app->fov = 60;
 	app->player_size = 32;
 	app->dirX = -1;
 	app->dirY = 0;
@@ -145,5 +144,5 @@ void		ft_app_init(t_app *app)
 	load_bmp(&app->textures[4], "textures/metal1.bmp");
 	load_bmp(&app->textures[5], "textures/metal2.bmp");
 	load_bmp(&app->textures[6], "textures/bois1.bmp");
-	load_bmp(&app->textures[7], "textures/bois2.bmp");
+	//load_bmp(&app->textures[7], "textures/nebula.bmp");
 }
