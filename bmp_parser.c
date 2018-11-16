@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 15:11:51 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/16 15:38:52 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/13 13:42:35 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,7 @@ static void	get_data_from_file2(t_bmp *img, FILE *file, int c, int i)
 	img->height += getc(file) << 24;
 	i++;
 	while ((c = getc(file)) != EOF && i < img->data_offset - 1)
-	{
 		i++;
-	}
 	img->data = (int*)malloc(sizeof(int) * img->width * img->height * 3);
 	i = 0;
 	while ((c = getc(file)) != EOF)
@@ -59,15 +57,11 @@ static void	get_data_from_file(t_bmp *img, FILE *file)
 
 	i = 0;
 	while ((c = getc(file)) != EOF && i < 10)
-	{
 		i++;
-	}
 	img->data_offset = c;
 	i++;
 	while ((c = getc(file)) != EOF && i < 18)
-	{
 		i++;
-	}
 	img->width = c;
 	i++;
 	img->width += getc(file) << 8;
@@ -77,9 +71,7 @@ static void	get_data_from_file(t_bmp *img, FILE *file)
 	img->width += getc(file) << 24;
 	i++;
 	while ((c = getc(file)) != EOF && i < 22)
-	{
 		i++;
-	}
 	get_data_from_file2(img, file, c, i);
 }
 
@@ -94,6 +86,6 @@ void		load_bmp(t_bmp *img, char *filename)
 		img->scale = 1;
 		fclose(file);
 	}
-	printf("w = %d\n", img->width);
-	printf("h = %d\n", img->height);
+	//printf("w = %d\n", img->width);
+	//printf("h = %d\n", img->height);
 }
