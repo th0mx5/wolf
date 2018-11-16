@@ -144,4 +144,5 @@ void		ft_app_init(t_app *app)
 	load_bmp(&app->textures[4], "textures/metal1.bmp");
 	load_bmp(&app->textures[5], "textures/metal2.bmp");
 	load_bmp(&app->textures[6], "textures/bois1.bmp");
+	load_bmp(&app->textures[7], "textures/nebula.bmp");
 }
