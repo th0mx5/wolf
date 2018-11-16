@@ -28,6 +28,12 @@ static void	get_data_from_file2(t_bmp *img, FILE *file, int c, int i)
 {
 	img->height = c;
 	i++;
+	img->height += getc(file) << 8;
+	i++;
+	img->height += getc(file) << 16;
+	i++;
+	img->height += getc(file) << 24;
+	i++;
 	while ((c = getc(file)) != EOF && i < img->data_offset - 1)
 	{
 		i++;
@@ -64,6 +70,12 @@ static void	get_data_from_file(t_bmp *img, FILE *file)
 	}
 	img->width = c;
 	i++;
+	img->width += getc(file) << 8;
+	i++;
+	img->width += getc(file) << 16;
+	i++;
+	img->width += getc(file) << 24;
+	i++;
 	while ((c = getc(file)) != EOF && i < 22)
 	{
 		i++;
@@ -79,8 +91,9 @@ void		load_bmp(t_bmp *img, char *filename)
 	if (file)
 	{
 		get_data_from_file(img, file);
-		img->cursor.x = 0;
-		img->cursor.y = 0;
+		img->scale = 1;
 		fclose(file);
 	}
+	printf("w = %d\n", img->width);
+	printf("h = %d\n", img->height);
 }
