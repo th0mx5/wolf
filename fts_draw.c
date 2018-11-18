@@ -42,7 +42,11 @@ static void	ft_draw_sky(int x, int start, t_app *a)
 
 	printf("x = %lf ", a->dirX);
 	i = 0;
+<<<<<<< HEAD
 	a->alpha = acos(a->dirX);
+=======
+	a->alpha = acos(a->dirX + cos(M_PI));
+>>>>>>> 7d10099f1bbad9c1faafbebc5f51552cafaf9840
 	if (a->dirY < 0)
 		a->alpha *= -1;
 	printf("a = %lf -- ", a->alpha);

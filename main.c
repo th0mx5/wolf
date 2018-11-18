@@ -12,7 +12,20 @@
 
 #include "wolf3d.h"
 
-int			main(int ac, char **av)
+int		ft_close(t_app *app)
+{
+	free(app->map);
+	exit(0);
+	return (0);
+}
+
+void	ft_error(char *s)
+{
+	ft_putstr(s);
+	exit(-1);
+}
+
+int		main(int ac, char **av)
 {
 	t_app	app;
 
