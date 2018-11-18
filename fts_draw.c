@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:30:54 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/16 15:40:12 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/18 16:14:32 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,24 @@ static void	ft_draw_sky(int x, int start, t_app *a)
 {
 	int		i;
 	int		clr;
+	// double	half_fov;
 	t_color	c1;
 
+	printf("x = %lf ", a->dirX);
 	i = 0;
-	a->alpha = cos(a->dirX);
+	a->alpha = acos(a->dirX);
 	if (a->dirY < 0)
 		a->alpha *= -1;
-	a->skyX = a->alpha * a->textures[7].width / (2 * M_PI);
+	printf("a = %lf -- ", a->alpha);
+	a->alpha += M_PI;
+	printf("a = %lf -- ", a->alpha);
+	a->alpha += x * (60 * 2 * M_PI / 360) / WIN_W - (30 * 2 * M_PI / 360);
+	printf("a = %lf\n", a->alpha);
+	a->skyX = a->alpha * a->textures[8].width / (2 * M_PI);
 	while (i <= start)
 	{
-		a->skyY = i * a->textures[7].height / (WIN_H / 2);
-		c1 = get_pixel_color(&a->textures[7], (int)a->skyX, (int)a->skyY);
+		a->skyY = i * a->textures[8].height / (WIN_H / 2);
+		c1 = get_pixel_color(&a->textures[8], (int)a->skyX, (int)a->skyY);
 		clr = ft_rgb_to_hex(c1);
 		ft_memcpy(a->img_data + 4 * WIN_W * i + x * 4,
 				&clr, sizeof(int));

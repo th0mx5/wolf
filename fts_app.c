@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 18:43:12 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/16 15:40:48 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/18 15:59:27 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,4 +145,5 @@ void		ft_app_init(t_app *app)
 	load_bmp(&app->textures[5], "textures/metal2.bmp");
 	load_bmp(&app->textures[6], "textures/bois1.bmp");
 	load_bmp(&app->textures[7], "textures/nebula.bmp");
+	load_bmp(&app->textures[8], "textures/death.bmp");
 }
