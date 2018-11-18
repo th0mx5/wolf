@@ -6,14 +6,14 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 18:41:09 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/11/18 17:22:34 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/18 17:40:26 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 #include <stdio.h>
 
-void	put_pxl_to_img(t_app *a, int x, int y, int color)
+void		put_pxl_to_img(t_app *a, int x, int y, int color)
 {
 	if (x < WIN_W && y < WIN_H)
 	{
@@ -42,42 +42,32 @@ static int	check_map(t_app *a, int x, int y)
 
 void		draw_player(t_app *a)
 {
-	int		x;
-	int		y;
-	int		xc;
-	int		yc;
-	int		d;
-	int		i = -1;
-	t_color	c1;
+	t_circle c;
 
-	a->loop = a->loop + 0.05;
-	c1.r = fabs(sin(a->loop)) * 255;
-	c1.g = 0;
-	c1.b = 0;
-	while (++i < 5)
+	while (++c.i < 5)
 	{
-		x = 0;
-		y = i;
-		d = 5 - 4 * i;
-		xc = 105;
-		yc = 105;
-		while (x <= y)
+		c.x = 0;
+		c.y = c.i;
+		c.d = 5 - 4 * c.i;
+		c.xc = 105;
+		c.yc = 105;
+		while (c.x <= c.y)
 		{
-			put_pxl_to_img(a, xc + x, yc - y, 0xFF0000);
-			put_pxl_to_img(a, xc - x, yc - y, 0xFF0000);
-			put_pxl_to_img(a, xc + x, yc + y, 0xFF0000);
-			put_pxl_to_img(a, xc - x, yc + y, 0xFF0000);
-			put_pxl_to_img(a, xc + y, yc - x, 0xFF0000);
-			put_pxl_to_img(a, xc - y, yc - x, 0xFF0000);
-			put_pxl_to_img(a, xc + y, yc + x, 0xFF0000);
-			put_pxl_to_img(a, xc - y, yc + x, 0xFF0000);
-			if (d > 0)
+			put_pxl_to_img(a, c.xc + c.x, c.yc - c.y, 0xFF0000);
+			put_pxl_to_img(a, c.xc - c.x, c.yc - c.y, 0xFF0000);
+			put_pxl_to_img(a, c.xc + c.x, c.yc + c.y, 0xFF0000);
+			put_pxl_to_img(a, c.xc - c.x, c.yc + c.y, 0xFF0000);
+			put_pxl_to_img(a, c.xc + c.y, c.yc - c.x, 0xFF0000);
+			put_pxl_to_img(a, c.xc - c.y, c.yc - c.x, 0xFF0000);
+			put_pxl_to_img(a, c.xc + c.y, c.yc + c.x, 0xFF0000);
+			put_pxl_to_img(a, c.xc - c.y, c.yc + c.x, 0xFF0000);
+			if (c.d > 0)
 			{
-				y--;
-				d -= 8 * y;
+				c.y--;
+				c.d -= 8 * c.y;
 			}
-			x++;
-			d = d + 8 * x + 4;
+			c.x++;
+			c.d = c.d + 8 * c.x + 4;
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 11:15:41 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/11/15 19:17:19 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/18 17:44:36 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	ft_start_screen(t_app *a)
 	ft_put_bmp_to_img(a, a->startscreen_logo, tmp.x, tmp.y);
 	ft_put_bmp_to_img(a, a->textures[7], 0, -a->textures[7].height / 2);
 	mlx_put_image_to_window(a->mlx, a->win, a->img, 0, 0);
-	mlx_string_put(a->mlx, a->win, WIN_W / 2 - 120, WIN_H / 2 + 250, ft_rgb_to_hex(c1), START);
+	mlx_string_put(a->mlx, a->win, WIN_WS, WIN_HS, ft_rgb_to_hex(c1), START);
 	mlx_destroy_image(a->mlx, a->img);
 	mlx_do_sync(a->mlx);
 }
@@ -61,10 +61,6 @@ int			ft_key_press(int key, t_app *app)
 		app->rt_left = 1;
 	else if (key == 124)
 		app->rt_right = 1;
-	else if (key == 125)
-		app->rt_dw = 1;
-	else if (key == 126)
-		app->rt_up = 1;
 	else if (key == 4)
 	{
 		if (app->h == 1)
@@ -78,7 +74,11 @@ int			ft_key_press(int key, t_app *app)
 
 int			ft_key_press2(int key, t_app *app)
 {
-	if (key == 17)
+	if (key == 125)
+		app->rt_dw = 1;
+	else if (key == 126)
+		app->rt_up = 1;
+	else if (key == 17)
 	{
 		if (app->t == 1)
 			app->t = 0;

@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/18 16:23:46 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/18 17:55:00 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # define START "PRESS ANY KEY TO START"
 # define HFOV_RAD 30 * 2 * M_PI / 360
 # define FOV_RAD 60 * 2 * M_PI / 360
+# define WIN_HS WIN_H / 2 + 250
+# define WIN_WS WIN_W / 2 - 120
 
 typedef struct	s_coord
 {
@@ -54,6 +56,16 @@ typedef struct	s_bmp
 	t_coord		cursor;
 	double		scale;
 }				t_bmp;
+
+typedef struct	s_circle
+{
+	int			x;
+	int			y;
+	int			xc;
+	int			yc;
+	int			d;
+	int			i;
+}				t_circle;
 
 typedef struct	s_app
 {
@@ -96,7 +108,6 @@ typedef struct	s_app
 	int			t;
 	int			texX;
 	int			texY;
-	int			wallX;
 	int			mx;
 	int			my;
 	int			startscreen;
@@ -155,6 +166,7 @@ void			ft_error(char *s);
 int				ft_rgb_to_hex(t_color c);
 void			ft_free_strsplit(char **array);
 void			ft_put_pxl_to_img(t_app *a, t_color c, int x, int y);
+void			ft_import_textures(t_app *a);
 void			ft_put_bmp_to_img(t_app *a, t_bmp bmp, int x, int y);
 
 void			load_bmp(t_bmp *img, char *filename);

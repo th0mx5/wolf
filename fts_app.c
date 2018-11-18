@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 18:43:12 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/18 15:59:27 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/18 18:07:41 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,13 +137,5 @@ void		ft_app_init(t_app *app)
 	ft_app_calcplayerpos(app);
 	if (app->p_count != 1)
 		ft_error("Fatal error : invalid map.");
-	load_bmp(&app->textures[0], "textures/texture_wall1.bmp");
-	load_bmp(&app->textures[1], "textures/wall2.bmp");
-	load_bmp(&app->textures[2], "textures/earth.bmp");
-	load_bmp(&app->textures[3], "textures/red.bmp");
-	load_bmp(&app->textures[4], "textures/metal1.bmp");
-	load_bmp(&app->textures[5], "textures/metal2.bmp");
-	load_bmp(&app->textures[6], "textures/bois1.bmp");
-	load_bmp(&app->textures[7], "textures/nebula.bmp");
-	load_bmp(&app->textures[8], "textures/death.bmp");
+	ft_import_textures(app);
 }

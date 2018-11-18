@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/30 11:31:02 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/11/15 13:36:11 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/18 17:26:29 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int			ft_move(t_app *a)
 		if (a->map[(int)(a->pos.x)][(int)(a->pos.y - a->dirX * a->ms)] == 0)
 			a->pos.y -= a->dirX * a->ms;
 	}
-    ft_move2(a);
+	ft_move2(a);
 	ft_rotate(a);
 	raycasting(a);
 	return (0);

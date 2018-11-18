@@ -6,13 +6,13 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:30:54 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/18 16:52:21 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/18 18:08:50 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-static void	ft_floor_and_ceilling(int x, int start, int clr, t_app *a)
+static void		ft_floor_and_ceilling(int x, int start, int clr, t_app *a)
 {
 	int		i;
 
@@ -33,56 +33,33 @@ static void	ft_floor_and_ceilling(int x, int start, int clr, t_app *a)
 	}
 }
 
-/*static void	ft_draw_sky(int x, int start, t_app *a)
-{
-	int		i;
-	int		clr;
-	t_color	c1;
-
-	i = 0;
-	a->alpha = acos(a->dirX);
-	if (a->dirY < 0)
-		a->alpha *= -1;
-	a->alpha += M_PI;
-	a->alpha += x * FOV_RAD / WIN_W - HFOV_RAD;
-	a->alpha += (a->alpha < 0) ? 2 * M_PI : 0;
-	a->alpha -= (a->alpha > 2 * M_PI) ? 2 * M_PI : 0;
-	a->skyX = a->alpha * a->textures[8].width / (2 * M_PI);
-	while (i <= start)
-	{
-		a->skyY = a->textures[8].height - i * a->textures[8].height / (WIN_H);
-		c1 = get_pixel_color(&a->textures[8], (int)a->skyX, (int)a->skyY);
-		clr = ft_rgb_to_hex(c1);
-		ft_memcpy(a->img_data + 4 * WIN_W * i + x * 4,
-				&clr, sizeof(int));
-		i++;
-	}
-}*/
-
-static void ft_apply_shadow_to_color(t_color *c, double intensity)
+static void		ft_apply_shadow_to_color(t_color *c, double intensity)
 {
 	c->r = c->r * intensity;
 	c->g = c->g * intensity;
 	c->b = c->b * intensity;
 }
 
-static void	ft_put_pixel(int x, int start, t_app *a)
+static t_color	ft_choose_tex(t_app *a)
+{
+	if (a->side == 0 && a->rayDirX < 0)
+		a->texnum = 2;
+	if (a->side == 0 && a->rayDirX > 0)
+		a->texnum = 3;
+	if (a->side == 1 && a->rayDirY < 0)
+		a->texnum = 4;
+	if (a->side == 1 && a->rayDirY > 0)
+		a->texnum = 5;
+	return (get_pixel_color(&a->textures[a->texnum], a->texX, a->texY));
+}
+
+static void		ft_put_pixel(int x, int start, t_app *a)
 {
 	int		clr;
-	t_color	c1;
+	t_color c1;
 
 	if (a->t == 1)
-	{
-		if (a->side == 0 && a->rayDirX < 0)
-			a->texnum = 2;
-		if (a->side == 0 && a->rayDirX > 0)
-			a->texnum = 3;
-		if (a->side == 1 && a->rayDirY < 0)
-			a->texnum = 4;
-		if (a->side == 1 && a->rayDirY > 0)
-			a->texnum = 5;
-		c1 = get_pixel_color(&a->textures[a->texnum], a->texX, a->texY);
-	}
+		c1 = ft_choose_tex(a);
 	else
 	{
 		if (a->side == 1)
@@ -95,7 +72,7 @@ static void	ft_put_pixel(int x, int start, t_app *a)
 		{
 			c1.r = 86;
 			c1.g = 65;
-			c1.b = 0;		
+			c1.b = 0;
 		}
 	}
 	if (a->h)
@@ -104,7 +81,7 @@ static void	ft_put_pixel(int x, int start, t_app *a)
 	ft_memcpy(a->img_data + 4 * WIN_W * start + x * 4, &clr, sizeof(int));
 }
 
-void		draw_wall(int x, int start, int end, t_app *a)
+void			draw_wall(int x, int start, int end, t_app *a)
 {
 	int		y;
 	double	wallX;
@@ -116,14 +93,13 @@ void		draw_wall(int x, int start, int end, t_app *a)
 		wallX = a->pos.x + a->dist_wall * a->rayDirY;
 	else
 		wallX = a->pos.y + a->dist_wall * a->rayDirX;
-	wallX -= floor(wallX); 
+	wallX -= floor(wallX);
 	a->texX = (int)(wallX * 128);
-	if (a->side == 0 && a->rayDirX > 0) 
+	if (a->side == 0 && a->rayDirX > 0)
 		a->texX = 128 - a->texX - 1;
-    if (a->side == 1 && a->rayDirY < 0) 
+	if (a->side == 1 && a->rayDirY < 0)
 		a->texX = 128 - a->texX - 1;
 	ft_floor_and_ceilling(x, start, 0, a);
-	//(a->t == 0) ? ft_floor_and_ceilling(x, start, 0, a) : ft_draw_sky(x, start, a);
 	while (++start <= end)
 	{
 		if (start >= 0 && start < WIN_H)
