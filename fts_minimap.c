@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 18:41:09 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/11/16 13:09:39 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/18 17:22:34 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,18 @@ static int	check_map(t_app *a, int x, int y)
 {
 	t_color	c1;
 
-	c1.r = 225;
-	c1.g = 130;
-	c1.b = 0;
+	c1.r = 25;
+	c1.g = 45;
+	c1.b = 145;
+	if (a->t == 0)
+	{
+		c1.r = 225;
+		c1.g = 130;
+		c1.b = 0;
+	}
 	if (a->map[x][y] >= 1)
 		return (ft_rgb_to_hex(c1));
-	return (0);
+	return (0xFFFFFF);
 }
 
 void		draw_player(t_app *a)
@@ -53,8 +59,8 @@ void		draw_player(t_app *a)
 		x = 0;
 		y = i;
 		d = 5 - 4 * i;
-		xc = 131;
-		yc = 131;
+		xc = 105;
+		yc = 105;
 		while (x <= y)
 		{
 			put_pxl_to_img(a, xc + x, yc - y, 0xFF0000);
@@ -76,6 +82,27 @@ void		draw_player(t_app *a)
 	}
 }
 
+static void	draw_rectangle(t_app *a)
+{
+	int		x;
+	int		y;
+
+	x = 6;
+	while (x < 222)
+	{
+		y = 6;
+		while (y < 222)
+		{
+			if ((x >= 6 && x < 8) || (x > 218 && x <= 222))
+				put_pxl_to_img(a, x, y, 0xFFFFFF);
+			if ((y >= 6 && y < 8) || (y > 218 && y <= 222))
+				put_pxl_to_img(a, x, y, 0xFFFFFF);
+			y++;
+		}
+		x++;
+	}
+}
+
 void		draw_minimap(t_app *a)
 {
 	int		x;
@@ -85,11 +112,12 @@ void		draw_minimap(t_app *a)
 	t_coord	tmp;
 
 	x = 8;
-	block = 37;
-	while (++x < 271)
+	block = 30;
+	draw_rectangle(a);
+	while (++x < 218)
 	{
 		y = 8;
-		while (++y < 271)
+		while (++y < 218)
 		{
 			color = 0;
 			tmp.x = (x / block) + a->pos.x - 3;
@@ -97,7 +125,8 @@ void		draw_minimap(t_app *a)
 			if (tmp.x >= 0 && tmp.y >= 0 && tmp.x < a->map_size.x
 					&& tmp.y < a->map_size.y)
 				color = check_map(a, tmp.x, tmp.y);
-			put_pxl_to_img(a, x, y, color);
+			if (color == 0xFFFFFF)
+				put_pxl_to_img(a, x, y, color);
 		}
 	}
 }

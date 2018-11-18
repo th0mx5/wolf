@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/16 15:05:19 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/18 16:23:46 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # define WIN_W 1280
 # define WIN_H 720
 # define START "PRESS ANY KEY TO START"
+# define HFOV_RAD 30 * 2 * M_PI / 360
+# define FOV_RAD 60 * 2 * M_PI / 360
 
 typedef struct	s_coord
 {

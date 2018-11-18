@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:30:54 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/18 16:14:32 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/18 16:52:21 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,52 +19,45 @@ static void	ft_floor_and_ceilling(int x, int start, int clr, t_app *a)
 	i = -1;
 	while (++i <= start)
 	{
-		clr = (a->t == 1) ? 0x0000FF : 0;
+		clr = (a->t == 1) ? 0x2A2A2A : 0;
 		if (x < WIN_W && i < WIN_H)
 			ft_memcpy(a->img_data + 4 * WIN_W * i + x * 4,
 					&clr, sizeof(int));
 	}
 	while (i++ < WIN_H)
 	{
-		clr = (a->t == 1) ? 0x555555 : 0;
+		clr = (a->t == 1) ? 0x424242 : 0;
 		if (x < WIN_W && i < WIN_H)
 			ft_memcpy(a->img_data + 4 * WIN_W * i + x * 4,
 					&clr, sizeof(int));
 	}
 }
 
-static void	ft_draw_sky(int x, int start, t_app *a)
+/*static void	ft_draw_sky(int x, int start, t_app *a)
 {
 	int		i;
 	int		clr;
-	// double	half_fov;
 	t_color	c1;
 
-	printf("x = %lf ", a->dirX);
 	i = 0;
-<<<<<<< HEAD
 	a->alpha = acos(a->dirX);
-=======
-	a->alpha = acos(a->dirX + cos(M_PI));
->>>>>>> 7d10099f1bbad9c1faafbebc5f51552cafaf9840
 	if (a->dirY < 0)
 		a->alpha *= -1;
-	printf("a = %lf -- ", a->alpha);
 	a->alpha += M_PI;
-	printf("a = %lf -- ", a->alpha);
-	a->alpha += x * (60 * 2 * M_PI / 360) / WIN_W - (30 * 2 * M_PI / 360);
-	printf("a = %lf\n", a->alpha);
+	a->alpha += x * FOV_RAD / WIN_W - HFOV_RAD;
+	a->alpha += (a->alpha < 0) ? 2 * M_PI : 0;
+	a->alpha -= (a->alpha > 2 * M_PI) ? 2 * M_PI : 0;
 	a->skyX = a->alpha * a->textures[8].width / (2 * M_PI);
 	while (i <= start)
 	{
-		a->skyY = i * a->textures[8].height / (WIN_H / 2);
+		a->skyY = a->textures[8].height - i * a->textures[8].height / (WIN_H);
 		c1 = get_pixel_color(&a->textures[8], (int)a->skyX, (int)a->skyY);
 		clr = ft_rgb_to_hex(c1);
 		ft_memcpy(a->img_data + 4 * WIN_W * i + x * 4,
 				&clr, sizeof(int));
 		i++;
 	}
-}
+}*/
 
 static void ft_apply_shadow_to_color(t_color *c, double intensity)
 {
@@ -129,8 +122,8 @@ void		draw_wall(int x, int start, int end, t_app *a)
 		a->texX = 128 - a->texX - 1;
     if (a->side == 1 && a->rayDirY < 0) 
 		a->texX = 128 - a->texX - 1;
-	//ft_floor_and_ceilling(x, start, 0, a);
-	(a->t == 0) ? ft_floor_and_ceilling(x, start, 0, a) : ft_draw_sky(x, start, a);
+	ft_floor_and_ceilling(x, start, 0, a);
+	//(a->t == 0) ? ft_floor_and_ceilling(x, start, 0, a) : ft_draw_sky(x, start, a);
 	while (++start <= end)
 	{
 		if (start >= 0 && start < WIN_H)
