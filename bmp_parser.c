@@ -86,6 +86,4 @@ void		load_bmp(t_bmp *img, char *filename)
 		img->scale = 1;
 		fclose(file);
 	}
-	//printf("w = %d\n", img->width);
-	//printf("h = %d\n", img->height);
 }

@@ -40,7 +40,7 @@ static void	ft_draw_sky(int x, int start, t_app *a)
 	t_color	c1;
 
 	i = 0;
-	a->alpha = cos(a->dirX);
+	a->alpha = acos(a->dirX + cos(M_PI));
 	if (a->dirY < 0)
 		a->alpha *= -1;
 	a->skyX = a->alpha * a->textures[7].width / (2 * M_PI);

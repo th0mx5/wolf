@@ -12,19 +12,6 @@
 
 #include "wolf3d.h"
 
-int		ft_close(t_app *app)
-{
-	free(app->map);
-	exit(0);
-	return (0);
-}
-
-void	ft_error(char *s)
-{
-	ft_putstr(s);
-	exit(-1);
-}
-
 int		ft_rgb_to_hex(t_color c)
 {
 	return (((c.r & 0xff) << 16) + ((c.g & 0xff) << 8) + (c.b & 0xff));
