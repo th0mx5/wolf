@@ -6,7 +6,7 @@
 #    By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/01 00:25:16 by thbernar          #+#    #+#              #
-#    Updated: 2018/10/30 11:35:34 by maxisimo         ###   ########.fr        #
+#    Updated: 2018/11/19 20:27:16 by maxisimo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = wolf3d
 
 SRC = main.c \
 	  fts_utils.c \
+	  //fts_utils2.c \
 	  fts_raycasting.c \
 	  fts_app.c \
 	  fts_minimap.c \

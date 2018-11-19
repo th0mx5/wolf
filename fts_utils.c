@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 15:04:48 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/19 13:46:26 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/19 20:22:46 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,6 @@
 int		ft_rgb_to_hex(t_color c)
 {
 	return (((c.r & 0xff) << 16) + ((c.g & 0xff) << 8) + (c.b & 0xff));
-}
-
-void	ft_free_strsplit(char **array)
-{
-	int i;
-
-	i = 0;
-	while (array	[i])
-	{
-		free(array[i]);
-		i++;
-	}
-	free(array);
 }
 
 void	ft_put_pxl_to_img(t_app *a, t_color c, int x, int y)

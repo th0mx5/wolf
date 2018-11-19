@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:30:54 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/19 19:17:00 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/19 20:16:56 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,6 @@ static void		ft_floor_and_ceilling(int x, int start, int clr, t_app *a)
 			ft_memcpy(a->img_data + 4 * WIN_W * i + x * 4,
 					&clr, sizeof(int));
 	}
-}
-
-static void		ft_apply_shadow_to_color(t_color *c, double intensity)
-{
-	c->r = c->r * intensity;
-	c->g = c->g * intensity;
-	c->b = c->b * intensity;
 }
 
 static t_color	ft_choose_tex(t_app *a)

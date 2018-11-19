@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/19 19:17:09 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/19 20:25:18 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,9 +139,6 @@ typedef struct	s_app
 	t_coord_d	pos;
 }				t_app;
 
-int				ft_close(t_app *app);
-void			ft_error(char *s);
-
 void			ft_app_allocmap(t_app *app);
 void			ft_app_writemap(t_app *app);
 void			ft_app_init(t_app *app);
@@ -156,18 +153,22 @@ int				ft_move(t_app *a);
 void			ft_pthread(t_app *a);
 void			*raycasting(void *tab);
 
-void			draw_wall(int x, int start, int end, t_app *a);
 int				ft_draw(t_app *a);
+void			draw_wall(int x, int start, int end, t_app *a);
 
 void			draw_minimap(t_app *a);
 void			put_pxl_to_img(t_app *a, int x, int y, int color);
 void			draw_player(t_app *a);
 
 int				ft_rgb_to_hex(t_color c);
-void			ft_free_strsplit(char **array);
 void			ft_put_circle_to_img(t_app *a, t_circle *c);
 void			ft_import_textures(t_app *a);
 void			ft_put_bmp_to_img(t_app *a, t_bmp bmp, int x, int y);
+
+int				ft_close(t_app *app);
+void			ft_error(char *s);
+void			ft_free_strsplit(char **array);
+void			ft_apply_shadow_to_color(t_color *c, double intensity);
 
 void			load_bmp(t_bmp *img, char *filename);
 t_color			get_pixel_color(t_bmp *img, int x, int y);
