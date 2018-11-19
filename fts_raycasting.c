@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:20:06 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/11/18 16:49:04 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/19 14:02:38 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,27 @@
 
 static void	dda_init(t_app *app)
 {
-	app->deltaDistX = fabs(1 / app->rayDirX);
-	app->deltaDistY = fabs(1 / app->rayDirY);
-	if (app->rayDirX < 0)
+	app->deltadistx = fabs(1 / app->raydir_x);
+	app->deltadisty = fabs(1 / app->raydir_y);
+	if (app->raydir_x < 0)
 	{
-		app->stepX = -1;
-		app->sideDistX = (app->rayPosX - app->mapX) * app->deltaDistX;
+		app->stepx = -1;
+		app->sidedistx = (app->rayposx - app->mapx) * app->deltadistx;
 	}
 	else
 	{
-		app->stepX = 1;
-		app->sideDistX = (app->mapX + 1. - app->rayPosX) * app->deltaDistX;
+		app->stepx = 1;
+		app->sidedistx = (app->mapx + 1. - app->rayposx) * app->deltadistx;
 	}
-	if (app->rayDirY < 0)
+	if (app->raydir_y < 0)
 	{
-		app->stepY = -1;
-		app->sideDistY = (app->rayPosY - app->mapY) * app->deltaDistY;
+		app->stepy = -1;
+		app->sidedisty = (app->rayposy - app->mapy) * app->deltadisty;
 	}
 	else
 	{
-		app->stepY = 1;
-		app->sideDistY = (app->mapY + 1. - app->rayPosY) * app->deltaDistY;
+		app->stepy = 1;
+		app->sidedisty = (app->mapy + 1. - app->rayposy) * app->deltadisty;
 	}
 }
 
@@ -44,40 +44,40 @@ static void	dda(t_app *app)
 	app->hit = 0;
 	while (app->hit == 0)
 	{
-		if (app->sideDistX < app->sideDistY)
+		if (app->sidedistx < app->sidedisty)
 		{
-			app->sideDistX += app->deltaDistX;
-			app->mapX += app->stepX;
+			app->sidedistx += app->deltadistx;
+			app->mapx += app->stepx;
 			app->side = 0;
 		}
 		else
 		{
-			app->sideDistY += app->deltaDistY;
-			app->mapY += app->stepY;
+			app->sidedisty += app->deltadisty;
+			app->mapy += app->stepy;
 			app->side = 1;
 		}
-		if (app->map[app->mapY][app->mapX] > 0)
+		if (app->map[app->mapy][app->mapx] > 0)
 			app->hit = 1;
 	}
 }
 
 static void	raycasting_init(t_app *app, int x)
 {
-	app->camX = 2 * x / (double)WIN_W - 1;
-	app->rayPosX = app->pos.y;
-	app->rayPosY = app->pos.x;
-	app->rayDirX = app->dirX + app->planeX * app->camX;
-	app->rayDirY = app->dirY + app->planeY * app->camX;
-	app->mapX = (int)app->rayPosX;
-	app->mapY = (int)app->rayPosY;
+	app->camx = 2 * x / (double)WIN_W - 1;
+	app->rayposx = app->pos.y;
+	app->rayposy = app->pos.x;
+	app->raydir_x = app->dir_x + app->plane_x * app->camx;
+	app->raydir_y = app->dir_y + app->plane_y * app->camx;
+	app->mapx = (int)app->rayposx;
+	app->mapy = (int)app->rayposy;
 	dda_init(app);
 	dda(app);
 	if (app->side == 0)
-		app->dist_wall = (app->mapX - app->rayPosX + (1 - app->stepX) / 2) /
-			app->rayDirX;
+		app->dist_wall = (app->mapx - app->rayposx + (1 - app->stepx) / 2) /
+			app->raydir_x;
 	else
-		app->dist_wall = (app->mapY - app->rayPosY + (1 - app->stepY) / 2) /
-			app->rayDirY;
+		app->dist_wall = (app->mapy - app->rayposy + (1 - app->stepy) / 2) /
+			app->raydir_y;
 }
 
 void		raycasting(t_app *a)

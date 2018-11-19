@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 15:04:48 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/18 18:07:47 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/19 13:46:26 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,25 @@ void	ft_put_pxl_to_img(t_app *a, t_color c, int x, int y)
 
 	hex_clr = ft_rgb_to_hex(c);
 	ft_memcpy(a->img_data + 4 * WIN_W * y + x * 4, &hex_clr, sizeof(int));
+}
+
+void	ft_put_circle_to_img(t_app *a, t_circle *c)
+{
+	put_pxl_to_img(a, c->xc + c->x, c->yc - c->y, 0xFF0000);
+	put_pxl_to_img(a, c->xc - c->x, c->yc - c->y, 0xFF0000);
+	put_pxl_to_img(a, c->xc + c->x, c->yc + c->y, 0xFF0000);
+	put_pxl_to_img(a, c->xc - c->x, c->yc + c->y, 0xFF0000);
+	put_pxl_to_img(a, c->xc + c->y, c->yc - c->x, 0xFF0000);
+	put_pxl_to_img(a, c->xc - c->y, c->yc - c->x, 0xFF0000);
+	put_pxl_to_img(a, c->xc + c->y, c->yc + c->x, 0xFF0000);
+	put_pxl_to_img(a, c->xc - c->y, c->yc + c->x, 0xFF0000);
+	if (c->d > 0)
+	{
+		c->y--;
+		c->d -= 8 * c->y;
+	}
+	c->x++;
+	c->d = c->d + 8 * c->x + 4;
 }
 
 void	ft_import_textures(t_app *a)

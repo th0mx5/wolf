@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 18:43:12 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/18 18:07:41 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/19 13:24:57 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,10 +114,10 @@ static void	ft_app_calcplayerpos(t_app *app)
 void		ft_app_init(t_app *app)
 {
 	app->player_size = 32;
-	app->dirX = -1;
-	app->dirY = 0;
-	app->planeX = 0;
-	app->planeY = 0.66;
+	app->dir_x = -1;
+	app->dir_y = 0;
+	app->plane_x = 0;
+	app->plane_y = 0.66;
 	app->ms = 0.07;
 	app->mv_up = 0;
 	app->mv_down = 0;

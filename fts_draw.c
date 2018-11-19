@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:30:54 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/18 18:08:50 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/19 14:02:23 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,15 @@ static void		ft_floor_and_ceilling(int x, int start, int clr, t_app *a)
 	i = -1;
 	while (++i <= start)
 	{
-		clr = (a->t == 1) ? 0x2A2A2A : 0;
+		//clr = (a->h == 1) ? 0 : 0x2A2A2A;
+		clr = 0x2A2A2A;
 		if (x < WIN_W && i < WIN_H)
 			ft_memcpy(a->img_data + 4 * WIN_W * i + x * 4,
 					&clr, sizeof(int));
 	}
 	while (i++ < WIN_H)
 	{
-		clr = (a->t == 1) ? 0x424242 : 0;
+		clr = 0x424242;
 		if (x < WIN_W && i < WIN_H)
 			ft_memcpy(a->img_data + 4 * WIN_W * i + x * 4,
 					&clr, sizeof(int));
@@ -42,15 +43,15 @@ static void		ft_apply_shadow_to_color(t_color *c, double intensity)
 
 static t_color	ft_choose_tex(t_app *a)
 {
-	if (a->side == 0 && a->rayDirX < 0)
+	if (a->side == 0 && a->raydir_x < 0)
 		a->texnum = 2;
-	if (a->side == 0 && a->rayDirX > 0)
+	if (a->side == 0 && a->raydir_x > 0)
 		a->texnum = 3;
-	if (a->side == 1 && a->rayDirY < 0)
+	if (a->side == 1 && a->raydir_y < 0)
 		a->texnum = 4;
-	if (a->side == 1 && a->rayDirY > 0)
+	if (a->side == 1 && a->raydir_y > 0)
 		a->texnum = 5;
-	return (get_pixel_color(&a->textures[a->texnum], a->texX, a->texY));
+	return (get_pixel_color(&a->textures[a->texnum], a->texx, a->texy));
 }
 
 static void		ft_put_pixel(int x, int start, t_app *a)
@@ -84,27 +85,28 @@ static void		ft_put_pixel(int x, int start, t_app *a)
 void			draw_wall(int x, int start, int end, t_app *a)
 {
 	int		y;
-	double	wallX;
+	double	wallx;
 
 	y = start;
 	if (a->t == 1)
-		a->texnum = a->map[(int)a->mapY][(int)a->mapX] - 1;
+		a->texnum = a->map[(int)a->mapy][(int)a->mapx] - 1;
 	if (a->side == 0)
-		wallX = a->pos.x + a->dist_wall * a->rayDirY;
+		wallx = a->pos.x + a->dist_wall * a->raydir_y;
 	else
-		wallX = a->pos.y + a->dist_wall * a->rayDirX;
-	wallX -= floor(wallX);
-	a->texX = (int)(wallX * 128);
-	if (a->side == 0 && a->rayDirX > 0)
-		a->texX = 128 - a->texX - 1;
-	if (a->side == 1 && a->rayDirY < 0)
-		a->texX = 128 - a->texX - 1;
-	ft_floor_and_ceilling(x, start, 0, a);
+		wallx = a->pos.y + a->dist_wall * a->raydir_x;
+	wallx -= floor(wallx);
+	a->texx = (int)(wallx * 128);
+	if (a->side == 0 && a->raydir_x > 0)
+		a->texx = 128 - a->texx - 1;
+	if (a->side == 1 && a->raydir_y < 0)
+		a->texx = 128 - a->texx - 1;
+	if (a->h != 1)
+		ft_floor_and_ceilling(x, start, 0, a);
 	while (++start <= end)
 	{
 		if (start >= 0 && start < WIN_H)
 		{
-			a->texY = (y - start + 1) * 128 / a->wall_size;
+			a->texy = (y - start + 1) * 128 / a->wall_size;
 			ft_put_pixel(x, start, a);
 		}
 	}

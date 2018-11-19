@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 18:41:09 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/11/18 17:40:26 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/19 13:41:37 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void		draw_player(t_app *a)
 {
 	t_circle c;
 
+	c.i = -1;
 	while (++c.i < 5)
 	{
 		c.x = 0;
@@ -52,23 +53,7 @@ void		draw_player(t_app *a)
 		c.xc = 105;
 		c.yc = 105;
 		while (c.x <= c.y)
-		{
-			put_pxl_to_img(a, c.xc + c.x, c.yc - c.y, 0xFF0000);
-			put_pxl_to_img(a, c.xc - c.x, c.yc - c.y, 0xFF0000);
-			put_pxl_to_img(a, c.xc + c.x, c.yc + c.y, 0xFF0000);
-			put_pxl_to_img(a, c.xc - c.x, c.yc + c.y, 0xFF0000);
-			put_pxl_to_img(a, c.xc + c.y, c.yc - c.x, 0xFF0000);
-			put_pxl_to_img(a, c.xc - c.y, c.yc - c.x, 0xFF0000);
-			put_pxl_to_img(a, c.xc + c.y, c.yc + c.x, 0xFF0000);
-			put_pxl_to_img(a, c.xc - c.y, c.yc + c.x, 0xFF0000);
-			if (c.d > 0)
-			{
-				c.y--;
-				c.d -= 8 * c.y;
-			}
-			c.x++;
-			c.d = c.d + 8 * c.x + 4;
-		}
+			ft_put_circle_to_img(a, &c);
 	}
 }
 

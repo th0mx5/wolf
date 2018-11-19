@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/18 17:55:00 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/19 13:44:08 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ typedef struct	s_coord_d
 	double		x;
 	double		y;
 }				t_coord_d;
-
 
 typedef struct	s_color
 {
@@ -74,10 +73,7 @@ typedef struct	s_app
 	void		*img;
 	char		*fname;
 	char		*img_data;
-	t_coord_d	pos;
 	int			player_size;
-	t_coord		mouse;
-	t_coord		map_size;
 	int			**map;
 	int			p_count;
 	int			color;
@@ -86,10 +82,10 @@ typedef struct	s_app
 	int			wall_size;
 	int			start2;
 	int			lineheight;
-	int			stepX;
-	int			stepY;
-	int			mapX;
-	int			mapY;
+	int			stepx;
+	int			stepy;
+	int			mapx;
+	int			mapy;
 	int			side;
 	int			hit;
 	int			mv_up;
@@ -106,41 +102,42 @@ typedef struct	s_app
 	int			lookud;
 	int			h;
 	int			t;
-	int			texX;
-	int			texY;
+	int			texx;
+	int			texy;
 	int			mx;
 	int			my;
 	int			startscreen;
 	int			texnum;
-	int			NorthSouth;
-	int			EastWest;
-	double		skyX;
-	double		skyY;
 	double		alpha;
 	double		loop;
 	double		kx;
 	double		ky;
 	double		ms;
-	double		oldDirX;
-	double		deltaDistX;
-	double		deltaDistY;
-	double		rayDirX;
-	double		rayDirY;
-	double		sideDistX;
-	double		sideDistY;
-	double		rayPosX;
-	double		rayPosY;
-	double		camX;
-	double		dirX;
-	double		dirY;
-	double		planeX;
-	double		planeY;
+	double		old_dir_x;
+	double		deltadistx;
+	double		deltadisty;
+	double		raydir_x;
+	double		raydir_y;
+	double		sidedistx;
+	double		sidedisty;
+	double		rayposx;
+	double		rayposy;
+	double		camx;
+	double		dir_x;
+	double		dir_y;
+	double		plane_x;
+	double		plane_y;
 	double		dist_wall;
-	double		oldPlaneX;
-	t_bmp		textures[9];
+	double		oldplane_x;
 	double		clr_intensity;
+	t_bmp		textures[9];
 	t_bmp		startscreen_logo;
+	t_coord		map_size;
+	t_coord_d	pos;
 }				t_app;
+
+int				ft_close(t_app *app);
+void			ft_error(char *s);
 
 void			ft_app_allocmap(t_app *app);
 void			ft_app_writemap(t_app *app);
@@ -161,16 +158,13 @@ void			draw_minimap(t_app *a);
 void			put_pxl_to_img(t_app *a, int x, int y, int color);
 void			draw_player(t_app *a);
 
-int				ft_close(t_app *app);
-void			ft_error(char *s);
 int				ft_rgb_to_hex(t_color c);
 void			ft_free_strsplit(char **array);
-void			ft_put_pxl_to_img(t_app *a, t_color c, int x, int y);
+void			ft_put_circle_to_img(t_app *a, t_circle *c);
 void			ft_import_textures(t_app *a);
 void			ft_put_bmp_to_img(t_app *a, t_bmp bmp, int x, int y);
 
 void			load_bmp(t_bmp *img, char *filename);
 t_color			get_pixel_color(t_bmp *img, int x, int y);
-
 
 #endif
