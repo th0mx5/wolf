@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/19 13:44:08 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/19 19:17:09 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <math.h>
+# include <pthread.h>
 # include "minilibx/mlx.h"
 # include "libft/libft.h"
 
@@ -30,6 +31,7 @@
 typedef struct	s_coord
 {
 	int			x;
+	int			xx;
 	int			y;
 }				t_coord;
 
@@ -133,6 +135,7 @@ typedef struct	s_app
 	t_bmp		textures[9];
 	t_bmp		startscreen_logo;
 	t_coord		map_size;
+	t_coord		p;
 	t_coord_d	pos;
 }				t_app;
 
@@ -150,9 +153,11 @@ int				ft_key_release(int key, t_app *app);
 
 int				ft_move(t_app *a);
 
-void			raycasting(t_app *app);
+void			ft_pthread(t_app *a);
+void			*raycasting(void *tab);
 
 void			draw_wall(int x, int start, int end, t_app *a);
+int				ft_draw(t_app *a);
 
 void			draw_minimap(t_app *a);
 void			put_pxl_to_img(t_app *a, int x, int y, int color);

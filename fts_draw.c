@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:30:54 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/19 18:56:51 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/19 19:17:00 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,24 @@ void			draw_wall(int x, int start, int end, t_app *a)
 		ft_floor_and_ceilling(x, start, 0, a);
 	while (++start <= end)
 	{
-		if (start >= 0 && start < WIN_H)
-		{
-			a->texy = (y - start + 1) * 128 / a->wall_size;
-			ft_put_pixel(x, start, a);
-		}
+		a->texy = ((start - WIN_H / 2 + a->lineheight / 2) - a->lookud)
+			* 128 / a->lineheight;
+		a->texy = abs(a->texy);
+		ft_put_pixel(x, start, a);
 	}
+}
+
+int				ft_draw(t_app *a)
+{
+	int		n[3];
+
+	a->img = mlx_new_image(a->win, WIN_W, WIN_H);
+	a->img_data = mlx_get_data_addr(a->img, &n[0], &n[1], &n[2]);
+	ft_pthread(a);
+	draw_minimap(a);
+	draw_player(a);
+	mlx_put_image_to_window(a->mlx, a->win, a->img, 0, 0);
+	mlx_destroy_image(a->mlx, a->img);
+	mlx_do_sync(a->mlx);
+	return (0);
 }

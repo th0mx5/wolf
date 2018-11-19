@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:20:06 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/11/19 14:02:38 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/19 19:09:21 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,27 +80,53 @@ static void	raycasting_init(t_app *app, int x)
 			app->raydir_y;
 }
 
-void		raycasting(t_app *a)
+void		ft_pthread(t_app *a)
 {
-	int		n[3];
-	t_coord	p;
+	t_app		tab[4];
+	pthread_t	t[4];
+	int			i;
 
-	p.x = -1;
-	a->img = mlx_new_image(a->win, WIN_W, WIN_H);
-	a->img_data = mlx_get_data_addr(a->img, &n[0], &n[1], &n[2]);
-	while (++p.x < WIN_W)
+	i = 0;
+	while (i < 4)
 	{
-		raycasting_init(a, p.x);
-		a->lineheight = (int)(WIN_H / a->dist_wall);
-		a->start = -a->lineheight / 2 + a->lookud;
-		a->end = a->lineheight / 2 + a->lookud;
-		a->wall_size = a->start - a->end;
-		a->clr_intensity = (a->dist_wall < 1) ? 1 : 1 / a->dist_wall;
-		draw_wall(p.x, a->start, a->end, a);
+		ft_memcpy((void*)&tab[i], (void*)a, sizeof(t_app));
+		tab[i].p.x = (WIN_W / 4) * i;
+		tab[i].p.xx = (WIN_W / 4) * (i + 1);
+		i++;
 	}
-	draw_minimap(a);
-	draw_player(a);
+	i = 0;
+	while (i < 4)
+	{
+		pthread_create(&t[i], NULL, raycasting, &tab[i]);
+		i++;
+	}
+	i = 0;
+	while (i < 4)
+	{
+		pthread_join(t[i], NULL);
+		i++;
+	}
 	mlx_put_image_to_window(a->mlx, a->win, a->img, 0, 0);
-	mlx_destroy_image(a->mlx, a->img);
-	mlx_do_sync(a->mlx);
+}
+
+void		*raycasting(void *tab)
+{
+	t_app	a;
+
+	a = *(t_app *)tab;
+	while (++a.p.x < a.p.xx)
+	{
+		raycasting_init(&a, a.p.x);
+		a.lineheight = (int)(WIN_H / a.dist_wall);
+		a.start = -a.lineheight / 2 + a.lookud + WIN_H / 2;
+		a.end = a.lineheight / 2 + a.lookud + WIN_H / 2;
+		if (a.start < 0)
+			a.start = 0;
+		if (a.end > WIN_H)
+			a.end = WIN_H;
+		a.wall_size = a.start - a.end;
+		a.clr_intensity = (a.dist_wall < 1) ? 1 : 1 / a.dist_wall;
+		draw_wall(a.p.x, a.start, a.end, &a);
+	}
+	return (tab);
 }

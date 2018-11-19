@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/30 11:31:02 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/11/19 13:24:57 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/19 19:11:40 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,6 @@ int			ft_move(t_app *a)
 	}
 	ft_move2(a);
 	ft_rotate(a);
-	raycasting(a);
+	ft_draw(a);
 	return (0);
 }
