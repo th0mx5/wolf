@@ -6,43 +6,50 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:30:54 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/19 20:16:56 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/21 20:28:08 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-static void		ft_floor_and_ceilling(int x, int start, int clr, t_app *a)
+static void		ft_floor_and_ceilling(int x, int clr, t_app *a)
 {
-	int		i;
+	t_color	c1;
+	int		y;
 
-	i = -1;
-	while (++i <= start)
+	y = a->end;
+	ft_init_tex_fc(a);
+	while (y < WIN_H)
 	{
-		clr = 0x2A2A2A;
-		if (x < WIN_W && i < WIN_H)
-			ft_memcpy(a->img_data + 4 * WIN_W * i + x * 4,
-					&clr, sizeof(int));
-	}
-	while (i++ < WIN_H)
-	{
-		clr = 0x424242;
-		if (x < WIN_W && i < WIN_H)
-			ft_memcpy(a->img_data + 4 * WIN_W * i + x * 4,
-					&clr, sizeof(int));
+		a->curdist = WIN_H / (2.0 * y - WIN_H);
+		a->weight = a->curdist / a->dist_wall;
+		a->curfloor_x = a->weight * a->floor_x + (1.0 - a->weight) * a->pos.y;
+		a->curfloor_y = a->weight * a->floor_y + (1.0 - a->weight) * a->pos.x;
+		a->floortex_x = (int)(a->curfloor_x * 64) % 64;
+		a->floortex_y = (int)(a->curfloor_y * 64) % 64;
+		a->floortex_x = abs(a->floortex_x);
+		a->floortex_y = abs(a->floortex_y);
+		c1 = get_pixel_color(&a->textures[3], a->floortex_x, a->floortex_y);
+		clr = ft_rgb_to_hex(c1);
+		ft_memcpy(a->img_data + 4 * WIN_W * (WIN_H - y)
+				+ x * 4, &clr, sizeof(int));
+		c1 = get_pixel_color(&a->textures[3], a->floortex_x, a->floortex_y);
+		clr = ft_rgb_to_hex(c1);
+		ft_memcpy(a->img_data + 4 * WIN_W * y + x * 4, &clr, sizeof(int));
+		y++;
 	}
 }
 
 static t_color	ft_choose_tex(t_app *a)
 {
 	if (a->side == 0 && a->raydir_x < 0)
-		a->texnum = 2;
-	if (a->side == 0 && a->raydir_x > 0)
-		a->texnum = 3;
-	if (a->side == 1 && a->raydir_y < 0)
-		a->texnum = 4;
-	if (a->side == 1 && a->raydir_y > 0)
 		a->texnum = 5;
+	if (a->side == 0 && a->raydir_x > 0)
+		a->texnum = 1;
+	if (a->side == 1 && a->raydir_y < 0)
+		a->texnum = 0;
+	if (a->side == 1 && a->raydir_y > 0)
+		a->texnum = 2;
 	return (get_pixel_color(&a->textures[a->texnum], a->texx, a->texy));
 }
 
@@ -77,29 +84,28 @@ static void		ft_put_pixel(int x, int start, t_app *a)
 void			draw_wall(int x, int start, int end, t_app *a)
 {
 	int		y;
-	double	wallx;
 
 	y = start;
 	a->texnum = (a->t == 1) ? a->map[(int)a->mapy][(int)a->mapx] - 1 : 0;
 	if (a->side == 0)
-		wallx = a->pos.x + a->dist_wall * a->raydir_y;
+		a->wallx = a->pos.x + a->dist_wall * a->raydir_y;
 	else
-		wallx = a->pos.y + a->dist_wall * a->raydir_x;
-	wallx -= floor(wallx);
-	a->texx = (int)(wallx * 128);
+		a->wallx = a->pos.y + a->dist_wall * a->raydir_x;
+	a->wallx -= floor(a->wallx);
+	a->texx = (int)(a->wallx * 64);
 	if (a->side == 0 && a->raydir_x > 0)
-		a->texx = 128 - a->texx - 1;
+		a->texx = 64 - a->texx - 1;
 	if (a->side == 1 && a->raydir_y < 0)
-		a->texx = 128 - a->texx - 1;
-	if (a->h != 1)
-		ft_floor_and_ceilling(x, start, 0, a);
+		a->texx = 64 - a->texx - 1;
 	while (++start <= end)
 	{
 		a->texy = ((start - WIN_H / 2 + a->lineheight / 2) - a->lookud)
-			* 128 / a->lineheight;
+			* 64 / a->lineheight;
 		a->texy = abs(a->texy);
 		ft_put_pixel(x, start, a);
 	}
+	if (a->h != 1)
+		ft_floor_and_ceilling(x, 0, a);
 }
 
 int				ft_draw(t_app *a)

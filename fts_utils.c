@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 15:04:48 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/19 20:22:46 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/21 19:59:43 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ void	ft_put_circle_to_img(t_app *a, t_circle *c)
 
 void	ft_import_textures(t_app *a)
 {
-	load_bmp(&a->textures[0], "textures/texture_wall1.bmp");
-	load_bmp(&a->textures[1], "textures/wall2.bmp");
-	load_bmp(&a->textures[2], "textures/earth.bmp");
-	load_bmp(&a->textures[3], "textures/red.bmp");
-	load_bmp(&a->textures[4], "textures/metal1.bmp");
-	load_bmp(&a->textures[5], "textures/metal2.bmp");
-	load_bmp(&a->textures[6], "textures/bois1.bmp");
+	load_bmp(&a->textures[0], "textures/bluestone.bmp");
+	load_bmp(&a->textures[1], "textures/greystone.bmp");
+	load_bmp(&a->textures[2], "textures/redbrick.bmp");
+	load_bmp(&a->textures[3], "textures/wood.bmp");
+	load_bmp(&a->textures[4], "textures/red.bmp");
+	load_bmp(&a->textures[5], "textures/mossy.bmp");
+	load_bmp(&a->textures[6], "textures/metal2.bmp");
 	load_bmp(&a->textures[7], "textures/nebula.bmp");
 	load_bmp(&a->textures[8], "textures/death.bmp");
 }

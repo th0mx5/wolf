@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/19 20:25:18 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/21 20:29:08 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,16 @@ typedef struct	s_app
 	int			my;
 	int			startscreen;
 	int			texnum;
+	int			floortex_x;
+	int			floortex_y;
+	double		wallx;
+	double		weight;
+	double		curfloor_x;
+	double		curfloor_y;
+	double		distplayer;
+	double		curdist;
+	double		floor_x;
+	double		floor_y;
 	double		alpha;
 	double		loop;
 	double		kx;
@@ -168,6 +178,7 @@ void			ft_put_bmp_to_img(t_app *a, t_bmp bmp, int x, int y);
 int				ft_close(t_app *app);
 void			ft_error(char *s);
 void			ft_free_strsplit(char **array);
+void			ft_init_tex_fc(t_app *a);
 void			ft_apply_shadow_to_color(t_color *c, double intensity);
 
 void			load_bmp(t_bmp *img, char *filename);
