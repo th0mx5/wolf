@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/21 20:29:08 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/22 18:56:07 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,11 @@ typedef struct	s_app
 	int			lookud;
 	int			h;
 	int			t;
+	int			c;
 	int			texx;
 	int			texy;
+	int			skyx;
+	int			skyy;
 	int			mx;
 	int			my;
 	int			startscreen;

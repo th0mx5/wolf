@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 18:43:12 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/19 19:58:02 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/22 18:57:42 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ void		ft_app_init(t_app *app)
 	app->p_count = 0;
 	app->h = 0;
 	app->t = 0;
+	app->c = 0;
 	app->startscreen = 0;
 	app->loop = 0;
 	ft_app_countmap(app);
