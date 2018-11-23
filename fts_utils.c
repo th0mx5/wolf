@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 15:04:48 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/22 18:36:20 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/23 17:29:11 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_import_textures(t_app *a)
 	load_bmp(&a->textures[1], "textures/greystone.bmp");
 	load_bmp(&a->textures[2], "textures/redbrick.bmp");
 	load_bmp(&a->textures[3], "textures/wood.bmp");
-	load_bmp(&a->textures[4], "textures/red.bmp");
+	load_bmp(&a->textures[4], "textures/glass.bmp");
 	load_bmp(&a->textures[5], "textures/mossy.bmp");
 	load_bmp(&a->textures[6], "textures/colorstone.bmp");
 	load_bmp(&a->textures[7], "textures/nebula.bmp");

@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:20:06 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/11/21 18:14:22 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/23 17:33:34 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void		*raycasting(void *tab)
 	t_app	a;
 
 	a = *(t_app *)tab;
-	while (a.p.x++ < a.p.xx)
+	while (a.p.x < a.p.xx)
 	{
 		raycasting_init(&a, a.p.x);
 		a.lineheight = (int)(WIN_H / a.dist_wall);
@@ -127,6 +127,7 @@ void		*raycasting(void *tab)
 		a.wall_size = a.start - a.end;
 		a.clr_intensity = (a.dist_wall < 1) ? 1 : 1 / a.dist_wall;
 		draw_wall(a.p.x, a.start, a.end, &a);
+		a.p.x++;
 	}
 	return (tab);
 }

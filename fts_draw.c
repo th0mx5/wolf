@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:30:54 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/22 19:20:35 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/23 17:28:51 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void			draw_wall(int x, int start, int end, t_app *a)
 	int		y;
 
 	y = start;
-	a->texnum = (a->t == 1) ? a->map[(int)a->mapy][(int)a->mapx] - 1 : 0;
+	//a->texnum = (a->t == 1) ? a->map[(int)a->mapy][(int)a->mapx] - 1 : 0;
 	if (a->side == 0)
 		a->wallx = a->pos.x + a->dist_wall * a->raydir_y;
 	else
