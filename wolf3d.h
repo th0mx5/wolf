@@ -184,7 +184,7 @@ void			ft_free_strsplit(char **array);
 void			ft_init_tex_fc(t_app *a);
 void			ft_apply_shadow_to_color(t_color *c, double intensity);
 
-void			load_bmp(t_bmp *img, char *filename);
+void			bmp_loadfile(t_bmp *bmp, char *fname);
 t_color			get_pixel_color(t_bmp *img, int x, int y);
 
 #endif

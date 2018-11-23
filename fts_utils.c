@@ -46,15 +46,26 @@ void	ft_put_circle_to_img(t_app *a, t_circle *c)
 
 void	ft_import_textures(t_app *a)
 {
-	load_bmp(&a->textures[0], "textures/bluestone.bmp");
-	load_bmp(&a->textures[1], "textures/greystone.bmp");
-	load_bmp(&a->textures[2], "textures/redbrick.bmp");
-	load_bmp(&a->textures[3], "textures/wood.bmp");
-	load_bmp(&a->textures[4], "textures/glass.bmp");
-	load_bmp(&a->textures[5], "textures/mossy.bmp");
-	load_bmp(&a->textures[6], "textures/colorstone.bmp");
-	load_bmp(&a->textures[7], "textures/nebula.bmp");
-	load_bmp(&a->textures[8], "textures/death.bmp");
+	//printf("1\n");
+	bmp_loadfile(&a->textures[0], "textures/earth.bmp");
+	//exit(0);
+	//printf("2\n");
+	bmp_loadfile(&a->textures[1], "textures/greystone.bmp");
+	//printf("3\n");
+	bmp_loadfile(&a->textures[2], "textures/redbrick.bmp");
+	//printf("4\n");
+	bmp_loadfile(&a->textures[3], "textures/wood.bmp");
+	//printf("5\n");
+	bmp_loadfile(&a->textures[4], "textures/glass.bmp");
+	//printf("6\n");
+	bmp_loadfile(&a->textures[5], "textures/mossy.bmp");
+	//printf("7\n");
+	bmp_loadfile(&a->textures[6], "textures/colorstone.bmp");
+	//printf("8\n");
+	bmp_loadfile(&a->textures[7], "textures/nebula.bmp");
+	//printf("9\n");
+	//bmp_loadfile(&a->textures[8], "textures/death.bmp");
+	//printf("10\n");
 }
 
 void	ft_put_bmp_to_img(t_app *a, t_bmp bmp, int x, int y)

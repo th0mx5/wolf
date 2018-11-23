@@ -30,7 +30,7 @@ static void	ft_start_screen(t_app *a)
 	tmp.x = WIN_W / 2 - a->startscreen_logo.width / 2 * 3;
 	tmp.y = WIN_H / 2 - a->startscreen_logo.height / 2 * 3;
 	ft_put_bmp_to_img(a, a->startscreen_logo, tmp.x, tmp.y);
-	ft_put_bmp_to_img(a, a->textures[7], 0, -a->textures[7].height / 2);
+	//ft_put_bmp_to_img(a, a->textures[7], 0, -a->textures[7].height / 2);
 	mlx_put_image_to_window(a->mlx, a->win, a->img, 0, 0);
 	mlx_string_put(a->mlx, a->win, WIN_WS, WIN_HS, ft_rgb_to_hex(c1), START);
 	mlx_destroy_image(a->mlx, a->img);
