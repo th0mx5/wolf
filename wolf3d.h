@@ -150,6 +150,7 @@ typedef struct	s_app
 	t_coord		map_size;
 	t_coord		p;
 	t_coord_d	pos;
+	t_bmp		sprite_weapon;
 }				t_app;
 
 void			ft_app_allocmap(t_app *app);

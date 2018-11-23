@@ -26,11 +26,10 @@ static void	ft_start_screen(t_app *a)
 	c1.r = sin_factor * 255;
 	c1.g = sin_factor * 255;
 	c1.b = sin_factor * 255;
-	a->startscreen_logo.scale = 3;
-	tmp.x = WIN_W / 2 - a->startscreen_logo.width / 2 * 3;
-	tmp.y = WIN_H / 2 - a->startscreen_logo.height / 2 * 3;
+	a->startscreen_logo.scale = 2 * (sin_factor + 1);
+	tmp.x = WIN_W / 2 - a->startscreen_logo.width / 2 * a->startscreen_logo.scale;
+	tmp.y = WIN_H / 2 - a->startscreen_logo.height / 2 * a->startscreen_logo.scale;
 	ft_put_bmp_to_img(a, a->startscreen_logo, tmp.x, tmp.y);
-	//ft_put_bmp_to_img(a, a->textures[7], 0, -a->textures[7].height / 2);
 	mlx_put_image_to_window(a->mlx, a->win, a->img, 0, 0);
 	mlx_string_put(a->mlx, a->win, WIN_WS, WIN_HS, ft_rgb_to_hex(c1), START);
 	mlx_destroy_image(a->mlx, a->img);
@@ -75,9 +74,9 @@ int			ft_key_press(int key, t_app *app)
 int			ft_key_press2(int key, t_app *app)
 {
 	if (key == 125)
-		app->rt_dw = 1;
+		app->rt_dw = 0;
 	else if (key == 126)
-		app->rt_up = 1;
+		app->rt_up = 0;
 	else if (key == 17)
 	{
 		if (app->t == 1)
