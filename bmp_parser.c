@@ -62,9 +62,8 @@ static void	bmp_readfile(t_bmp *bmp, int fd)
 
 	i = 0;
 	bytes_read = 1;
-	while (bytes_read != 0)
+	while ((bytes_read = read(fd, &c, 1)) != 0)
 	{
-		bytes_read = read(fd, &c, 1);
 		bmp_getfile_size(bmp, c, i);
 		bmp_getfile_data(bmp, c, i);
 		i++;
@@ -82,6 +81,8 @@ void		bmp_loadfile(t_bmp *bmp, char *fname)
 	}
 	bmp_readfile(bmp, fd);
 	bmp->scale = 1.0;
+	ft_putstr(fname);
+	ft_putstr(" loaded.\n");
 }
 
 t_color		get_pixel_color(t_bmp *img, int x, int y)

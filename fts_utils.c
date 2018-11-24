@@ -46,32 +46,22 @@ void	ft_put_circle_to_img(t_app *a, t_circle *c)
 
 void	ft_import_textures(t_app *a)
 {
-	//printf("1\n");
 	bmp_loadfile(&a->textures[0], "textures/earth.bmp");
-	//exit(0);
-	//printf("2\n");
 	bmp_loadfile(&a->textures[1], "textures/greystone.bmp");
-	//printf("3\n");
 	bmp_loadfile(&a->textures[2], "textures/redbrick.bmp");
-	//printf("4\n");
 	bmp_loadfile(&a->textures[3], "textures/wood.bmp");
-	//printf("5\n");
 	bmp_loadfile(&a->textures[4], "textures/glass.bmp");
-	//printf("6\n");
 	bmp_loadfile(&a->textures[5], "textures/mossy.bmp");
-	//printf("7\n");
 	bmp_loadfile(&a->textures[6], "textures/colorstone.bmp");
-	//printf("8\n");
 	bmp_loadfile(&a->textures[7], "textures/nebula.bmp");
-	//printf("9\n");
-	//bmp_loadfile(&a->textures[8], "textures/death.bmp");
-	//printf("10\n");
+	bmp_loadfile(&a->sprites[0], "sprites/ak47.bmp");
 }
 
 void	ft_put_bmp_to_img(t_app *a, t_bmp bmp, int x, int y)
 {
 	t_coord p;
 	t_color	c;
+	t_coord tmp;
 
 	p.x = 0;
 	p.y = 0;
@@ -81,7 +71,10 @@ void	ft_put_bmp_to_img(t_app *a, t_bmp bmp, int x, int y)
 		while (p.x < bmp.width * bmp.scale)
 		{
 			c = get_pixel_color(&bmp, p.x / bmp.scale, p.y / bmp.scale);
-			ft_put_pxl_to_img(a, c, x + p.x, y + p.y);
+			tmp.x = x + p.x;
+			tmp.y = y - p.y + bmp.height * bmp.scale;
+			if (ft_rgb_to_hex(c) != 0xB80087 && tmp.x > 0 && tmp.y < WIN_W)
+				ft_put_pxl_to_img(a, c, tmp.x, tmp.y);
 			p.x++;
 		}
 		p.y++;

@@ -91,6 +91,10 @@ int			ft_key_press2(int key, t_app *app)
 		else
 			app->c = 1;
 	}
+	else if (key == 18)
+		app->weapon = 1;
+	else if (key == 19)
+		app->weapon = 0;
 	else if (key == 257)
 		app->speed = 1;
 	else if (key == 53)

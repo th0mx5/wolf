@@ -145,12 +145,13 @@ typedef struct	s_app
 	double		dist_wall;
 	double		oldplane_x;
 	double		clr_intensity;
-	t_bmp		textures[9];
+	t_bmp		textures[10];
 	t_bmp		startscreen_logo;
 	t_coord		map_size;
 	t_coord		p;
 	t_coord_d	pos;
-	t_bmp		sprite_weapon;
+	t_bmp		sprites[10];
+	int			weapon;
 }				t_app;
 
 void			ft_app_allocmap(t_app *app);
@@ -187,5 +188,7 @@ void			ft_apply_shadow_to_color(t_color *c, double intensity);
 
 void			bmp_loadfile(t_bmp *bmp, char *fname);
 t_color			get_pixel_color(t_bmp *img, int x, int y);
+
+void			weapons_draw_weapon(t_app *a);
 
 #endif
