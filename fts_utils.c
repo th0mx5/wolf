@@ -6,7 +6,11 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 15:04:48 by thbernar          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/11/26 19:38:14 by maxisimo         ###   ########.fr       */
+=======
+/*   Updated: 2018/11/23 17:29:11 by maxisimo         ###   ########.fr       */
+>>>>>>> d0788b3e4f70ee433fc2d7854269469f7d23a354
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +50,6 @@ void	ft_put_circle_to_img(t_app *a, t_circle *c)
 
 void	ft_import_textures(t_app *a)
 {
-	if (a->p_count != 1)
-		ft_error("Fatal error : invalid map.");
 	bmp_loadfile(&a->textures[0], "textures/earth.bmp");
 	bmp_loadfile(&a->textures[1], "textures/greystone.bmp");
 	bmp_loadfile(&a->textures[2], "textures/redbrick.bmp");
@@ -56,7 +58,6 @@ void	ft_import_textures(t_app *a)
 	bmp_loadfile(&a->textures[5], "textures/mossy.bmp");
 	bmp_loadfile(&a->textures[6], "textures/colorstone.bmp");
 	bmp_loadfile(&a->textures[7], "textures/nebula.bmp");
-	bmp_loadfile(&a->textures[8], "textures/sky1.bmp");
 	bmp_loadfile(&a->sprites[0], "sprites/ak47.bmp");
 }
 
