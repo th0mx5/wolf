@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/26 10:19:25 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/26 17:01:05 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,10 @@ typedef struct	s_app
 	void		*img;
 	char		*fname;
 	char		*img_data;
-	int			player_size;
 	int			**map;
 	int			p_count;
-	int			color;
 	int			start;
 	int			end;
-	int			wall_size;
-	int			start2;
 	int			lineheight;
 	int			stepx;
 	int			stepy;
@@ -98,8 +94,6 @@ typedef struct	s_app
 	int			rt_left;
 	int			rt_up;
 	int			rt_dw;
-	int			px;
-	int			blocs;
 	int			speed;
 	int			lookud;
 	int			h;
@@ -109,8 +103,6 @@ typedef struct	s_app
 	int			texy;
 	int			skyx;
 	int			skyy;
-	int			mx;
-	int			my;
 	int			startscreen;
 	int			texnum;
 	int			floortex_x;
@@ -125,8 +117,6 @@ typedef struct	s_app
 	double		floor_y;
 	double		alpha;
 	double		loop;
-	double		kx;
-	double		ky;
 	double		ms;
 	double		old_dir_x;
 	double		deltadistx;
@@ -147,8 +137,8 @@ typedef struct	s_app
 	double		clr_intensity;
 	t_bmp		textures[10];
 	t_bmp		logo;
-	t_coord		map_size;
 	t_coord		p;
+	t_coord		map_size;
 	t_coord_d	pos;
 	t_bmp		sprites[10];
 	int			weapon;
@@ -176,6 +166,7 @@ void			put_pxl_to_img(t_app *a, int x, int y, int color);
 void			draw_player(t_app *a);
 
 int				ft_rgb_to_hex(t_color c);
+void			ft_put_pxl_to_img(t_app *a, t_color c, int x, int y);
 void			ft_put_circle_to_img(t_app *a, t_circle *c);
 void			ft_import_textures(t_app *a);
 void			ft_put_bmp_to_img(t_app *a, t_bmp bmp, int x, int y);

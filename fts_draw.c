@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:30:54 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/26 16:11:42 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/26 17:08:08 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void		ft_draw_sky(int x, int start, t_app *a)
 	}
 }
 
-static void		ft_floor_and_ceilling(int x, int clr, int start, t_app *a)
+static void		ft_floor_and_ceilling(int x, int start, t_app *a)
 {
 	t_color	c1;
 	int		y;
@@ -59,12 +59,9 @@ static void		ft_floor_and_ceilling(int x, int clr, int start, t_app *a)
 		a->floortex_x = abs(a->floortex_x);
 		a->floortex_y = abs(a->floortex_y);
 		c1 = get_pixel_color(&a->textures[3], a->floortex_x, a->floortex_y);
-		clr = ft_rgb_to_hex(c1);
-		ft_memcpy(a->img_data + 4 * WIN_W * (WIN_H - y)
-				+ x * 4, &clr, sizeof(int));
+		ft_put_pxl_to_img(a, c1, x, (WIN_H - y));
 		c1 = get_pixel_color(&a->textures[6], a->floortex_x, a->floortex_y);
-		clr = ft_rgb_to_hex(c1);
-		ft_memcpy(a->img_data + 4 * WIN_W * y + x * 4, &clr, sizeof(int));
+		ft_put_pxl_to_img(a, c1, x, y);
 		y++;
 	}
 }
@@ -82,9 +79,8 @@ static t_color	ft_choose_tex(t_app *a)
 	return (get_pixel_color(&a->textures[a->texnum], a->texx, a->texy));
 }
 
-static void		ft_put_pixel(int x, int start, t_app *a)
+static void		ft_choose_pixel(int x, int start, t_app *a)
 {
-	int		clr;
 	t_color c1;
 
 	if (a->t == 1)
@@ -106,8 +102,7 @@ static void		ft_put_pixel(int x, int start, t_app *a)
 	}
 	if (a->h)
 		ft_apply_shadow_to_color(&c1, a->clr_intensity);
-	clr = ft_rgb_to_hex(c1);
-	ft_memcpy(a->img_data + 4 * WIN_W * start + x * 4, &clr, sizeof(int));
+	ft_put_pxl_to_img(a, c1, x, start);
 }
 
 void			draw_wall(int x, int start, int end, t_app *a)
@@ -126,7 +121,7 @@ void			draw_wall(int x, int start, int end, t_app *a)
 	if (a->side == 1 && a->raydir_y < 0)
 		a->texx = 64 - a->texx - 1;
 	if (a->h == 0 && a->t == 1 && a->c == 0)
-		ft_floor_and_ceilling(x, 0, start, a);
+		ft_floor_and_ceilling(x, start, a);
 	else if (a->c == 1)
 		ft_draw_sky(x, start, a);
 	while (++start <= end)
@@ -134,7 +129,7 @@ void			draw_wall(int x, int start, int end, t_app *a)
 		a->texy = ((start - WIN_H / 2 + a->lineheight / 2) - a->lookud)
 			* 64 / a->lineheight;
 		a->texy = abs(a->texy);
-		ft_put_pixel(x, start, a);
+		ft_choose_pixel(x, start, a);
 	}
 }
 

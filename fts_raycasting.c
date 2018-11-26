@@ -6,12 +6,11 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:20:06 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/11/23 17:33:34 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/26 17:42:15 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
-#include <stdio.h>
 
 static void	dda_init(t_app *app)
 {
@@ -124,7 +123,6 @@ void		*raycasting(void *tab)
 			a.start = 0;
 		if (a.end > WIN_H)
 			a.end = WIN_H;
-		a.wall_size = a.start - a.end;
 		a.clr_intensity = (a.dist_wall < 1) ? 1 : 1 / a.dist_wall;
 		draw_wall(a.p.x, a.start, a.end, &a);
 		a.p.x++;
