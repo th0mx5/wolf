@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/26 21:28:30 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/26 21:36:11 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,7 @@ typedef struct	s_bmp
 {
 	int			width;
 	int			height;
-	int			data_offset;
 	int			*data;
-	t_coord		cursor;
 	double		scale;
 }				t_bmp;
 

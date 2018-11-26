@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 15:11:51 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/26 21:33:32 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/26 21:41:19 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static void	bmp_readfile(t_bmp *bmp, int fd)
 	i = i + 8;
 	if (!(bmp->data = (int *)malloc(sizeof(int) * bmp->width
 			* bmp->height * 3)))
-		return (-1);
+		exit(-1);
 	while (i < 36 && read(fd, &c, 1))
 	{
 		i++;

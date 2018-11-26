@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 18:43:12 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/26 21:27:59 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/26 21:41:55 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,11 @@ void		ft_app_allocmap(t_app *app)
 	int i;
 
 	i = 0;
-	app->map = (int**)malloc(sizeof(int*) * app->map_size.x);
-	if (app->map == NULL)
+	if (!(app->map = (int**)malloc(sizeof(int*) * app->map_size.x)))
 		exit(-1);
 	while (i < app->map_size.x)
 	{
-		app->map[i] = (int*)malloc(sizeof(int) * app->map_size.y);
-		if (app->map[i] == NULL)
+		if (!(app->map[i] = (int*)malloc(sizeof(int) * app->map_size.y)))
 			exit(-1);
 		i++;
 	}
