@@ -31,15 +31,23 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror
 
+LIBMLX := -Lminilibx -lmlx
+LIBFT := -Llibft -lft
+
+LFT := libft/libft.a
+
+FRAMEWORK := -framework OpenGL -framework Appkit
+
 all: $(NAME)
 
-$(NAME) : $(OBJ)
+$(NAME) : $(OBJ) libft/libft.a minilibx/libmlx.a
+	$(CC) $(LIBMLX) $(LIBFT) $(FRAMEWORK) $(OBJ) -o $(NAME)
+
+libft/libft.a:
 	make -C libft
+
+minilibx/libmlx.a:
 	make -C minilibx
-	mv libft/libft.a .
-	mv minilibx/libmlx.a .
-	gcc -Wall -g -Werror -Wextra -c $(SRC)
-	gcc -Wall -g -Werror -Wextra -L. -lmlx -lft -framework OpenGL -framework Appkit $(OBJ) -o $(NAME)
 
 clean:
 	make -C libft clean
