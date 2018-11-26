@@ -6,36 +6,11 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:30:54 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/23 17:28:51 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/26 13:30:48 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
-
-/*static void	ft_draw_sky(int x, int start, t_app *a)
-{
-	int		i;
-	int		clr;
-	t_color	c1;
- 	i = 0;
-	a->alpha = acos(a->dir_x);
-	if (a->dir_y < 0)
-		a->alpha *= -1;
-	a->alpha += M_PI;
-	a->alpha += x * FOV_RAD / WIN_W - HFOV_RAD;
-	a->alpha += (a->alpha < 0) ? 2 * M_PI : 0;
-	a->alpha -= (a->alpha > 2 * M_PI) ? 2 * M_PI : 0;
-	a->skyx = a->alpha * a->textures[8].width / (2 * M_PI);
-	while (i <= start)
-	{
-		a->skyy = a->textures[8].height - i * a->textures[8].height / (WIN_H);
-		c1 = get_pixel_color(&a->textures[8], (int)a->skyx, (int)a->skyy);
-		clr = ft_rgb_to_hex(c1);
-		ft_memcpy(a->img_data + 4 * WIN_W * i + x * 4,
-				&clr, sizeof(int));
-		i++;
-	}
-}*/
 
 static void		ft_floor_and_ceilling(int x, int clr, int start, t_app *a)
 {
@@ -55,15 +30,10 @@ static void		ft_floor_and_ceilling(int x, int clr, int start, t_app *a)
 		a->floortex_y = (int)(a->curfloor_y * 64) % 64;
 		a->floortex_x = abs(a->floortex_x);
 		a->floortex_y = abs(a->floortex_y);
-		if (a->c == 0)
-		{
-			c1 = get_pixel_color(&a->textures[3], a->floortex_x, a->floortex_y);
-			clr = ft_rgb_to_hex(c1);
-			ft_memcpy(a->img_data + 4 * WIN_W * (WIN_H - y)
-					+ x * 4, &clr, sizeof(int));
-		}
-		/*else
-			ft_draw_sky(x, start, a);*/
+		c1 = get_pixel_color(&a->textures[3], a->floortex_x, a->floortex_y);
+		clr = ft_rgb_to_hex(c1);
+		ft_memcpy(a->img_data + 4 * WIN_W * (WIN_H - y)
+				+ x * 4, &clr, sizeof(int));
 		c1 = get_pixel_color(&a->textures[6], a->floortex_x, a->floortex_y);
 		clr = ft_rgb_to_hex(c1);
 		ft_memcpy(a->img_data + 4 * WIN_W * y + x * 4, &clr, sizeof(int));
@@ -117,7 +87,6 @@ void			draw_wall(int x, int start, int end, t_app *a)
 	int		y;
 
 	y = start;
-	//a->texnum = (a->t == 1) ? a->map[(int)a->mapy][(int)a->mapx] - 1 : 0;
 	if (a->side == 0)
 		a->wallx = a->pos.x + a->dist_wall * a->raydir_y;
 	else

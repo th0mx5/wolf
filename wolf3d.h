@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/23 16:52:57 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/26 10:19:25 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ typedef struct	s_app
 	double		oldplane_x;
 	double		clr_intensity;
 	t_bmp		textures[10];
-	t_bmp		startscreen_logo;
+	t_bmp		logo;
 	t_coord		map_size;
 	t_coord		p;
 	t_coord_d	pos;
