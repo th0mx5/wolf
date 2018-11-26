@@ -12,7 +12,7 @@
 
 #include "wolf3d.h"
 
-static void	ft_draw_sky(int x, int start, t_app *a)
+/*static void	ft_draw_sky(int x, int start, t_app *a)
 {
 	int		i;
 	int		clr;
@@ -35,7 +35,7 @@ static void	ft_draw_sky(int x, int start, t_app *a)
 				&clr, sizeof(int));
 		i++;
 	}
-}
+}*/
 
 static void		ft_floor_and_ceilling(int x, int clr, int start, t_app *a)
 {
@@ -43,6 +43,7 @@ static void		ft_floor_and_ceilling(int x, int clr, int start, t_app *a)
 	int		y;
 
 	y = a->end;
+	(void)start;
 	ft_init_tex_fc(a);
 	while (y < WIN_H)
 	{
@@ -61,8 +62,8 @@ static void		ft_floor_and_ceilling(int x, int clr, int start, t_app *a)
 			ft_memcpy(a->img_data + 4 * WIN_W * (WIN_H - y)
 					+ x * 4, &clr, sizeof(int));
 		}
-		else
-			ft_draw_sky(x, start, a);
+		/*else
+			ft_draw_sky(x, start, a);*/
 		c1 = get_pixel_color(&a->textures[6], a->floortex_x, a->floortex_y);
 		clr = ft_rgb_to_hex(c1);
 		ft_memcpy(a->img_data + 4 * WIN_W * y + x * 4, &clr, sizeof(int));
@@ -147,6 +148,7 @@ int				ft_draw(t_app *a)
 	ft_pthread(a);
 	draw_minimap(a);
 	draw_player(a);
+	weapons_draw_weapon(a);
 	mlx_put_image_to_window(a->mlx, a->win, a->img, 0, 0);
 	mlx_destroy_image(a->mlx, a->img);
 	mlx_do_sync(a->mlx);

@@ -21,6 +21,7 @@ SRC = main.c \
 	  fts_hook.c \
 	  fts_draw.c \
 	  fts_move.c \
+	  fts_weapons.c \
 	  bmp_parser.c
 
 OBJ = $(SRC:.c=.o)
