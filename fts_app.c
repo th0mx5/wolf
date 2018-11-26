@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 18:43:12 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/26 20:20:11 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/26 21:27:59 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,6 @@ void		ft_app_init(t_app *app)
 	app->rt_left = 0;
 	app->rt_up = 0;
 	app->rt_dw = 0;
-	app->lookud = 0;
 	app->p_count = 0;
 	app->h = 0;
 	app->t = 0;

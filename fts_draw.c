@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:30:54 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/26 19:50:12 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/26 21:27:29 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void			draw_wall(int x, int start, int end, t_app *a)
 		ft_draw_sky(x, start, a);
 	while (++start <= end)
 	{
-		a->texy = ((start - WIN_H / 2 + a->lineheight / 2) - a->lookud)
+		a->texy = (start - WIN_H / 2 + a->lineheight / 2)
 			* 64 / a->lineheight;
 		a->texy = abs(a->texy);
 		ft_choose_color(x, start, a);
