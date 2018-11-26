@@ -6,7 +6,7 @@
 #    By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/01 00:25:16 by thbernar          #+#    #+#              #
-#    Updated: 2018/11/19 20:38:33 by maxisimo         ###   ########.fr        #
+#    Updated: 2018/11/26 19:48:09 by maxisimo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRC = main.c \
 	  fts_minimap.c \
 	  fts_hook.c \
 	  fts_draw.c \
+	  fts_choose.c \
 	  fts_move.c \
 	  fts_weapons.c \
 	  bmp_parser.c
