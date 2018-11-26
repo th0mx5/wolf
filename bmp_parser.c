@@ -12,45 +12,52 @@
 
 #include "wolf3d.h"
 
-static void	bmp_getfile_size(t_bmp *bmp, unsigned char c, int i)
+static void	bmp_getfile_size(t_bmp *bmp, int fd)
 {
-	if (i >= 18 && i <= 21)
+	unsigned char	c;
+	int				i;
+	int				bytes_read;
+
+	i = 0;
+	while (i < 18 && (bytes_read = read(fd, &c, 1)) != 0)
 	{
-		if (i == 18)
-			bmp->width = c;
-		if (i == 19)
-			bmp->width += c << 8;
-		if (i == 20)
-			bmp->width += c << 16;
-		if (i == 21)
-			bmp->width += c << 24;
+		i++;
 	}
-	if (i >= 22 && i <= 25)
-	{
-		if (i == 22)
-			bmp->height = c;
-		if (i == 23)
-			bmp->height += c << 8;
-		if (i == 24)
-			bmp->height += c << 16;
-		if (i == 25)
-			bmp->height += c << 24;
-	}
+	read(fd, &c, 1);
+	bmp->width = c;
+	read(fd, &c, 1);
+	bmp->width += c << 8;
+	read(fd, &c, 1);
+	bmp->width += c << 16;
+	read(fd, &c, 1);
+	bmp->width += c << 24;
+	read(fd, &c, 1);
+	bmp->height = c;
+	read(fd, &c, 1);
+	bmp->height += c << 8;
+	read(fd, &c, 1);
+	bmp->height += c << 16;
+	read(fd, &c, 1);
+	bmp->height += c << 24;
 }
 
-static void	bmp_getfile_data(t_bmp *bmp, unsigned char c, int i)
+static void	bmp_getfile_data(t_bmp *bmp, int fd)
 {
-	if (i == 54)
-		bmp->data = (int *)malloc(sizeof(int) * bmp->width * bmp->height * 3);
-	if (i >= 54)
+	unsigned char	c;
+	int				b_r;
+	int				i;
+
+	i = 0;
+	b_r = 1;
+	while ((b_r = read(fd, &c, 1)) != 0)
 	{
-		i = i - 54;
 		if (i % 3 == 0)
 			bmp->data[i + 2] = c;
 		if (i % 3 == 1)
 			bmp->data[i] = c;
 		if (i % 3 == 2)
 			bmp->data[i - 2] = c;
+		i++;
 	}
 }
 
@@ -62,12 +69,14 @@ static void	bmp_readfile(t_bmp *bmp, int fd)
 
 	i = 0;
 	bytes_read = 1;
-	while ((bytes_read = read(fd, &c, 1)) != 0)
+	bmp_getfile_size(bmp, fd);
+	i = i + 8;
+	bmp->data = (int *)malloc(sizeof(int) * bmp->width * bmp->height * 3);
+	while (i < 54 && read(fd, &c, 1))
 	{
-		bmp_getfile_size(bmp, c, i);
-		bmp_getfile_data(bmp, c, i);
 		i++;
 	}
+	bmp_getfile_data(bmp, fd);
 }
 
 void		bmp_loadfile(t_bmp *bmp, char *fname)
