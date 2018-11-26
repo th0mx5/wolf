@@ -29,7 +29,7 @@ OBJ = $(SRC:.c=.o)
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 
 all: $(NAME)
 
@@ -38,8 +38,8 @@ $(NAME) : $(OBJ)
 	make -C minilibx
 	mv libft/libft.a .
 	mv minilibx/libmlx.a .
-	gcc -Wall -g -Werror -Wextra -c $(SRC)
-	gcc -Wall -g -Werror -Wextra -L. -lmlx -lft -framework OpenGL -framework Appkit $(OBJ) -o $(NAME)
+	gcc -Wall -g -Werror -Wextra -fsanitize=address -c $(SRC)
+	gcc -Wall -g -Werror -Wextra -fsanitize=address -L. -lmlx -lft -framework OpenGL -framework Appkit $(OBJ) -o $(NAME)
 
 clean:
 	make -C libft clean
