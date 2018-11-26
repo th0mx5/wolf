@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 18:43:12 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/22 18:57:42 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/26 10:25:45 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,5 @@ void		ft_app_init(t_app *app)
 	app->loop = 0;
 	ft_app_countmap(app);
 	ft_app_calcplayerpos(app);
-	if (app->p_count != 1)
-		ft_error("Fatal error : invalid map.");
 	ft_import_textures(app);
 }
