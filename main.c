@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 11:54:23 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/26 10:21:01 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/26 22:35:47 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,7 @@ int		main(int ac, char **av)
 		mlx_loop_hook(app.mlx, expose_hook, &app);
 		mlx_loop(app.mlx);
 	}
+	else
+		ft_putstr("usage: ./wolf3d maps/mapX.w3d");
 	return (0);
 }
