@@ -36,14 +36,15 @@ static void	ft_app_countmap(t_app *app)
 		count[0]++;
 	}
 	free(s);
-	app->map_size.x = count[2];
-	app->map_size.y = count[0];
+	app->map_size.x = count[2] + 2;
+	app->map_size.y = count[0] + 2;
 	ft_app_allocmap(app);
 }
 
 void		ft_app_allocmap(t_app *app)
 {
-	int i;
+	int		i;
+	t_coord	p;
 
 	i = 0;
 	app->map = (int**)malloc(sizeof(int*) * app->map_size.x);
@@ -56,6 +57,14 @@ void		ft_app_allocmap(t_app *app)
 			exit(-1);
 		i++;
 	}
+	p.y = 0;
+	while (p.y < app->map_size.y)
+	{
+		p.x = -1;
+		while (++p.x < app->map_size.x)
+			app->map[p.x][p.y] = 1;
+		p.y++;
+	}
 	ft_app_writemap(app);
 }
 
@@ -66,20 +75,20 @@ void		ft_app_writemap(t_app *app)
 	char	*s;
 	t_coord p;
 
-	p.y = 0;
+	p.y = 1;
 	if (((fd = open(app->fname, O_RDONLY)) < 0))
 		ft_error("Fatal error : invalid file.");
-	while ((get_next_line(fd, &s)) > 0 && p.y < app->map_size.y)
+	while ((get_next_line(fd, &s)) > 0 && p.y < app->map_size.y - 1)
 	{
 		p.x = 0;
 		array = ft_strsplit(s, ' ');
 		free(s);
-		while (p.x < app->map_size.x)
+		while (p.x < app->map_size.x - 2)
 		{
 			if (array[p.x])
-				app->map[p.x][p.y] = ft_atoi(array[p.x]);
+				app->map[p.x + 1][p.y] = ft_atoi(array[p.x]);
 			else
-				app->map[p.x][p.y] = 0;
+				app->map[p.x + 1][p.y] = 0;
 			p.x++;
 		}
 		ft_free_strsplit(array);
