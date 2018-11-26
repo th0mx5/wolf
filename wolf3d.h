@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/26 19:47:45 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/26 19:50:01 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ void			draw_wall(int x, int start, int end, t_app *a);
 int				ft_draw(t_app *a);
 
 t_color			ft_choose_tex(t_app *a);
-void			ft_choose_pixel(int x, int start, t_app *a);
+void			ft_choose_color(int x, int start, t_app *a);
 
 void			draw_minimap(t_app *a);
 void			put_pxl_to_img(t_app *a, int x, int y, int color);

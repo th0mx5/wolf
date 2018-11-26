@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 19:45:32 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/11/26 19:46:15 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/26 19:50:03 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_color	ft_choose_tex(t_app *a)
 	return (get_pixel_color(&a->textures[a->texnum], a->texx, a->texy));
 }
 
-void	ft_choose_pixel(int x, int start, t_app *a)
+void	ft_choose_color(int x, int start, t_app *a)
 {
 	t_color c1;
 
