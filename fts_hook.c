@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 11:15:41 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/11/26 10:23:33 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/26 18:09:26 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ int			ft_key_press(int key, t_app *app)
 int			ft_key_press2(int key, t_app *app)
 {
 	if (key == 125)
-		app->rt_dw = 0;
+		app->rt_dw = 1;
 	else if (key == 126)
-		app->rt_up = 0;
+		app->rt_up = 1;
 	else if (key == 17)
 		app->t = (app->t == 1) ? 0 : 1;
 	else if (key == 8)
