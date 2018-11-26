@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/30 11:31:02 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/11/19 19:57:43 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/26 21:28:17 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,6 @@ static void	ft_rotate(t_app *a)
 		a->plane_x = a->plane_x * cos(0.05) - a->plane_y * sin(0.05);
 		a->plane_y = a->oldplane_x * sin(0.05) + a->plane_y * cos(0.05);
 	}
-	if (a->rt_up == 1)
-		a->lookud = ((a->lookud += 10) >= WIN_H / 2) ?
-			WIN_H / 2 : a->lookud + 10;
-	if (a->rt_dw == 1)
-		a->lookud = ((a->lookud -= 10) <= -(WIN_H / 2)) ?
-			-(WIN_H / 2) : a->lookud - 10;
 }
 
 static void	ft_move2(t_app *a)

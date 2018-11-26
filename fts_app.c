@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 18:43:12 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/26 20:20:11 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/26 21:41:55 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,11 @@ void		ft_app_allocmap(t_app *app)
 	t_coord	p;
 
 	i = 0;
-	app->map = (int**)malloc(sizeof(int*) * app->map_size.x);
-	if (app->map == NULL)
+	if (!(app->map = (int**)malloc(sizeof(int*) * app->map_size.x)))
 		exit(-1);
 	while (i < app->map_size.x)
 	{
-		app->map[i] = (int*)malloc(sizeof(int) * app->map_size.y);
-		if (app->map[i] == NULL)
+		if (!(app->map[i] = (int*)malloc(sizeof(int) * app->map_size.y)))
 			exit(-1);
 		i++;
 	}
@@ -135,7 +133,6 @@ void		ft_app_init(t_app *app)
 	app->rt_left = 0;
 	app->rt_up = 0;
 	app->rt_dw = 0;
-	app->lookud = 0;
 	app->p_count = 0;
 	app->h = 0;
 	app->t = 0;
