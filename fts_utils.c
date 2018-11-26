@@ -58,6 +58,7 @@ void	ft_import_textures(t_app *a)
 	bmp_loadfile(&a->textures[7], "textures/nebula.bmp");
 	bmp_loadfile(&a->textures[8], "textures/sky1.bmp");
 	bmp_loadfile(&a->sprites[0], "sprites/ak47.bmp");
+	bmp_loadfile(&a->sprites[1], "sprites/scope.bmp");
 }
 
 void	ft_put_bmp_to_img(t_app *a, t_bmp bmp, int x, int y)
