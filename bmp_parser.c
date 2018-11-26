@@ -41,14 +41,11 @@ static void	bmp_getfile_size(t_bmp *bmp, int fd)
 	bmp->height += c << 24;
 }
 
-static void	bmp_getfile_data(t_bmp *bmp, int fd)
+static void	bmp_getfile_data(t_bmp *bmp, int fd, int i, int b_r)
 {
 	unsigned char	c;
-	int				b_r;
-	int				i;
 
 	i = 0;
-	b_r = 1;
 	while ((b_r = read(fd, &c, 1)) != 0)
 	{
 		if (i % 3 == 0)
@@ -64,19 +61,21 @@ static void	bmp_getfile_data(t_bmp *bmp, int fd)
 static void	bmp_readfile(t_bmp *bmp, int fd)
 {
 	int				i;
+	int				j;
 	int				bytes_read;
 	unsigned char	c;
 
 	i = 0;
+	j = 0;
 	bytes_read = 1;
 	bmp_getfile_size(bmp, fd);
 	i = i + 8;
 	bmp->data = (int *)malloc(sizeof(int) * bmp->width * bmp->height * 3);
-	while (i < 54 && read(fd, &c, 1))
+	while (i < 36 && read(fd, &c, 1))
 	{
 		i++;
 	}
-	bmp_getfile_data(bmp, fd);
+	bmp_getfile_data(bmp, fd, i, bytes_read);
 }
 
 void		bmp_loadfile(t_bmp *bmp, char *fname)
@@ -99,7 +98,7 @@ t_color		get_pixel_color(t_bmp *img, int x, int y)
 	int		os;
 	t_color	color;
 
-	os = (x + y * img->width) * 3;
+	os = ((x + y * img->width) % (img->width * img->height)) * 3;
 	color.r = img->data[0 + os];
 	color.g = img->data[1 + os];
 	color.b = img->data[2 + os];
