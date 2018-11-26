@@ -22,7 +22,8 @@ void	ft_put_pxl_to_img(t_app *a, t_color c, int x, int y)
 	int hex_clr;
 
 	hex_clr = ft_rgb_to_hex(c);
-	ft_memcpy(a->img_data + 4 * WIN_W * y + x * 4, &hex_clr, sizeof(int));
+	if (x < WIN_W && y < WIN_H && x >= 0 && y >= 0)
+		ft_memcpy(a->img_data + 4 * WIN_W * y + x * 4, &hex_clr, sizeof(int));
 }
 
 void	ft_put_circle_to_img(t_app *a, t_circle *c)
