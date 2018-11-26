@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 15:04:48 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/26 10:25:39 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/26 16:04:43 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	ft_import_textures(t_app *a)
 	bmp_loadfile(&a->textures[5], "textures/mossy.bmp");
 	bmp_loadfile(&a->textures[6], "textures/colorstone.bmp");
 	bmp_loadfile(&a->textures[7], "textures/nebula.bmp");
+	bmp_loadfile(&a->textures[8], "textures/sky1.bmp");
 	bmp_loadfile(&a->sprites[0], "sprites/ak47.bmp");
 }
 

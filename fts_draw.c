@@ -6,11 +6,39 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:30:54 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/26 13:30:48 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/11/26 16:11:42 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
+
+static void		ft_draw_sky(int x, int start, t_app *a)
+{
+	int		i;
+	int		clr;
+	t_color	c1;
+
+	i = 0;
+	a->alpha = asin(a->dir_x);
+	if (a->alpha != a->alpha)
+		a->alpha = M_PI;
+	if (a->dir_y < 0)
+		a->alpha *= -1;
+	a->alpha += M_PI;
+	a->alpha += x * FOV_RAD / WIN_W - HFOV_RAD;
+	a->alpha += (a->alpha < 0) ? 2 * M_PI : 0;
+	a->alpha -= (a->alpha > 2 * M_PI) ? 2 * M_PI : 0;
+	a->skyx = a->alpha * a->textures[8].width / (2 * M_PI);
+	while (i <= start)
+	{
+		a->skyy = a->textures[8].height - i * a->textures[8].height / (WIN_H);
+		c1 = get_pixel_color(&a->textures[8], (int)a->skyx, (int)a->skyy);
+		clr = ft_rgb_to_hex(c1);
+		ft_memcpy(a->img_data + 4 * WIN_W * i + x * 4,
+				&clr, sizeof(int));
+		i++;
+	}
+}
 
 static void		ft_floor_and_ceilling(int x, int clr, int start, t_app *a)
 {
@@ -97,8 +125,10 @@ void			draw_wall(int x, int start, int end, t_app *a)
 		a->texx = 64 - a->texx - 1;
 	if (a->side == 1 && a->raydir_y < 0)
 		a->texx = 64 - a->texx - 1;
-	if (a->h == 0 && a->t == 1)
+	if (a->h == 0 && a->t == 1 && a->c == 0)
 		ft_floor_and_ceilling(x, 0, start, a);
+	else if (a->c == 1)
+		ft_draw_sky(x, start, a);
 	while (++start <= end)
 	{
 		a->texy = ((start - WIN_H / 2 + a->lineheight / 2) - a->lookud)
