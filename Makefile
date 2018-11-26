@@ -6,7 +6,7 @@
 #    By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/01 00:25:16 by thbernar          #+#    #+#              #
-#    Updated: 2018/11/26 19:48:09 by maxisimo         ###   ########.fr        #
+#    Updated: 2018/11/26 23:03:39 by maxisimo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ OBJ = $(SRC:.c=.o)
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
@@ -38,8 +38,8 @@ $(NAME) : $(OBJ)
 	make -C minilibx
 	mv libft/libft.a .
 	mv minilibx/libmlx.a .
-	gcc -Wall -g -Werror -Wextra -fsanitize=address -c $(SRC)
-	gcc -Wall -g -Werror -Wextra -fsanitize=address -L. -lmlx -lft -framework OpenGL -framework Appkit $(OBJ) -o $(NAME)
+	gcc -Wall -g -Werror -Wextra -c $(SRC)
+	gcc -Wall -g -Werror -Wextra -L. -lmlx -lft -framework OpenGL -framework Appkit $(OBJ) -o $(NAME)
 
 clean:
 	make -C libft clean
