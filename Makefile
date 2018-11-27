@@ -6,7 +6,7 @@
 #    By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/01 00:25:16 by thbernar          #+#    #+#              #
-#    Updated: 2018/11/26 23:03:39 by maxisimo         ###   ########.fr        #
+#    Updated: 2018/11/27 16:06:14 by maxisimo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,14 +49,10 @@ libft/libft.a:
 minilibx/libmlx.a:
 	make -C minilibx
 
-clean:
-	make -C libft clean
-	make -C minilibx clean
+clean: libft/libft.a minilibx/libmlx.a
 	rm -rf $(OBJ) libft.a libmlx.a
 
-fclean: clean
-	make -C libft fclean
-	make -C minilibx clean
+fclean: clean libft/libft.a minilibx/libmlx.a
 	rm -rf $(NAME)
 
 re : fclean all
