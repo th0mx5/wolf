@@ -12,11 +12,19 @@
 
 #include "wolf3d.h"
 
+int static is_extension_valid(char *fname)
+{
+	if (ft_strncmp(ft_strrev(fname), "d3w.", 4) == 0)
+		return (1);
+	else
+		return (0);
+}
+
 int		main(int ac, char **av)
 {
 	t_app	app;
 
-	if (ac == 2)
+	if (ac == 2 && is_extension_valid(ft_strdup(av[1])) == 1)
 	{
 		app.fname = av[1];
 		ft_app_init(&app);
@@ -30,6 +38,6 @@ int		main(int ac, char **av)
 		mlx_loop(app.mlx);
 	}
 	else
-		ft_putstr("usage: ./wolf3d maps/mapX.w3d");
+		ft_putstr("usage: ./wolf3d maps/*.w3d\n");
 	return (0);
 }

@@ -14,16 +14,15 @@
 
 static void	ft_app_countmap(t_app *app)
 {
-	int		fd;
-	int		count[3];
+	int		count[4];
 	char	*s;
 	char	**array;
 
 	count[2] = 0;
 	count[0] = 0;
-	if (((fd = open(app->fname, O_RDONLY)) < 0))
+	if (((count[3] = open(app->fname, O_RDONLY)) < 0))
 		ft_error("Fatal error : invalid file.");
-	while ((get_next_line(fd, &s)) > 0)
+	while ((get_next_line(count[3], &s)) > 0)
 	{
 		array = ft_strsplit(s, ' ');
 		free(s);
@@ -34,11 +33,12 @@ static void	ft_app_countmap(t_app *app)
 			count[2] = count[1];
 		ft_free_strsplit(array);
 		count[0]++;
+		if (count[0] > 100 || count[2] > 100)
+			ft_error("Fatal error : invalid file.");
 	}
 	free(s);
 	app->map_size.x = count[2] + 2;
 	app->map_size.y = count[0] + 2;
-	ft_app_allocmap(app);
 }
 
 void		ft_app_allocmap(t_app *app)
@@ -63,13 +63,12 @@ void		ft_app_allocmap(t_app *app)
 			app->map[p.x][p.y] = 1;
 		p.y++;
 	}
-	ft_app_writemap(app);
 }
 
 void		ft_app_writemap(t_app *app)
 {
 	int		fd;
-	char	**array;
+	char	**arr;
 	char	*s;
 	t_coord p;
 
@@ -79,17 +78,17 @@ void		ft_app_writemap(t_app *app)
 	while ((get_next_line(fd, &s)) > 0 && p.y < app->map_size.y - 1)
 	{
 		p.x = 0;
-		array = ft_strsplit(s, ' ');
+		arr = ft_strsplit(s, ' ');
 		free(s);
 		while (p.x < app->map_size.x - 2)
 		{
-			if (array[p.x])
-				app->map[p.x + 1][p.y] = ft_atoi(array[p.x]);
+			if (arr[p.x] && -1 < ft_atoi(arr[p.x]) && ft_atoi(arr[p.x]) < 64)
+				app->map[p.x + 1][p.y] = ft_atoi(arr[p.x]);
 			else
 				app->map[p.x + 1][p.y] = 0;
 			p.x++;
 		}
-		ft_free_strsplit(array);
+		ft_free_strsplit(arr);
 		p.y++;
 	}
 	free(s);
@@ -141,6 +140,8 @@ void		ft_app_init(t_app *app)
 	app->startscreen = 0;
 	app->loop = 0;
 	ft_app_countmap(app);
+	ft_app_allocmap(app);
+	ft_app_writemap(app);
 	ft_app_calcplayerpos(app);
 	ft_import_textures(app);
 }

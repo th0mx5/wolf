@@ -41,7 +41,7 @@ FRAMEWORK := -framework OpenGL -framework Appkit
 all: $(NAME)
 
 $(NAME) : $(OBJ) libft/libft.a minilibx/libmlx.a
-	$(CC) $(LIBMLX) $(LIBFT) $(FRAMEWORK) $(OBJ) -o $(NAME)
+	$(CC) $(CFLAGS) $(LIBMLX) $(LIBFT) $(FRAMEWORK) $(OBJ) -o $(NAME)
 
 libft/libft.a:
 	make -C libft
