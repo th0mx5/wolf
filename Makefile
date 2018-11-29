@@ -22,7 +22,10 @@ SRC = main.c \
 	  fts_draw.c \
 	  fts_choose.c \
 	  fts_move.c \
-	  fts_weapons.c \
+	  weapons.c \
+	  sprites.c \
+	  textures.c \
+	  sounds.c \
 	  bmp_parser.c
 
 OBJ = $(SRC:.c=.o)
