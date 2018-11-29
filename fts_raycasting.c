@@ -38,7 +38,7 @@ static void	dda_init(t_app *app)
 	}
 }
 
-static void	dda(t_app *app, int x)
+static void	dda(t_app *app)
 {
 	app->hit = 0;
 	while (app->hit == 0)
@@ -55,7 +55,6 @@ static void	dda(t_app *app, int x)
 			app->mapy += app->stepy;
 			app->side = 1;
 		}
-		(void)x;
 		if (app->map[app->mapy][app->mapx] > 0)
 			app->hit = 1;
 	}
@@ -71,7 +70,7 @@ static void	raycasting_init(t_app *app, int x)
 	app->mapx = (int)app->rayposx;
 	app->mapy = (int)app->rayposy;
 	dda_init(app);
-	dda(app, x);
+	dda(app);
 	if (app->side == 0)
 		app->dist_wall = (app->mapx - app->rayposx + (1 - app->stepx) / 2) /
 			app->raydir_x;

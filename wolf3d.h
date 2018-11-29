@@ -54,7 +54,7 @@ typedef struct	s_bmp
 	int			height;
 	int			*data;
 	double		scale;
-	t_coord		p;		
+	t_coord_d	p;		
 }				t_bmp;
 
 typedef struct	s_circle

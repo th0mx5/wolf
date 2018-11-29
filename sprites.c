@@ -15,16 +15,16 @@
 void    sprites_load(t_app *a)
 {
     bmp_loadfile(&a->sprites[2], "sprites/thomas.bmp");
-    a->sprites[2].p.x = 2;
-    a->sprites[2].p.x = 2;
+    a->sprites[2].p.x = 2.5;
+    a->sprites[2].p.x = 2.5;
 }
 
 void    sprites_draw(t_app *a)
 {
     // Draw all sprites
-    t_coord p1;
+    t_coord_d p1;
     t_coord_d p2;
-    t_coord rel;
+    t_coord_d rel;
     double  d;
     double  c;
     double  b;
