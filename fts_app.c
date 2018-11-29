@@ -82,7 +82,7 @@ void		ft_app_writemap(t_app *app)
 		free(s);
 		while (p.x < app->map_size.x - 2)
 		{
-			if (arr[p.x] && -1 < ft_atoi(arr[p.x]) && ft_atoi(arr[p.x]) < 64)
+			if (arr[p.x] && -1 <= ft_atoi(arr[p.x]) && ft_atoi(arr[p.x]) < 64)
 				app->map[p.x + 1][p.y] = ft_atoi(arr[p.x]);
 			else
 				app->map[p.x + 1][p.y] = 0;
