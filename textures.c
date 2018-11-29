@@ -15,4 +15,5 @@
 void    textures_load(t_app *a)
 {
     // Load all textures
+    (void)a;
 }

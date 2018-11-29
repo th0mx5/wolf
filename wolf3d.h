@@ -54,6 +54,7 @@ typedef struct	s_bmp
 	int			height;
 	int			*data;
 	double		scale;
+	t_coord		p;		
 }				t_bmp;
 
 typedef struct	s_circle
@@ -181,5 +182,8 @@ void			bmp_loadfile(t_bmp *bmp, char *fname);
 t_color			get_pixel_color(t_bmp *img, int x, int y);
 
 void			weapons_draw_weapon(t_app *a);
+
+void    		sprites_load(t_app *a);
+void    		sprites_draw(t_app *a);
 
 #endif

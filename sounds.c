@@ -15,4 +15,5 @@
 void    sounds_load(t_app *a)
 {
     // Load all sounds
+    (void)a;
 }

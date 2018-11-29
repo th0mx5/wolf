@@ -27,7 +27,9 @@ int		main(int ac, char **av)
 	if (ac == 2 && is_extension_valid(ft_strdup(av[1])) == 1)
 	{
 		app.fname = av[1];
+		ft_putstr(app.fname);
 		ft_app_init(&app);
+		sprites_load(&app);
 		app.mlx = mlx_init();
 		app.win = mlx_new_window(app.mlx, WIN_W, WIN_H, "Wolf3D");
 		bmp_loadfile(&app.logo, "textures/logo.bmp");

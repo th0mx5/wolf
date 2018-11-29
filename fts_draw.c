@@ -112,7 +112,8 @@ int				ft_draw(t_app *a)
 	a->img_data = mlx_get_data_addr(a->img, &n[0], &n[1], &n[2]);
 	ft_pthread(a);
 	draw_minimap(a);
-	draw_player(a);
+	draw_player(a);	
+	sprites_draw(a);
 	weapons_draw_weapon(a);
 	mlx_put_image_to_window(a->mlx, a->win, a->img, 0, 0);
 	mlx_destroy_image(a->mlx, a->img);
