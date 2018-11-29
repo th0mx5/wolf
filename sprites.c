@@ -16,3 +16,8 @@ void    sprites_load(t_app *a)
 {
     // Load all sprites
 }
+
+void    sprites_draw(t_app *a)
+{
+    // Draw all sprites
+}
