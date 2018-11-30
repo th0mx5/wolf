@@ -15,6 +15,8 @@
 void    sprites_load(t_app *a)
 {
     bmp_loadfile(&a->sprites[2], "sprites/thomas.bmp");
+    bmp_loadfile(&a->weapon.fired, "sprites/ak47.bmp");
+    bmp_loadfile(&a->weapon.normal, "sprites/ak47fired.bmp");
     a->sprites[2].p.x = 2.5;
     a->sprites[2].p.x = 2.5;
 }
@@ -31,13 +33,11 @@ void    sprites_draw(t_app *a)
     (void)a;
     p1 = a->sprites[2].p;
     p2 = a->pos;
-
     rel.x = p1.x - p2.x;
     rel.y = p1.y - p2.y;
     double invDet = 1.0 / (a->plane_x * a->dir_y - a->dir_x * a->plane_y);
     double transformX = invDet * (a->dir_y * rel.x - a->dir_x * rel.y);
     double transformY = invDet * (-a->plane_y * rel.x + a->plane_x * rel.y);
-
     //printf("%d %d, %d %d\n", a->sprites[2].p.x, a->sprites[2].p.y, a->pos.x, a->pos.y);
     c = (p1.x - p2.x) * (p1.x - p2.x);
     b = (p1.y - p2.y) * (p1.y - p2.y);

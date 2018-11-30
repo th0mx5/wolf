@@ -60,6 +60,11 @@ int			ft_key_press(int key, t_app *app)
 		app->rt_left = 1;
 	else if (key == 124)
 		app->rt_right = 1;
+	else if (key == 126)
+	{
+		app->weapon.fire_count = 0;
+		app->weapon.is_fired = 1;
+	}
 	else if (key == 4)
 		app->h = (app->h == 1) ? 0 : 1;
 	ft_key_press2(key, app);
@@ -77,9 +82,9 @@ int			ft_key_press2(int key, t_app *app)
 	else if (key == 8)
 		app->c = (app->c == 1) ? 0 : 1;
 	else if (key == 18)
-		app->weapon = 1;
+		app->is_weapon = 1;
 	else if (key == 19)
-		app->weapon = 0;
+		app->is_weapon = 0;
 	else if (key == 257)
 		app->speed = 1;
 	else if (key == 53)
@@ -104,7 +109,10 @@ int			ft_key_release(int key, t_app *app)
 	else if (key == 125)
 		app->rt_dw = 0;
 	else if (key == 126)
+	{
 		app->rt_up = 0;
+		app->weapon.is_fired = 0;
+	}
 	else if (key == 257)
 		app->speed = 0;
 	return (0);
