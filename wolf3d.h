@@ -198,4 +198,6 @@ void			weapons_stopfire(t_app *a);
 void    		sprites_load(t_app *a);
 void    		sprites_draw(t_app *a);
 
+void    		textures_load(t_app *a);
+
 #endif

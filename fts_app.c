@@ -143,5 +143,5 @@ void		ft_app_init(t_app *app)
 	ft_app_allocmap(app);
 	ft_app_writemap(app);
 	ft_app_calcplayerpos(app);
-	ft_import_textures(app);
+	textures_load(app);
 }
