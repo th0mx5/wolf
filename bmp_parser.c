@@ -70,8 +70,8 @@ static void	bmp_readfile(t_bmp *bmp, int fd)
 	bytes_read = 1;
 	bmp_getfile_size(bmp, fd);
 	i = i + 8;
-	if (!(bmp->data = (int *)malloc(sizeof(int) * bmp->width
-			* bmp->height * 3)))
+	bmp->data = (int *)malloc(sizeof(int) * bmp->width * bmp->height * 3);
+	if (!bmp->data)
 		exit(-1);
 	while (i < 36 && read(fd, &c, 1))
 	{
