@@ -136,7 +136,7 @@ void		ft_app_init(t_app *app)
 	app->h = 0;
 	app->t = 0;
 	app->c = 0;
-	app->weapon = 0;
+	app->is_weapon = 0;
 	app->startscreen = 0;
 	app->loop = 0;
 	ft_app_countmap(app);
