@@ -44,9 +44,11 @@ static void	bmp_getfile_size(t_bmp *bmp, int fd)
 static void	bmp_getfile_data(t_bmp *bmp, int fd, int i, int b_r)
 {
 	unsigned char	c;
+	int				size;
 
 	i = 0;
-	while ((b_r = read(fd, &c, 1)) != 0)
+	size = bmp->width * bmp->height * 3;
+	while ((b_r = read(fd, &c, 1)) != 0 && i < size)
 	{
 		if (i % 3 == 0)
 			bmp->data[i + 2] = c;
