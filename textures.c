@@ -16,7 +16,7 @@ void    textures_load(t_app *a)
 {
     if (a->p_count <= 0)
 		ft_error("Fatal error : invalid file.");
-	bmp_loadfile(&a->textures[0], "textures/earth.bmp");
+	bmp_loadfile(&a->textures[0], "textures/eagle2.bmp");
 	bmp_loadfile(&a->textures[1], "textures/greystone.bmp");
 	bmp_loadfile(&a->textures[2], "textures/redbrick.bmp");
 	bmp_loadfile(&a->textures[3], "textures/wood.bmp");

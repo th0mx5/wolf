@@ -27,8 +27,8 @@ static void	ft_start_screen(t_app *a)
 	c1.g = sin_factor * 255;
 	c1.b = sin_factor * 255;
 	a->logo.scale = 2 * (sin_factor + 1);
-	tmp.x = WIN_W / 2 - a->logo.width / 2 * a->logo.scale;
-	tmp.y = WIN_H / 2 - a->logo.height / 2 * a->logo.scale;
+	tmp.x = (WIN_W - a->logo.width * a->logo.scale) / 2;
+	tmp.y = (WIN_H - a->logo.height * a->logo.scale) / 2;
 	ft_put_bmp_to_img(a, a->logo, tmp.x, tmp.y);
 	mlx_put_image_to_window(a->mlx, a->win, a->img, 0, 0);
 	mlx_string_put(a->mlx, a->win, WIN_WS, WIN_HS, ft_rgb_to_hex(c1), START);
