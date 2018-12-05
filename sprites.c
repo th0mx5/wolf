@@ -15,8 +15,7 @@
 void    sprites_load(t_app *a)
 {
     bmp_loadfile(&a->sprites[2], "sprites/thomas.bmp");
-    bmp_loadfile(&a->weapon.fired, "sprites/ak47.bmp");
-    bmp_loadfile(&a->weapon.normal, "sprites/ak47fired.bmp");
+    bmp_loadfile(&a->weapon.sprite, "sprites/ak47.bmp");
     a->sprites[2].p.x = 2.5;
     a->sprites[2].p.x = 2.5;
 }

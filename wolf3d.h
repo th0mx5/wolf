@@ -60,8 +60,7 @@ typedef struct	s_bmp
 
 typedef struct	s_weapon
 {
-	t_bmp		normal;
-	t_bmp		fired;
+	t_bmp		sprite;
 	int			is_fired;
 	int			fire_count;
 }				t_weapon;
