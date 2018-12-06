@@ -63,6 +63,7 @@ void		ft_app_allocmap(t_app *app)
 			app->map[p.x][p.y] = 1;
 		p.y++;
 	}
+	printf("%d %d\n", app->map_size.x, app->map_size.y);
 }
 
 void		ft_app_writemap(t_app *app)
@@ -80,12 +81,10 @@ void		ft_app_writemap(t_app *app)
 		p.x = 0;
 		arr = ft_strsplit(s, ' ');
 		free(s);
-		while (p.x < app->map_size.x - 2)
+		while (p.x < app->map_size.x - 2 && arr[p.x] != NULL)
 		{
 			if (arr[p.x] && -1 <= ft_atoi(arr[p.x]) && ft_atoi(arr[p.x]) < 64)
 				app->map[p.x + 1][p.y] = ft_atoi(arr[p.x]);
-			else
-				app->map[p.x + 1][p.y] = 0;
 			p.x++;
 		}
 		ft_free_strsplit(arr);
