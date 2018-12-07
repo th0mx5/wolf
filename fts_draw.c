@@ -95,7 +95,7 @@ void			draw_wall(int x, int start, int end, t_app *a)
 		ft_floor_and_ceilling(x, start, a);
 	else if (a->c == 1)
 		ft_draw_sky(x, start, a);
-	while (++start <= end)
+	while (++start <= end - 1)
 	{
 		a->texy = (start - WIN_H / 2 + a->lineheight / 2)
 			* 64 / a->lineheight;

@@ -50,12 +50,7 @@ static void	bmp_getfile_data(t_bmp *bmp, int fd, int i, int b_r)
 	size = bmp->width * bmp->height * 3;
 	while ((b_r = read(fd, &c, 1)) != 0 && i < size)
 	{
-		if (i % 3 == 0)
-			bmp->data[i + 2] = c;
-		if (i % 3 == 1)
-			bmp->data[i] = c;
-		if (i % 3 == 2)
-			bmp->data[i - 2] = c;
+		bmp->data[i] = c;
 		i++;
 	}
 }
@@ -102,9 +97,17 @@ t_color		get_pixel_color(t_bmp *img, int x, int y)
 	int		os;
 	t_color	color;
 
-	os = ((x + y * img->width) % (img->width * img->height)) * 3;
-	color.r = img->data[0 + os];
+	os = (x + (img->height - (y + 1)) * img->width);
+	os = os * 3;
+	if (x == img->width || y == img->height)
+	{
+		color.b = 255;
+		color.g = 255;
+		color.r = 255;
+		return (color);
+	}
+	color.b = img->data[0 + os];
 	color.g = img->data[1 + os];
-	color.b = img->data[2 + os];
+	color.r = img->data[2 + os];
 	return (color);
 }

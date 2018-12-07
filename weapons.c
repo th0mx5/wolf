@@ -12,7 +12,20 @@
 
 #include "wolf3d.h"
 
-void	weapons_draw_weapon(t_app *a)
+static void	weapons_fire(t_app *a)
+{
+	t_coord	tmp;
+
+	tmp.x = WIN_W - a->sprites[0].width;
+	tmp.y = WIN_H - a->sprites[0].height;
+	if (a->weapon.fire_count % 2 == 0)
+		ft_put_bmp_to_img(a, a->weapon.sprite, tmp.x, tmp.y);
+	else
+		ft_put_bmp_to_img(a, a->weapon.sprite, tmp.x - 10, tmp.y);
+	a->weapon.fire_count++;
+}
+
+void		weapons_draw_weapon(t_app *a)
 {
 	t_coord	tmp;
 	t_coord tmp2;
@@ -26,20 +39,7 @@ void	weapons_draw_weapon(t_app *a)
 		if (a->weapon.is_fired)
 			weapons_fire(a);
 		else
-			ft_put_bmp_to_img(a, a->weapon.normal, tmp.x, tmp.y);
+			ft_put_bmp_to_img(a, a->weapon.sprite, tmp.x, tmp.y);
 		ft_put_bmp_to_img(a, a->sprites[1], tmp2.x, tmp2.y);
 	}
-}
-
-void	weapons_fire(t_app *a)
-{
-	t_coord	tmp;
-
-	tmp.x = WIN_W - a->sprites[0].width;
-	tmp.y = WIN_H - a->sprites[0].height;
-	if (a->weapon.fire_count % 2 == 0)
-		ft_put_bmp_to_img(a, a->weapon.normal, tmp.x, tmp.y);
-	else
-		ft_put_bmp_to_img(a, a->weapon.normal, tmp.x - 10, tmp.y);
-	a->weapon.fire_count++;
 }

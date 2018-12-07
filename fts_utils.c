@@ -60,7 +60,7 @@ void	ft_put_bmp_to_img(t_app *a, t_bmp bmp, int x, int y)
 		{
 			c = get_pixel_color(&bmp, p.x / bmp.scale, p.y / bmp.scale);
 			tmp.x = x + p.x;
-			tmp.y = y - p.y + bmp.height * bmp.scale;
+			tmp.y = y + p.y;
 			if (ft_rgb_to_hex(c) != 0xB80087 && tmp.x > 0 && tmp.y < WIN_W)
 				ft_put_pxl_to_img(a, c, tmp.x, tmp.y);
 			p.x++;

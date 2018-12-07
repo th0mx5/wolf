@@ -52,6 +52,7 @@ typedef struct	s_bmp
 {
 	int			width;
 	int			height;
+	int			size;
 	int			*data;
 	double		scale;
 	t_coord_d	p;		
@@ -60,8 +61,7 @@ typedef struct	s_bmp
 
 typedef struct	s_weapon
 {
-	t_bmp		normal;
-	t_bmp		fired;
+	t_bmp		sprite;
 	int			is_fired;
 	int			fire_count;
 }				t_weapon;
@@ -192,8 +192,6 @@ void			bmp_loadfile(t_bmp *bmp, char *fname);
 t_color			get_pixel_color(t_bmp *img, int x, int y);
 
 void			weapons_draw_weapon(t_app *a);
-void			weapons_fire(t_app *a);
-void			weapons_stopfire(t_app *a);
 
 void    		sprites_load(t_app *a);
 void    		sprites_draw(t_app *a);
