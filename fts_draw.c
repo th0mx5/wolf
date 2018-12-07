@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:30:54 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/27 20:43:45 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/12/07 20:15:44 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,8 @@ int				ft_draw(t_app *a)
 	ft_pthread(a);
 	draw_minimap(a);
 	draw_player(a);
-	sprites_draw(a);
 	weapons_draw_weapon(a);
+	sprites_draw(a);
 	mlx_put_image_to_window(a->mlx, a->win, a->img, 0, 0);
 	mlx_destroy_image(a->mlx, a->img);
 	mlx_do_sync(a->mlx);
