@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/26 21:36:11 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/12/08 15:31:42 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,28 @@ typedef struct	s_circle
 	int			d;
 	int			i;
 }				t_circle;
+
+typedef struct	s_spr
+{
+	double		spr_x;
+	double		spr_y;
+	double		invdet;
+	double		change_x;
+	double		change_y;
+	int			screenx;
+	int			height;
+	int			start_x;
+	int			start_y;
+	int			end_x;
+	int			end_y;
+	int			width;
+	int			stripe;
+	int			texx;
+	int			texy;
+	int			y;
+	int			d;
+	int			clr;
+}				t_spr;
 
 typedef struct	s_app
 {
