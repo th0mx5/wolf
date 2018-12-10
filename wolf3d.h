@@ -138,6 +138,8 @@ typedef struct	s_app
 	int			texnum;
 	int			floortex_x;
 	int			floortex_y;
+	int			current_thread;
+	struct s_app *main_a;
 	double		wallx;
 	double		weight;
 	double		curfloor_x;

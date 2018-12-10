@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:20:06 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/12/10 17:37:16 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/12/10 18:29:14 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,14 @@ void		ft_pthread(t_app *a)
 	i = 0;
 	while (i < 4)
 	{
-		ft_memcpy((void*)&tab[i], (void*)a, sizeof(t_app));
-		tab[i].p.x = (WIN_W / 4) * i;
-		tab[i].p.xx = (WIN_W / 4) * (i + 1);
+		tab[i] = *a;
+		tab[i].main_a = a;
 		i++;
 	}
 	i = 0;
 	while (i < 4)
 	{
+		tab[i].current_thread = i;
 		pthread_create(&t[i], NULL, raycasting, &tab[i]);
 		i++;
 	}
@@ -105,7 +105,6 @@ void		ft_pthread(t_app *a)
 		pthread_join(t[i], NULL);
 		i++;
 	}
-	mlx_put_image_to_window(a->mlx, a->win, a->img, 0, 0);
 }
 
 void		*raycasting(void *tab)
@@ -113,6 +112,8 @@ void		*raycasting(void *tab)
 	t_app	a;
 
 	a = *(t_app *)tab;
+	a.p.x = (WIN_W / 4) * a.current_thread;
+	a.p.xx = (WIN_W / 4) * (a.current_thread + 1);
 	while (a.p.x < a.p.xx)
 	{
 		raycasting_init(&a, a.p.x);
@@ -127,6 +128,7 @@ void		*raycasting(void *tab)
 		a.zbuffer[a.p.x] = a.dist_wall;
 		draw_wall(a.p.x, a.start, a.end, &a);
 		a.p.x++;
+		a.main_a->zbuffer[a.p.x] = a.dist_wall;
 	}
-	return (tab);
+	return (NULL);
 }
