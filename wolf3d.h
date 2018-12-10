@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/12/10 17:27:10 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/12/10 23:54:58 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define FOV_RAD 60 * 2 * M_PI / 360
 # define WIN_HS WIN_H / 2 + 250
 # define WIN_WS WIN_W / 2 - 120
+# define TEXSIZE 64
 
 typedef struct	s_coord
 {
@@ -108,6 +109,7 @@ typedef struct	s_app
 	char		*fname;
 	char		*img_data;
 	int			**map;
+	int			num;
 	int			p_count;
 	int			start;
 	int			end;
@@ -124,8 +126,6 @@ typedef struct	s_app
 	int			mv_right;
 	int			rt_right;
 	int			rt_left;
-	int			rt_up;
-	int			rt_dw;
 	int			speed;
 	int			h;
 	int			t;

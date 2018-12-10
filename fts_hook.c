@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 11:15:41 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/11/26 22:09:08 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/12/10 19:25:11 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,8 @@ int			ft_key_press(int key, t_app *app)
 
 int			ft_key_press2(int key, t_app *app)
 {
-	if (key == 125)
-		app->rt_dw = 1;
-	else if (key == 126)
-		app->rt_up = 1;
+	if (key == 126)
+		app->weapon.is_fired = 1;
 	else if (key == 17)
 		app->t = (app->t == 1) ? 0 : 1;
 	else if (key == 8)
@@ -106,13 +104,8 @@ int			ft_key_release(int key, t_app *app)
 		app->rt_left = 0;
 	else if (key == 124)
 		app->rt_right = 0;
-	else if (key == 125)
-		app->rt_dw = 0;
 	else if (key == 126)
-	{
-		app->rt_up = 0;
 		app->weapon.is_fired = 0;
-	}
 	else if (key == 257)
 		app->speed = 0;
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 11:54:23 by thbernar          #+#    #+#             */
-/*   Updated: 2018/12/10 18:30:53 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/12/11 00:18:34 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	sprites_load(t_app *a)
 {
-	bmp_loadfile(&a->sprites[2], "sprites/thomas.bmp");
+	bmp_loadfile(&a->sprites[2], "sprites/zombie1.bmp");
 	bmp_loadfile(&a->weapon.sprite, "sprites/ak47.bmp");
-	a->sprites[2].p.x = 21.5;
-	a->sprites[2].p.y = 15.5;
+	a->sprites[2].p.x = 22.5;
+	a->sprites[2].p.y = 19.5;
 }
 
 void	sprites_init(t_app *a, t_spr *s)
@@ -71,8 +71,9 @@ void	sprites_draw(t_app *a)
 				color = get_pixel_color(&a->sprites[2], s.texx, s.texy);
 				ft_apply_shadow_to_spr(&color, s.dist);
 				s.clr = ft_rgb_to_hex(color);
-				ft_memcpy(a->img_data + 4 * WIN_W * s.y + s.stripe * 4,
-						&s.clr, sizeof(int));
+				if (s.clr != 0)
+					ft_memcpy(a->img_data + 4 * WIN_W * s.y + s.stripe * 4,
+							&s.clr, sizeof(int));
 				s.y++;
 			}
 		}

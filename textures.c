@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 11:54:23 by thbernar          #+#    #+#             */
-/*   Updated: 2018/12/10 12:49:29 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/12/11 00:01:33 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ void	textures_load(t_app *a)
 {
 	if (a->p_count <= 0)
 		ft_error("Fatal error : invalid file.");
-	bmp_loadfile(&a->textures[0], "textures/eagle2.bmp");
+	bmp_loadfile(&a->textures[0], "textures/purplestone.bmp");
 	bmp_loadfile(&a->textures[1], "textures/greystone.bmp");
-	bmp_loadfile(&a->textures[2], "textures/redbrick.bmp");
+	bmp_loadfile(&a->textures[2], "textures/eagle2.bmp");
 	bmp_loadfile(&a->textures[3], "textures/wood.bmp");
-	bmp_loadfile(&a->textures[4], "textures/glass.bmp");
-	bmp_loadfile(&a->textures[5], "textures/mossy.bmp");
+	bmp_loadfile(&a->textures[4], "textures/SKULWALL.bmp");
+	bmp_loadfile(&a->textures[5], "textures/MARBFACE.bmp");
 	bmp_loadfile(&a->textures[6], "textures/colorstone.bmp");
 	bmp_loadfile(&a->textures[7], "textures/nebula.bmp");
 	//bmp_loadfile(&a->textures[8], "textures/sky1.bmp");
