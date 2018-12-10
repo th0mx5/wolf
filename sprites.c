@@ -16,20 +16,12 @@ void	sprites_load(t_app *a)
 {
 	bmp_loadfile(&a->sprites[2], "sprites/thomas.bmp");
 	bmp_loadfile(&a->weapon.sprite, "sprites/ak47.bmp");
-	a->sprites[2].p.x = 1.5;
-	a->sprites[2].p.y = 7.5;
+	a->sprites[2].p.x = 4.5;
+	a->sprites[2].p.y = 1.5;
 }
 
 void	sprites_init(t_app *a, t_spr *s)
 {
-	t_coord_d	rel;
-	t_coord_d	p1;
-	t_coord_d	p2;
-
-	p1 = a->sprites[2].p;
-	p2 = a->pos;
-	rel.x = p1.x - p2.x;
-	rel.y = p1.y - p2.y;
 	s->spr_x = a->sprites[2].p.y - a->pos.y;
 	s->spr_y = a->sprites[2].p.x - a->pos.x;
 	s->invdet = 1.0 / (a->plane_x * a->dir_y - a->dir_x * a->plane_y);
@@ -59,7 +51,7 @@ void	sprites_draw(t_app *a)
 	{
 		s.texx = (int)(256 * (s.stripe - (-s.width / 2 + s.screenx))
 				* a->sprites[2].width / s.width) / 256;
-		if (s.change_y > 0 && s.stripe > 0 && s.stripe < WIN_W)
+		if (s.change_y > 0 && s.stripe > 0 && s.stripe < WIN_W && s.change_y < a->zbuffer[s.stripe])
 		{
 			s.y = s.start_y;
 			while (s.y < s.end_y)

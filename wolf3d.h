@@ -136,6 +136,8 @@ typedef struct	s_app
 	int			texnum;
 	int			floortex_x;
 	int			floortex_y;
+	int			current_thread;
+	struct s_app *main_a;
 	double		wallx;
 	double		weight;
 	double		curfloor_x;
@@ -164,6 +166,7 @@ typedef struct	s_app
 	double		dist_wall;
 	double		oldplane_x;
 	double		clr_intensity;
+	double		zbuffer[WIN_W];
 	t_bmp		textures[10];
 	t_bmp		logo;
 	t_coord		p;

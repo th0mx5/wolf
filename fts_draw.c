@@ -113,8 +113,8 @@ int				ft_draw(t_app *a)
 	ft_pthread(a);
 	draw_minimap(a);
 	draw_player(a);
-	weapons_draw_weapon(a);
 	sprites_draw(a);
+	weapons_draw_weapon(a);
 	mlx_put_image_to_window(a->mlx, a->win, a->img, 0, 0);
 	mlx_destroy_image(a->mlx, a->img);
 	mlx_do_sync(a->mlx);
