@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:30:54 by thbernar          #+#    #+#             */
-/*   Updated: 2018/12/07 20:15:44 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/12/10 17:35:59 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,6 @@ static void		ft_draw_sky(int x, int start, t_app *a)
 	}
 }
 
-static void		ft_apply_shadow_to_cf(t_color *c, int y)
-{
-	c->r *= (1 - (800. / abs(y)) / 2.);
-	c->g *= (1 - (800. / abs(y)) / 2.);
-	c->b *= (1 - (800. / abs(y)) / 2.);
-	c->r = (c->r < 0) ? 0 : c->r;
-	c->g = (c->g < 0) ? 0 : c->g;
-	c->b = (c->b < 0) ? 0 : c->b;
-}
-
 static void		ft_floor_and_ceilling(int x, int y, t_app *a)
 {
 	t_color	c1;
@@ -67,10 +57,10 @@ static void		ft_floor_and_ceilling(int x, int y, t_app *a)
 		a->floortex_x = abs(a->floortex_x);
 		a->floortex_y = abs(a->floortex_y);
 		c1 = get_pixel_color(&a->textures[3], a->floortex_x, a->floortex_y);
-		(a->h == 1) ? ft_apply_shadow_to_cf(&c1, y) : 0;
+		ft_apply_shadow_to_cf(&c1, y);
 		ft_put_pxl_to_img(a, c1, x, (WIN_H - y));
 		c1 = get_pixel_color(&a->textures[6], a->floortex_x, a->floortex_y);
-		(a->h == 1) ? ft_apply_shadow_to_cf(&c1, y) : 0;
+		ft_apply_shadow_to_cf(&c1, y);
 		ft_put_pxl_to_img(a, c1, x, y);
 		y++;
 	}
@@ -91,7 +81,7 @@ void			draw_wall(int x, int start, int end, t_app *a)
 		a->texx = 64 - a->texx - 1;
 	if (a->side == 1 && a->raydir_y < 0)
 		a->texx = 64 - a->texx - 1;
-	if (a->t == 1 && a->c == 0)
+	if (a->c == 0)
 		ft_floor_and_ceilling(x, start, a);
 	else if (a->c == 1)
 		ft_draw_sky(x, start, a);
@@ -113,8 +103,8 @@ int				ft_draw(t_app *a)
 	ft_pthread(a);
 	draw_minimap(a);
 	draw_player(a);
-	weapons_draw_weapon(a);
 	sprites_draw(a);
+	weapons_draw_weapon(a);
 	mlx_put_image_to_window(a->mlx, a->win, a->img, 0, 0);
 	mlx_destroy_image(a->mlx, a->img);
 	mlx_do_sync(a->mlx);

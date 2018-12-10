@@ -6,15 +6,15 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 11:54:23 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/26 23:04:23 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/12/10 12:49:29 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void    textures_load(t_app *a)
+void	textures_load(t_app *a)
 {
-    if (a->p_count <= 0)
+	if (a->p_count <= 0)
 		ft_error("Fatal error : invalid file.");
 	bmp_loadfile(&a->textures[0], "textures/eagle2.bmp");
 	bmp_loadfile(&a->textures[1], "textures/greystone.bmp");

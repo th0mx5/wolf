@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 20:14:32 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/11/21 20:28:37 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/12/10 17:32:34 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,4 @@ void	ft_init_tex_fc(t_app *a)
 	}
 	if (a->end < 0)
 		a->end = WIN_H;
-}
-
-void	ft_apply_shadow_to_color(t_color *c, double intensity)
-{
-	c->r = c->r * intensity;
-	c->g = c->g * intensity;
-	c->b = c->b * intensity;
 }

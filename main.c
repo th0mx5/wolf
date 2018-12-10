@@ -6,13 +6,13 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 11:54:23 by thbernar          #+#    #+#             */
-/*   Updated: 2018/11/26 23:04:23 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/12/10 12:51:46 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-int static is_extension_valid(char *fname)
+static int	is_extension_valid(char *fname)
 {
 	if (ft_strncmp(ft_strrev(fname), "d3w.", 4) == 0)
 		return (1);
@@ -20,7 +20,7 @@ int static is_extension_valid(char *fname)
 		return (0);
 }
 
-int		main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	t_app	app;
 

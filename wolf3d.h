@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/12/08 15:31:42 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/12/10 17:27:10 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct	s_spr
 	double		invdet;
 	double		change_x;
 	double		change_y;
+	double		dist;
 	int			screenx;
 	int			height;
 	int			start_x;
@@ -95,6 +96,7 @@ typedef struct	s_spr
 	int			texy;
 	int			y;
 	int			d;
+	int			x;
 	int			clr;
 }				t_spr;
 
@@ -164,6 +166,7 @@ typedef struct	s_app
 	double		dist_wall;
 	double		oldplane_x;
 	double		clr_intensity;
+	double		zbuffer[WIN_W];
 	t_bmp		textures[10];
 	t_bmp		logo;
 	t_coord		p;
@@ -188,6 +191,7 @@ int				ft_move(t_app *a);
 void			ft_pthread(t_app *a);
 void			*raycasting(void *tab);
 
+void			ft_apply_shadow_to_cf(t_color *c, int y);
 void			draw_wall(int x, int start, int end, t_app *a);
 int				ft_draw(t_app *a);
 
@@ -209,6 +213,7 @@ void			ft_error(char *s);
 void			ft_free_strsplit(char **array);
 void			ft_init_tex_fc(t_app *a);
 void			ft_apply_shadow_to_color(t_color *c, double intensity);
+void			ft_apply_shadow_to_spr(t_color *c, int y);
 
 void			bmp_loadfile(t_bmp *bmp, char *fname);
 t_color			get_pixel_color(t_bmp *img, int x, int y);

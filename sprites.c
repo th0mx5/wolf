@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 11:54:23 by thbernar          #+#    #+#             */
-/*   Updated: 2018/12/08 15:43:43 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/12/10 17:28:00 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	sprites_load(t_app *a)
 {
 	bmp_loadfile(&a->sprites[2], "sprites/thomas.bmp");
 	bmp_loadfile(&a->weapon.sprite, "sprites/ak47.bmp");
-	a->sprites[2].p.x = 1.5;
-	a->sprites[2].p.y = 7.5;
+	a->sprites[2].p.x = 21.5;
+	a->sprites[2].p.y = 15.5;
 }
 
 void	sprites_init(t_app *a, t_spr *s)
@@ -40,12 +40,12 @@ void	sprites_init(t_app *a, t_spr *s)
 	s->start_y = -s->height / 2 + WIN_H / 2;
 	s->start_y = (s->start_y < 0) ? 0 : s->start_y;
 	s->end_y = s->height / 2 + WIN_H / 2;
-	s->end_y = (s->end_y >= WIN_H) ? WIN_H - 1 : s->end_y;
+	s->end_y = (s->end_y > WIN_H) ? WIN_H - 1 : s->end_y;
 	s->width = abs((int)(WIN_H / (s->change_y)));
 	s->start_x = -s->width / 2 + s->screenx;
 	s->start_x = (s->start_x < 0) ? 0 : s->start_x;
 	s->end_x = s->width / 2 + s->screenx;
-	s->end_x = (s->end_x >= WIN_W) ? WIN_W - 1 : s->end_x;
+	s->end_x = (s->end_x > WIN_W) ? WIN_W - 1 : s->end_x;
 	s->stripe = s->start_x;
 }
 
@@ -54,19 +54,22 @@ void	sprites_draw(t_app *a)
 	t_color		color;
 	t_spr		s;
 
+	s.dist = (a->pos.x - 21.5) * (a->pos.x - 21.5) + (a->pos.y - 15.5) *
+			(a->pos.y - 15.5);
 	sprites_init(a, &s);
 	while (s.stripe < s.end_x)
 	{
-		s.texx = (int)(256 * (s.stripe - (-s.width / 2 + s.screenx))
-				* a->sprites[2].width / s.width) / 256;
-		if (s.change_y > 0 && s.stripe > 0 && s.stripe < WIN_W)
+		s.texx = (int)((s.stripe - (-s.width / 2 + s.screenx))
+				* a->sprites[2].width / s.width);
+		if (s.change_y > 0 && s.stripe > 0 && s.stripe < WIN_W)// && s.change_y < a->zbuffer[s.stripe])
 		{
-			s.y = s.start_y;
+			s.y = s.start_y - 1;
 			while (s.y < s.end_y)
 			{
-				s.d = (s.y) * 256 - WIN_H * 128 + s.height * 128;
-				s.texy = ((s.d * a->sprites[2].height) / s.height) / 256;
+				s.d = (s.y) * 2 - WIN_H + s.height;
+				s.texy = ((s.d * a->sprites[2].height) / s.height) / 2;
 				color = get_pixel_color(&a->sprites[2], s.texx, s.texy);
+				ft_apply_shadow_to_spr(&color, s.dist);
 				s.clr = ft_rgb_to_hex(color);
 				ft_memcpy(a->img_data + 4 * WIN_W * s.y + s.stripe * 4,
 						&s.clr, sizeof(int));
