@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:20:06 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/12/10 19:49:51 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/12/11 13:42:01 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	dda(t_app *app)
 			app->mapy += app->stepy;
 			app->side = 1;
 		}
-		if (app->map[app->mapy][app->mapx] > 0)
+		if (app->map[app->mapy][app->mapx] > 0 && app->map[app->mapy][app->mapx] != 9)
 			app->hit = 1;
 	}
 }
@@ -124,7 +124,7 @@ void		*raycasting(void *tab)
 			a.start = 0;
 		if (a.end > WIN_H)
 			a.end = WIN_H;
-		a.clr_intensity = (a.dist_wall < 0.4) ? 1 : 0.4 / a.dist_wall;
+		a.clr_intensity = (a.dist_wall < 0.35) ? 1 : 0.35 / a.dist_wall;
 		a.zbuffer[a.p.x] = a.dist_wall;
 		draw_wall(a.p.x, a.start, a.end, &a);
 		a.main_a->zbuffer[a.p.x] = a.dist_wall;

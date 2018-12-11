@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:11:44 by thbernar          #+#    #+#             */
-/*   Updated: 2018/12/10 23:54:58 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/12/11 13:08:21 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct	s_bmp
 	int			height;
 	int			size;
 	int			*data;
+	double		dist;
 	double		scale;
 	t_coord_d	p;		
 }				t_bmp;
@@ -84,7 +85,6 @@ typedef struct	s_spr
 	double		invdet;
 	double		change_x;
 	double		change_y;
-	double		dist;
 	int			screenx;
 	int			height;
 	int			start_x;
@@ -109,7 +109,9 @@ typedef struct	s_app
 	char		*fname;
 	char		*img_data;
 	int			**map;
+	int			bpp;
 	int			num;
+	int			spr_num;
 	int			p_count;
 	int			start;
 	int			end;

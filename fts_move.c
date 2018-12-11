@@ -6,7 +6,7 @@
 /*   By: maxisimo <maxisimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/30 11:31:02 by maxisimo          #+#    #+#             */
-/*   Updated: 2018/11/26 21:28:17 by maxisimo         ###   ########.fr       */
+/*   Updated: 2018/12/11 13:46:12 by maxisimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,20 @@ static void	ft_move2(t_app *a)
 {
 	if (a->mv_left == 1)
 	{
-		if (a->map[(int)(a->pos.x + a->dir_x * a->ms)][(int)(a->pos.y)] == 0)
+		if ((a->map[(int)(a->pos.x + a->dir_x * a->ms)][(int)(a->pos.y)] == 0) ||
+				a->map[(int)(a->pos.x + a->dir_x * a->ms)][(int)(a->pos.y)] == 9)
 			a->pos.x += a->dir_x * a->ms;
-		if (a->map[(int)(a->pos.x)][(int)(a->pos.y - a->dir_y * a->ms)] == 0)
+		if ((a->map[(int)(a->pos.x)][(int)(a->pos.y - a->dir_y * a->ms)] == 0) ||
+				a->map[(int)(a->pos.x)][(int)(a->pos.y - a->dir_y * a->ms)] == 9)
 			a->pos.y -= a->dir_y * a->ms;
 	}
 	if (a->mv_right == 1)
 	{
-		if (a->map[(int)(a->pos.x - a->dir_x * a->ms)][(int)(a->pos.y)] == 0)
+		if ((a->map[(int)(a->pos.x - a->dir_x * a->ms)][(int)(a->pos.y)] == 0) ||
+				a->map[(int)(a->pos.x - a->dir_x * a->ms)][(int)(a->pos.y)] == 9)
 			a->pos.x -= a->dir_x * a->ms;
-		if (a->map[(int)(a->pos.x)][(int)(a->pos.y + a->dir_y * a->ms)] == 0)
+		if ((a->map[(int)(a->pos.x)][(int)(a->pos.y + a->dir_y * a->ms)] == 0) ||
+				a->map[(int)(a->pos.x)][(int)(a->pos.y + a->dir_y * a->ms)] == 9)
 			a->pos.y += a->dir_y * a->ms;
 	}
 }
@@ -57,16 +61,20 @@ int			ft_move(t_app *a)
 {
 	if (a->mv_up == 1)
 	{
-		if (a->map[(int)(a->pos.x + a->dir_y * a->ms)][(int)(a->pos.y)] == 0)
+		if ((a->map[(int)(a->pos.x + a->dir_y * a->ms)][(int)(a->pos.y)] == 0) ||
+				a->map[(int)(a->pos.x + a->dir_y * a->ms)][(int)(a->pos.y)] == 9)
 			a->pos.x += a->dir_y * a->ms;
-		if (a->map[(int)(a->pos.x)][(int)(a->pos.y + a->dir_x * a->ms)] == 0)
+		if ((a->map[(int)(a->pos.x)][(int)(a->pos.y + a->dir_x * a->ms)] == 0) ||
+				a->map[(int)(a->pos.x)][(int)(a->pos.y + a->dir_x * a->ms)] == 9)
 			a->pos.y += a->dir_x * a->ms;
 	}
 	if (a->mv_down == 1)
 	{
-		if (a->map[(int)(a->pos.x - a->dir_y * a->ms)][(int)(a->pos.y)] == 0)
+		if ((a->map[(int)(a->pos.x - a->dir_y * a->ms)][(int)(a->pos.y)] == 0) ||
+				a->map[(int)(a->pos.x - a->dir_y * a->ms)][(int)(a->pos.y)] == 9)
 			a->pos.x -= a->dir_y * a->ms;
-		if (a->map[(int)(a->pos.x)][(int)(a->pos.y - a->dir_x * a->ms)] == 0)
+		if ((a->map[(int)(a->pos.x)][(int)(a->pos.y - a->dir_x * a->ms)] == 0) ||
+				a->map[(int)(a->pos.x)][(int)(a->pos.y - a->dir_x * a->ms)] == 9)
 			a->pos.y -= a->dir_x * a->ms;
 	}
 	ft_move2(a);
