@@ -35,7 +35,7 @@ int			main(int ac, char **av)
 		mlx_hook(app.win, 2, (1L << 0), ft_key_press, &app);
 		mlx_hook(app.win, 3, (1L << 1), ft_key_release, &app);
 		mlx_hook(app.win, 17, (1L << 17), ft_close, &app);
-		mlx_loop_hook(app.mlx, expose_hook, &app);
+		mlx_loop_hook(app.mlx, ft_draw, &app);
 		mlx_loop(app.mlx);
 	}
 	else

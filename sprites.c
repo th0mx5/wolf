@@ -23,9 +23,11 @@ void	sprites_load(t_app *a)
 	bmp_loadfile(&a->sprites[7], "sprites/zombie1.bmp");
 	bmp_loadfile(&a->sprites[8], "sprites/zombie1.bmp");
 	bmp_loadfile(&a->weapon.sprite, "sprites/ak47.bmp");
+	a->sprites[2].p.x = 2.5;
+	a->sprites[2].p.y = 2.5;
 }
 
-void	spr_position(t_app *a, int i)
+void	sprites_get_coord(t_app *a, int i)
 {
 	int		x;
 	int		y;
@@ -137,7 +139,6 @@ void	sprites_draw(t_app *a)
 	i = -1;
 	while (++i < a->spr_num)
 	{
-		spr_position(a, i);
 		a->sprites[i].dist = (a->pos.x - a->sprites[i].p.x) *
 			(a->pos.x - a->sprites[i].p.x) + (a->pos.y - a->sprites[i].p.y) *
 				(a->pos.y - a->sprites[i].p.y);

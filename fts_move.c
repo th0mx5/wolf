@@ -79,6 +79,5 @@ int			ft_move(t_app *a)
 	}
 	ft_move2(a);
 	ft_rotate(a);
-	ft_draw(a);
 	return (0);
 }

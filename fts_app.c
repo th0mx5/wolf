@@ -134,7 +134,7 @@ void		ft_app_init(t_app *app)
 	app->t = 0;
 	app->c = 0;
 	app->is_weapon = 0;
-	app->startscreen = 0;
+	app->startscreen = 1;
 	app->loop = 0;
 	ft_app_countmap(app);
 	ft_app_allocmap(app);

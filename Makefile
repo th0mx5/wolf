@@ -25,6 +25,7 @@ SRC = main.c \
 	  sprites.c \
 	  textures.c \
 	  shades.c \
+	  startscreen.c \
 	  bmp_parser.c
 
 OBJ = $(SRC:.c=.o)

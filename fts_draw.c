@@ -110,11 +110,17 @@ int				ft_draw(t_app *a)
 
 	a->img = mlx_new_image(a->win, WIN_W, WIN_H);
 	a->img_data = mlx_get_data_addr(a->img, &n[0], &n[1], &n[2]);
-	ft_pthread(a);
-	sprites_draw(a);
-	draw_minimap(a);
-	draw_player(a);
-	weapons_draw_weapon(a);
+	if (a->startscreen == 0)
+	{
+		ft_pthread(a);
+		sprites_draw(a);
+		draw_minimap(a);
+		draw_player(a);
+		weapons_draw_weapon(a);
+		ft_move(a);
+	}
+	else
+		startscreen_draw(a);
 	mlx_put_image_to_window(a->mlx, a->win, a->img, 0, 0);
 	mlx_destroy_image(a->mlx, a->img);
 	mlx_do_sync(a->mlx);

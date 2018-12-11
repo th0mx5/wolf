@@ -12,42 +12,9 @@
 
 #include "wolf3d.h"
 
-static void	ft_start_screen(t_app *a)
-{
-	t_color	c1;
-	t_coord tmp;
-	int		n[3];
-	double	sin_factor;
-
-	a->img = mlx_new_image(a->win, WIN_W, WIN_H);
-	a->img_data = mlx_get_data_addr(a->img, &n[0], &n[1], &n[2]);
-	a->loop = a->loop + 0.02;
-	sin_factor = fabs(sin(a->loop));
-	c1.r = sin_factor * 255;
-	c1.g = sin_factor * 255;
-	c1.b = sin_factor * 255;
-	a->logo.scale = 2 * (sin_factor + 1);
-	tmp.x = (WIN_W - a->logo.width * a->logo.scale) / 2;
-	tmp.y = (WIN_H - a->logo.height * a->logo.scale) / 2;
-	ft_put_bmp_to_img(a, a->logo, tmp.x, tmp.y);
-	mlx_put_image_to_window(a->mlx, a->win, a->img, 0, 0);
-	mlx_string_put(a->mlx, a->win, WIN_WS, WIN_HS, ft_rgb_to_hex(c1), START);
-	mlx_destroy_image(a->mlx, a->img);
-	mlx_do_sync(a->mlx);
-}
-
-int			expose_hook(t_app *a)
-{
-	if (a->startscreen == 0)
-		ft_start_screen(a);
-	else
-		ft_move(a);
-	return (0);
-}
-
 int			ft_key_press(int key, t_app *app)
 {
-	++app->startscreen;
+	app->startscreen = 0;
 	if (key == 13)
 		app->mv_up = 1;
 	else if (key == 1)

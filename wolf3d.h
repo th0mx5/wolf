@@ -229,4 +229,6 @@ void    		sprites_draw(t_app *a);
 
 void    		textures_load(t_app *a);
 
+void			startscreen_draw(t_app *a);
+
 #endif
