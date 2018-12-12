@@ -173,6 +173,7 @@ typedef struct	s_app
 	double		zbuffer[WIN_W];
 	t_bmp		textures[10];
 	t_bmp		logo;
+	t_bmp		startscreentxt;
 	t_coord		p;
 	t_coord		map_size;
 	t_coord_d	pos;
