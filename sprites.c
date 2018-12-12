@@ -23,12 +23,11 @@ void	sprites_load(t_app *a)
 	bmp_loadfile(&a->sprites[7], "sprites/zombie1.bmp");
 	bmp_loadfile(&a->sprites[8], "sprites/zombie1.bmp");
 	bmp_loadfile(&a->weapon.sprite, "sprites/ak47.bmp");
-	bmp_loadfile(&a->startscreentxt, "sprites/zombie1.bmp");
 	a->sprites[2].p.x = 2.5;
 	a->sprites[2].p.y = 2.5;
 }
 
-void	sprites_get_coord(t_app *a, int i)
+void	sprites_get_pos(t_app *a)
 {
 	int		x;
 	int		y;
