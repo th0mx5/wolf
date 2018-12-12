@@ -26,13 +26,14 @@ SRC = main.c \
 	  textures.c \
 	  shades.c \
 	  startscreen.c \
+	  enemies.c \
 	  bmp_parser.c
 
 OBJ = $(SRC:.c=.o)
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 
 LIBMLX := -Lminilibx -lmlx
 LIBFT := -Llibft -lft

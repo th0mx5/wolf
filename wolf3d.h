@@ -102,6 +102,14 @@ typedef struct	s_spr
 	t_coord_d	pos;
 }				t_spr;
 
+typedef struct	s_enemy
+{
+	t_spr		sprite;
+	t_coord_d	pos;
+	int			life;
+	int			state;
+}				t_enemy;
+
 typedef struct	s_app
 {
 	void		*mlx;
@@ -142,6 +150,7 @@ typedef struct	s_app
 	int			floortex_x;
 	int			floortex_y;
 	int			current_thread;
+	int			enemies_count;
 	struct s_app *main_a;
 	double		wallx;
 	double		weight;
@@ -182,6 +191,7 @@ typedef struct	s_app
 	int			is_weapon;
 	t_weapon	weapon;
 	int			hp;
+	t_enemy		*enemies;
 }				t_app;
 
 void			ft_app_allocmap(t_app *app);
@@ -235,4 +245,5 @@ void    		textures_load(t_app *a);
 
 void			startscreen_draw(t_app *a);
 
+void			enemies_init(t_app *a);
 #endif
