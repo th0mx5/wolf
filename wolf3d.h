@@ -99,6 +99,7 @@ typedef struct	s_spr
 	int			d;
 	int			x;
 	int			clr;
+	t_coord_d	pos;
 }				t_spr;
 
 typedef struct	s_app
@@ -180,6 +181,7 @@ typedef struct	s_app
 	t_bmp		sprites[10];
 	int			is_weapon;
 	t_weapon	weapon;
+	int			hp;
 }				t_app;
 
 void			ft_app_allocmap(t_app *app);

@@ -107,14 +107,6 @@ void			draw_wall(int x, int start, int end, t_app *a)
 int				ft_draw(t_app *a)
 {
 	int		n[3];
-	t_color	c1;
-	double	sin_factor;
-
-    a->loop = a->loop + 0.02;
-    sin_factor = fabs(sin(a->loop));
-	c1.r = sin_factor * 255;
-    c1.g = sin_factor * 255;
-    c1.b = sin_factor * 255;
 
 	a->img = mlx_new_image(a->win, WIN_W, WIN_H);
 	a->img_data = mlx_get_data_addr(a->img, &n[0], &n[1], &n[2]);
