@@ -24,6 +24,4 @@ void	textures_load(t_app *a)
 	bmp_loadfile(&a->textures[5], "textures/marbface.bmp");
 	bmp_loadfile(&a->textures[6], "textures/skulwall2.bmp");
 	//bmp_loadfile(&a->textures[8], "textures/sky1.bmp");
-	bmp_loadfile(&a->sprites[0], "sprites/ak47.bmp");
-	bmp_loadfile(&a->sprites[1], "sprites/scope.bmp");
 }

@@ -63,7 +63,8 @@ typedef struct	s_bmp
 
 typedef struct	s_weapon
 {
-	t_bmp		sprite;
+	t_bmp		img;
+	t_bmp		scope;
 	int			is_fired;
 	int			fire_count;
 }				t_weapon;
@@ -85,6 +86,7 @@ typedef struct	s_spr
 	double		invdet;
 	double		change_x;
 	double		change_y;
+	double		dist;
 	int			screenx;
 	int			height;
 	int			start_x;
@@ -96,10 +98,19 @@ typedef struct	s_spr
 	int			texx;
 	int			texy;
 	int			y;
-	int			d;
 	int			x;
 	int			clr;
+	t_coord_d	pos;
+	t_bmp		*img;
 }				t_spr;
+
+typedef struct	s_enemy
+{
+	t_spr		sprite;
+	t_coord_d	pos;
+	int			life;
+	int			state;
+}				t_enemy;
 
 typedef struct	s_app
 {
@@ -141,6 +152,7 @@ typedef struct	s_app
 	int			floortex_x;
 	int			floortex_y;
 	int			current_thread;
+	int			enemies_count;
 	struct s_app *main_a;
 	double		wallx;
 	double		weight;
@@ -173,12 +185,15 @@ typedef struct	s_app
 	double		zbuffer[WIN_W];
 	t_bmp		textures[10];
 	t_bmp		logo;
+	t_bmp		startscreentxt;
 	t_coord		p;
 	t_coord		map_size;
 	t_coord_d	pos;
 	t_bmp		sprites[10];
 	int			is_weapon;
 	t_weapon	weapon;
+	int			hp;
+	t_enemy		*enemies;
 }				t_app;
 
 void			ft_app_allocmap(t_app *app);
@@ -225,10 +240,13 @@ t_color			get_pixel_color(t_bmp *img, int x, int y);
 void			weapons_draw_weapon(t_app *a);
 
 void    		sprites_load(t_app *a);
-void    		sprites_draw(t_app *a);
+void    		sprites_draw(t_app *a, t_spr s, t_coord_d pos);
+void			sprites_get_pos(t_app *a);
 
 void    		textures_load(t_app *a);
 
 void			startscreen_draw(t_app *a);
 
+void			enemies_init(t_app *a);
+void			enemies_draw(t_app *a);
 #endif

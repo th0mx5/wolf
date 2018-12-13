@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = wolf3d
+NAME = doom-nukem
 
 SRC = main.c \
 	  fts_utils.c \
@@ -26,6 +26,7 @@ SRC = main.c \
 	  textures.c \
 	  shades.c \
 	  startscreen.c \
+	  enemies.c \
 	  bmp_parser.c
 
 OBJ = $(SRC:.c=.o)

@@ -23,7 +23,7 @@ void startscreen_draw(t_app *a)
     c1.r = sin_factor * 255;
     c1.g = sin_factor * 255;
     c1.b = sin_factor * 255;
-    a->logo.scale = 2 * (sin_factor + 1);
+    a->logo.scale = 0.75 * (sin_factor + 1);
     tmp.x = (WIN_W - a->logo.width * a->logo.scale) / 2;
     tmp.y = (WIN_H - a->logo.height * a->logo.scale) / 2;
     ft_put_bmp_to_img(a, a->logo, tmp.x, tmp.y);
