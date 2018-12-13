@@ -72,8 +72,7 @@ void	sprites_init(t_app *a, t_spr *s, t_coord_d pos)
 
 void	put_sprite(t_app *a, t_spr *s)
 {
-	t_color		color;
-	//int c = 0xFFFFFF;
+	t_color		c;
 
 	while (s->stripe < s->end_x)
 	{
@@ -85,10 +84,9 @@ void	put_sprite(t_app *a, t_spr *s)
 			while (s->y < s->end_y)
 			{
 				s->texy = (((s->y * 2 - WIN_H + s->height) * s->img->height) / s->height) / 2;
-				color = get_pixel_color(s->img, s->texx, s->texy);
-				if (s->dist > 2)
-					ft_apply_shadow_to_spr(&color, s->dist);
-				ft_put_pxl_to_img(a, color, s->stripe, s->y);
+				c = get_pixel_color(s->img, s->texx, s->texy);
+				if (s->dist < 4 && c.r != 0 && c.g != 0 && c.b != 0)
+					ft_put_pxl_to_img(a, c, s->stripe, s->y);
 				s->y++;
 			}
 		}
@@ -101,10 +99,9 @@ void	sprites_draw(t_app *a, t_spr s, t_coord_d pos)
 	int	c;
 	int	b;
 
-	c = a->pos.x - a->enemies[0].pos.x;
-	b = a->pos.y - a->enemies[0].pos.y;
+	c = a->pos.x - pos.x;
+	b = a->pos.y - pos.y;
 	s.dist = c * c + b * b;
-	//sort_sprites(a);
 	sprites_init(a, &s, pos);
 	put_sprite(a, &s);
 }

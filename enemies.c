@@ -78,6 +78,7 @@ void	enemies_init(t_app *a)
 
 void	enemies_draw(t_app *a)
 {
+	// SORT ENEMIES HERE
 	sprites_draw(a, a->enemies[0].sprite, a->enemies[0].pos);
 	sprites_draw(a, a->enemies[1].sprite, a->enemies[1].pos);
 	sprites_draw(a, a->enemies[2].sprite, a->enemies[2].pos);
