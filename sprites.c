@@ -86,7 +86,8 @@ void	put_sprite(t_app *a, t_spr *s)
 			{
 				s->texy = (((s->y * 2 - WIN_H + s->height) * s->img->height) / s->height) / 2;
 				color = get_pixel_color(s->img, s->texx, s->texy);
-				ft_apply_shadow_to_spr(&color, s->dist);
+				if (s->dist > 2)
+					ft_apply_shadow_to_spr(&color, s->dist);
 				ft_put_pxl_to_img(a, color, s->stripe, s->y);
 				s->y++;
 			}

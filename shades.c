@@ -12,7 +12,7 @@
 
 #include "wolf3d.h"
 
-void			ft_apply_shadow_to_cf(t_color *c, int y)
+void	ft_apply_shadow_to_cf(t_color *c, int y)
 {
 	c->r *= (1 - (800. / abs(y)) / 2.);
 	c->g *= (1 - (800. / abs(y)) / 2.);
