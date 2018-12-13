@@ -85,6 +85,7 @@ typedef struct	s_spr
 	double		invdet;
 	double		change_x;
 	double		change_y;
+	double		dist;
 	int			screenx;
 	int			height;
 	int			start_x;
@@ -100,6 +101,7 @@ typedef struct	s_spr
 	int			x;
 	int			clr;
 	t_coord_d	pos;
+	t_bmp		*img;
 }				t_spr;
 
 typedef struct	s_enemy
@@ -246,4 +248,5 @@ void    		textures_load(t_app *a);
 void			startscreen_draw(t_app *a);
 
 void			enemies_init(t_app *a);
+void			enemies_draw(t_app *a);
 #endif

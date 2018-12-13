@@ -56,6 +56,8 @@ static void enemies_get_pos(t_app *a)
 			{
 				a->enemies[i].pos.y = (double)p.y + 0.5;
 				a->enemies[i].pos.x = (double)p.x + 0.5;
+				a->enemies[i].sprite.img = &a->sprites[2];
+				a->map[p.x][p.y] = 0;
                 printf("-> %f %f\n", a->enemies[i].pos.x, a->enemies[i].pos.y);
                 i++;
 			}
@@ -72,4 +74,9 @@ void	enemies_init(t_app *a)
     enemies_alloc(a);
     enemies_get_pos(a);
     printf("enemies = %d\n", a->enemies_count);
+}
+
+void	enemies_draw(t_app *a)
+{
+	sprites_draw(a);
 }
