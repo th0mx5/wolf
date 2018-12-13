@@ -16,37 +16,11 @@ void	sprites_load(t_app *a)
 {
 	a->spr_num = 7;
 	bmp_loadfile(&a->sprites[2], "sprites/zombie1.bmp");
-	bmp_loadfile(&a->sprites[3], "sprites/zombie1.bmp");
-	bmp_loadfile(&a->sprites[4], "sprites/zombie1.bmp");
-	bmp_loadfile(&a->sprites[5], "sprites/zombie1.bmp");
-	bmp_loadfile(&a->sprites[6], "sprites/zombie1.bmp");
-	bmp_loadfile(&a->sprites[7], "sprites/zombie1.bmp");
-	bmp_loadfile(&a->sprites[8], "sprites/zombie1.bmp");
-	bmp_loadfile(&a->weapon.sprite, "sprites/ak47.bmp");
+	bmp_loadfile(&a->weapon.img, "sprites/ak47.bmp");
+	bmp_loadfile(&a->weapon.scope, "sprites/scope.bmp");
 	bmp_loadfile(&a->startscreentxt, "sprites/zombie1.bmp");
 	a->sprites[2].p.x = 2.5;
 	a->sprites[2].p.y = 2.5;
-}
-
-void	sprites_get_coord(t_app *a, int i)
-{
-	int		x;
-	int		y;
-	y = 0;
-	while (y < a->map_size.y)
-	{
-		x = 0;
-		while (x < a->map_size.x)
-		{
-			if (a->map[x][y] == 9)
-			{
-				a->sprites[i].p.y = (double)y + 0.5;
-				a->sprites[i].p.x = (double)x + 0.5;
-			}
-			x++;
-		}
-		y++;
-	}
 }
 
 void	sort_sprites(t_app *a)
@@ -75,18 +49,10 @@ void	sort_sprites(t_app *a)
 	}
 }
 
-void	sprites_init(t_app *a, t_spr *s, int i)
+void	sprites_init(t_app *a, t_spr *s, t_coord_d pos)
 {
-	t_coord_d	rel;
-	t_coord_d	p1;
-	t_coord_d	p2;
-
-	p1 = a->sprites[i].p;
-	p2 = a->pos;
-	rel.x = p1.x - p2.x;
-	rel.y = p1.y - p2.y;
-	s->spr_x = a->sprites[i].p.y - a->pos.y;
-	s->spr_y = a->sprites[i].p.x - a->pos.x;
+	s->spr_x = pos.y - a->pos.y;
+	s->spr_y = pos.x - a->pos.x;
 	s->invdet = 1.0 / (a->plane_x * a->dir_y - a->dir_x * a->plane_y);
 	s->change_x = s->invdet * (a->dir_y * s->spr_x - a->dir_x * s->spr_y);
 	s->change_y = s->invdet * (-a->plane_y * s->spr_x + a->plane_x * s->spr_y);
@@ -104,27 +70,24 @@ void	sprites_init(t_app *a, t_spr *s, int i)
 	s->stripe = s->start_x;
 }
 
-void	put_sprite(t_app *a, t_spr *s, int i)
+void	put_sprite(t_app *a, t_spr *s)
 {
 	t_color		color;
+	//int c = 0xFFFFFF;
 
 	while (s->stripe < s->end_x)
 	{
 		s->texx = (int)((s->stripe - (-s->width / 2 + s->screenx))
-				* a->sprites[i].width / s->width);
+				* s->img->width / s->width);
 		if (s->change_y > 0 && s->stripe > 0 && s->stripe < WIN_W && s->change_y < a->zbuffer[s->stripe])
 		{
 			s->y = s->start_y - 1;
 			while (s->y < s->end_y)
 			{
-				s->d = (s->y) * 2 - WIN_H + s->height;
-				s->texy = ((s->d * a->sprites[i].height) / s->height) / 2;
-				color = get_pixel_color(&a->sprites[i], s->texx, s->texy);
-				ft_apply_shadow_to_spr(&color, a->sprites[i].dist);
-				s->clr = ft_rgb_to_hex(color);
-				if (s->clr != 0)
-					ft_memcpy(a->img_data + 4 * WIN_W * s->y + s->stripe * 4,
-							&s->clr, sizeof(int));
+				s->texy = (((s->y * 2 - WIN_H + s->height) * s->img->height) / s->height) / 2;
+				color = get_pixel_color(s->img, s->texx, s->texy);
+				ft_apply_shadow_to_spr(&color, s->dist);
+				ft_put_pxl_to_img(a, color, s->stripe, s->y);
 				s->y++;
 			}
 		}
@@ -132,23 +95,15 @@ void	put_sprite(t_app *a, t_spr *s, int i)
 	}
 }
 
-void	sprites_draw(t_app *a)
+void	sprites_draw(t_app *a, t_spr s, t_coord_d pos)
 {
-	int			i;
-	t_spr		s;
+	int	c;
+	int	b;
 
-	i = -1;
-	while (++i < a->spr_num)
-	{
-		a->sprites[i].dist = (a->pos.x - a->sprites[i].p.x) *
-			(a->pos.x - a->sprites[i].p.x) + (a->pos.y - a->sprites[i].p.y) *
-				(a->pos.y - a->sprites[i].p.y);
-	}
-	sort_sprites(a);
-	i = -1;
-	while (++i < a->spr_num)
-	{
-		sprites_init(a, &s, i);
-		put_sprite(a, &s, i);
-	}
+	c = a->pos.x - a->enemies[0].pos.x;
+	b = a->pos.y - a->enemies[0].pos.y;
+	s.dist = c * c + b * b;
+	//sort_sprites(a);
+	sprites_init(a, &s, pos);
+	put_sprite(a, &s);
 }

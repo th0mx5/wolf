@@ -63,7 +63,8 @@ typedef struct	s_bmp
 
 typedef struct	s_weapon
 {
-	t_bmp		sprite;
+	t_bmp		img;
+	t_bmp		scope;
 	int			is_fired;
 	int			fire_count;
 }				t_weapon;
@@ -97,7 +98,6 @@ typedef struct	s_spr
 	int			texx;
 	int			texy;
 	int			y;
-	int			d;
 	int			x;
 	int			clr;
 	t_coord_d	pos;
@@ -240,7 +240,7 @@ t_color			get_pixel_color(t_bmp *img, int x, int y);
 void			weapons_draw_weapon(t_app *a);
 
 void    		sprites_load(t_app *a);
-void    		sprites_draw(t_app *a);
+void    		sprites_draw(t_app *a, t_spr s, t_coord_d pos);
 void			sprites_get_pos(t_app *a);
 
 void    		textures_load(t_app *a);

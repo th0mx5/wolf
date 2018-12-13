@@ -113,7 +113,7 @@ int				ft_draw(t_app *a)
 	if (a->startscreen == 0)
 	{
 		ft_pthread(a);
-		sprites_draw(a);
+		enemies_draw(a);
 		draw_minimap(a);
 		draw_player(a);
 		weapons_draw_weapon(a);
